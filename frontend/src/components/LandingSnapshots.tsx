@@ -41,7 +41,7 @@ function Still({ children, className = '' }: { children: ReactNode; className?: 
 
 function Frame({ caption, children }: { caption: string; children: ReactNode }) {
   return (
-    <div className="relative overflow-hidden rounded-lg border border-line bg-surface">
+    <div className="relative w-full min-w-0 overflow-hidden rounded-lg border border-line bg-surface">
       <div className="flex items-center gap-1.5 border-b border-line bg-panel px-2.5 py-1.5">
         <span className="h-1.5 w-1.5 rounded-full bg-[#d4705f]" />
         <span className="h-1.5 w-1.5 rounded-full bg-[#c68a2e]" />

@@ -79,7 +79,7 @@ const CALLOUTS = [
   { title: 'Rumour held', note: '“Dam gate opened” sent to Verify, not to a boat', flip: false },
 ]
 
-export default function LandingMap({ data, offsetLng = 0 }: { data: Overview | null; offsetLng?: number }) {
+export default function LandingMap({ data, offsetLng = 0, compact = false }: { data: Overview | null; offsetLng?: number; compact?: boolean }) {
   const center = data?.ward.center ?? { lat: 19.077, lng: 72.877 }
   const river = data?.ward.river ?? []
   const lm = data?.landmarks ?? []
@@ -113,12 +113,12 @@ export default function LandingMap({ data, offsetLng = 0 }: { data: Overview | n
       {data?.blocked_roads.map((b) => b.segments.map((seg, i) => (
         <Polyline key={`blocked-${b.road}-${i}`} positions={seg} pathOptions={{ color: '#c8443c', weight: 3, dashArray: '3 5', opacity: 0.95 }} />
       )))}
-      {lm.map((l) => <Marker key={l.name} position={[l.lat, l.lng]} icon={landmarkIcon(l.name)} interactive={false} />)}
+      {!compact && lm.map((l) => <Marker key={l.name} position={[l.lat, l.lng]} icon={landmarkIcon(l.name)} interactive={false} />)}
       {data?.camps.map((c) => (
         <Marker key={c.name} position={[c.lat, c.lng]} interactive={false}
           icon={campIcon(c.name.split(' (')[0], `${c.occupancy}/${c.capacity} people`)} />
       ))}
-      {CALLOUTS.map((c, i) => lm[i * 2] && (
+      {!compact && CALLOUTS.map((c, i) => lm[i * 2] && (
         <Marker key={c.title} position={[lm[i * 2].lat, lm[i * 2].lng]} interactive={false} zIndexOffset={500} icon={calloutIcon(c.title, c.note, c.flip)} />
       ))}
     </MapContainer>

@@ -162,10 +162,10 @@ function Hero({ data }: { data: Overview | null }) {
   return (
     <section className="relative min-h-[100svh] overflow-hidden lg:h-[100svh] lg:min-h-[720px]">
       <div className="absolute inset-0" aria-hidden="true">
-        <LandingMap data={data} offsetLng={wide ? -0.0065 : 0} />
+        <LandingMap data={data} offsetLng={wide ? -0.0065 : 0} compact={!wide} />
       </div>
       {/* Mist and legibility washes, then the HUD frame. */}
-      <div className="pointer-events-none absolute inset-0 z-[500] bg-[#e3eae6] opacity-30" />
+      <div className="pointer-events-none absolute inset-0 z-[500] bg-[#e3eae6] opacity-60 lg:opacity-30" />
       <div className="pointer-events-none absolute inset-0 z-[500] bg-gradient-to-r from-[#e3eae6] via-[#e3eae6]/70 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] h-40 bg-gradient-to-b from-[#e3eae6] to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[500] h-48 bg-gradient-to-t from-[#e3eae6] to-transparent" />
@@ -256,7 +256,7 @@ function How() {
         {STEPS.map((s, i) => {
           const Snap = SNAPSHOTS[i]
           return (
-            <li key={s.code} className="group flex flex-col bg-[#f6f9f7] p-5">
+            <li key={s.code} className="group flex min-w-0 flex-col overflow-hidden bg-[#f6f9f7] p-5">
               <Label className="!text-[var(--coral)]">{s.code} / {s.agent}</Label>
               <div className="mt-4 transition duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_14px_30px_rgba(29,51,48,.12)]">
                 <Snap />
@@ -295,7 +295,7 @@ function People() {
   return (
     <Section id="people" code="02 / Who it serves" title="One system, three very different screens.">
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
-        <figure className="relative h-[660px] overflow-hidden rounded-[18px] border border-[var(--hud-line)] bg-[#edf2ef]">
+        <figure className="relative h-[720px] overflow-hidden rounded-[18px] border border-[var(--hud-line)] bg-[#edf2ef] sm:h-[680px]">
           <div className="absolute left-[-140px] top-8 origin-top-left scale-[0.84] opacity-[0.32] blur-[0.4px]">
             <DashboardGhost />
           </div>
@@ -303,7 +303,7 @@ function People() {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <PhoneChat />
           </div>
-          <figcaption className="absolute bottom-3 left-4 right-4 flex flex-wrap items-center justify-between gap-2">
+          <figcaption className="absolute bottom-3 left-4 right-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-lg bg-[#edf2ef]/90 px-2 py-1">
             <Label className="!text-[9.5px]">The helpline on a family’s phone</Label>
             <Label className="!text-[9.5px]">Behind it: the officer’s control room</Label>
           </figcaption>
@@ -343,10 +343,10 @@ function Results() {
                 <span className="block h-1.5 bg-[var(--coral)]" style={{ width: `${Math.max((r.after / max) * 100, 1.5)}%` }} />
               </span>
               <span className="flex justify-between font-serif text-[16px] tabular-nums text-[#677c77] md:block md:text-right">
-                <span className="font-sans text-[13px] md:hidden">First come</span>{r.before}{r.unit && ` ${r.unit}`}
+                <span className="font-sans text-[13px] md:hidden">First come</span><span>{r.before}{r.unit && ` ${r.unit}`}</span>
               </span>
               <span className="flex justify-between font-serif text-[24px] font-semibold tabular-nums md:block md:text-right">
-                <span className="font-sans text-[13px] font-normal text-[#677c77] md:hidden">Pukaar</span>{r.after}{r.unit && <span className="text-[13px] font-normal"> {r.unit}</span>}
+                <span className="font-sans text-[13px] font-normal text-[#677c77] md:hidden">Pukaar</span><span>{r.after}{r.unit && <span className="text-[13px] font-normal"> {r.unit}</span>}</span>
               </span>
             </div>
           )

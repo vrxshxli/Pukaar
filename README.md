@@ -16,7 +16,7 @@ A multi-agent flood-response coordinator for ward control rooms. It turns a nigh
 
 **AgentX Hackathon 2026 · PS-03 · Team Seekers**
 
-### ▶ [Watch the 4-minute demo film](https://youtu.be/TGQ5zi1kfI8)
+### 🌐 [Live app: pukaar.onrender.com](https://pukaar.onrender.com) · ▶ [Watch the 4-minute demo film](https://youtu.be/TGQ5zi1kfI8)
 
 [![Pukaar demo film on YouTube](https://img.youtube.com/vi/TGQ5zi1kfI8/maxresdefault.jpg)](https://youtu.be/TGQ5zi1kfI8)
 
@@ -393,7 +393,11 @@ LLM_MODE=ollama ./start.sh      # or: .\start.ps1 -Mode ollama
 
 Every model call has a timeout (`LLM_TIMEOUT`, default 6 s). If Ollama is stopped, slow or missing the model, that call falls back to rules and the toolbar says so. `OLLAMA_MODEL` and `OLLAMA_HOST` override the defaults.
 
-### Public link
+### Hosted on Render
+
+The live app runs at **https://pukaar.onrender.com** (rules mode, Singapore region), built from `Dockerfile` with the blueprint in `render.yaml`. It redeploys on every push to `main`. On the free plan it sleeps after about 15 idle minutes, so the first visit can take up to a minute, and the flood night resets on every restart. Set `PUKAAR_OFFICER_PASSWORD` and `PUKAAR_VOLUNTEER_PASSWORD` in Render's Environment tab.
+
+### Public link from your laptop
 
 On Windows, double-click **`go-live.bat`**: it starts the server and a free Cloudflare quick tunnel in two windows and prints a `https://….trycloudflare.com` address. Elsewhere: `cloudflared tunnel --url http://localhost:8000`. The QR code in the control room then points phones at the public helpline. Quick-tunnel addresses change on every restart.
 

@@ -301,13 +301,26 @@ export default function Dashboard() {
         </aside>
 
         <main className="relative flex min-w-0 flex-1 flex-col lg:overflow-y-auto xl:block xl:overflow-hidden">
-          <div className="relative h-[72vh] min-h-[440px] shrink-0 xl:absolute xl:inset-0 xl:h-auto">
+          <div className="space-y-2 px-3 pt-3 lg:hidden">
+            <MapToolbar state={state}
+              onToggleAutomation={() => act(() => api('/api/settings', { automation: !state.automation }))}
+              onLlmMode={(mode) => act(() => api('/api/settings', { llm_mode: mode }))}>
+              <ReplayControls replay={state.replay} onError={setActionError} />
+            </MapToolbar>
+            {!state.automation && (
+              <div className="rounded-xl bg-urgent px-3 py-1.5 text-xs font-bold text-white">
+                Automation is off: agents keep logging, but no message is sent and no new proposal is made.
+              </div>
+            )}
+            {(error || actionError) && <ErrorNote>{actionError ?? error}</ErrorNote>}
+          </div>
+          <div className="relative h-[64vh] min-h-[420px] shrink-0 lg:h-[72vh] xl:absolute xl:inset-0 xl:h-auto">
             <WardMap center={state.ward.center} river={state.ward.river} tickets={state.tickets} teams={state.teams}
               camps={state.camps} blocked={state.blocked_roads} zones={state.watch_zones} preview={preview}
               selectedTicket={selected} onSelectTicket={setSelected} basemap={basemap} onMap={setMap} />
 
             <div className="pointer-events-none absolute inset-3 z-[1000] flex flex-col gap-2 xl:right-[396px]">
-              <div className="flex flex-col items-end gap-2">
+              <div className="hidden flex-col items-end gap-2 lg:flex">
                 <MapToolbar state={state}
                   onToggleAutomation={() => act(() => api('/api/settings', { automation: !state.automation }))}
                   onLlmMode={(mode) => act(() => api('/api/settings', { llm_mode: mode }))}>

@@ -1,0 +1,17 @@
+# Render blueprint: one web service built from the Dockerfile.
+# In Render: New + > Blueprint > pick this repo. You will be asked for the two passwords.
+services:
+  - type: web
+    name: pukaar
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: LLM_MODE
+        value: rules
+      - key: PUKAAR_OFFICER_PASSWORD
+        sync: false
+      - key: PUKAAR_VOLUNTEER_PASSWORD
+        sync: false

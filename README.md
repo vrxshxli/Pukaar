@@ -220,7 +220,7 @@ def require_approved(approval, kind, ticket_id=None, team_id=None):
 
 | Agent | Job | Tools it may call |
 | --- | --- | --- |
-| **Planner** | Routes each event to the right agents in order and logs the plan ("routed message #7 (rescue) to Listen, then Triage, then Loop"). | (orchestration only) |
+| **LLM Planner** | For judgment events (new rescue or welfare reports, rumours, blocked lanes) it plans its own steps, calls one tool at a time, observes and replans, up to 6 steps, inside the guardrails below. Obvious events and every fallback go to the rule-based orchestrator, which logs its routing ("routed message #7 (rescue) to Listen, then Triage, then Loop"). | `find_similar_tickets`, `create_ticket`, `merge_into_ticket`, `flag_for_verification`, `score_priority`, `escalate_danger`, `mark_road_blocked`, `replan_routes`, `list_free_teams`, `memory_ticket_context`, `memory_area`, `memory_household`, `memory_camps`, `memory_episodes` |
 | **Listen** | Detects Hindi, Marathi, Hinglish or English; extracts people, vulnerable members, medical need, water level, landmark, battery and danger words; asks one follow-up if location or head count is missing. | `extract_report`, `geocode_landmark`, `ask_followup` |
 | **Triage** | Matches reports to existing tickets, scores priority with written reasons, sends contradicted claims to Verify, recognises reposts about families already safe. | `find_similar_tickets`, `create_ticket`, `merge_into_ticket`, `score_priority`, `flag_for_verification` |
 | **Dispatch** | Picks the best free team by skill (a medic for medical needs), road distance and hours on duty; routes around blocked roads; replans; proposes, never sends. Supplies go to the van. | `list_free_teams`, `compute_route`, `create_approval`, `replan_routes` |
@@ -238,6 +238,8 @@ Each rule is enforced in the backend, not the UI, and has a test.
 
 | Invariant | Enforced in | Proven by |
 | --- | --- | --- |
+| The LLM Planner can never dispatch, close, downgrade or send a bulletin; any step outside its allowed tools, schemas or state is rejected and the rules take over | `agents/planner.py`: allowed tools per event, `FORBIDDEN`, per-tool state checks | `tests/test_planner.py` |
+| A Planner merge is accepted only if the matcher's own score is at least 0.6, and the recorded reason and confidence are the matcher's, not the model's | `Planner._check_merge_into_ticket` | `tests/test_planner.py` |
 | No team goes `en_route` without an approved approval for exactly that team and ticket | `approvals.require_approved` via `teams.set_status` | `tests/test_safety.py` |
 | No public bulletin is marked sent without approval | `orchestrator` → `require_approved(…, "bulletin")` | `tests/test_safety.py` |
 | Agents may raise a P1 but never lower it; only an officer can downgrade | `tickets.score_priority`, `tickets.downgrade` → `require_approved(…, "downgrade")` | `tests/test_safety.py` |
@@ -366,7 +368,7 @@ pukaar/
 │  │  └─ tools/             approvals (the gate) · tickets · teams · geo · messaging · audit · alerts · weather · playbooks
 │  ├─ data/                 scenario (ward, roads, households, camps, the 311-message night), playbooks, alerts
 │  ├─ scripts/              generate_flood_night.py · evaluate.py
-│  └─ tests/                67 tests: safety, auth, pipeline, API, scenario, LLM fallback
+│  └─ tests/                86 tests: safety, auth, planner, pipeline, API, scenario, LLM fallback
 ├─ frontend/src/
 │  ├─ pages/                Landing · Dashboard · Chat · Volunteer · Family · Login
 │  └─ components/           WardMap · TicketQueue · TicketDetail · ApprovalCard · MapToolbar · LandingMap …
@@ -422,7 +424,7 @@ On Windows, double-click **`go-live.bat`**: it starts the server and a free Clou
 ```bash
 cd backend && .venv/bin/python -m uvicorn app.main:app --reload   # API on :8000 (.venv\Scripts on Windows)
 cd frontend && npm run dev                                          # Vite on :5173, proxies /api
-cd backend && .venv/bin/python -m pytest -q                         # 67 tests
+cd backend && .venv/bin/python -m pytest -q                         # 86 tests
 cd backend && .venv/bin/python scripts/generate_flood_night.py     # regenerate the night
 cd backend && .venv/bin/python scripts/evaluate.py --modes rules ollama
 ```
@@ -457,11 +459,12 @@ How to read it honestly:
 ## Tests
 
 ```bash
-cd backend && .venv/bin/python -m pytest -q      # 67 passed
+cd backend && .venv/bin/python -m pytest -q      # 86 passed
 ```
 
 | File | Tests | Covers |
 | --- | ---: | --- |
+| `test_planner.py` | 19 | The planner's loop with a scripted model; fallback to rules on timeout, rate limit and bad JSON; forbidden tools rejected; a merge only through the matcher's score; the approval gate unreachable (`create_approval`, `propose_preposition`, `draft_bulletin`, `ask_followup`, `set_status`); the step limit; P1 never lowered; a blocked lane; Groq retry with backoff |
 | `test_auth.py` | 23 | Every officer route refuses anonymous and crew sessions, crew isolation, attribution, lockout, hashed storage, public overview has no personal data |
 | `test_safety.py` | 21 | Every invariant in [Safety invariants](#safety-invariants) |
 | `test_pipeline.py` | 10 | Kamla's three messages to one P1, replies per language, medic boat waits for the officer, full rescue with Lane 6 blocked and OTP, Pinto repost, dam rumour, follow-up questions, red alert, gas leak |

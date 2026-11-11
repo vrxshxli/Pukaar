@@ -105,6 +105,11 @@ CREATE TABLE audit_log (
   at TEXT, agent TEXT, tool TEXT, kind TEXT, summary TEXT, input TEXT,
   result TEXT, ticket_id TEXT, approved_by TEXT
 );
+CREATE TABLE agent_runs (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  event TEXT, ticket_id TEXT, provider TEXT, model TEXT, status TEXT,
+  plan TEXT, steps TEXT, memory TEXT, outcome TEXT, started_at TEXT, ended_at TEXT
+);
 CREATE INDEX idx_messages_reporter ON messages(reporter_id);
 CREATE INDEX idx_reports_ticket ON reports(ticket_id);
 CREATE INDEX idx_audit_at ON audit_log(id);
@@ -113,7 +118,7 @@ CREATE INDEX idx_audit_at ON audit_log(id);
 TABLES = [
     "settings", "incidents", "reporters", "messages", "reports", "tickets",
     "ticket_reports", "teams", "routes", "approvals", "area_events", "camps",
-    "households", "bulletins", "lookups", "audit_log",
+    "households", "bulletins", "lookups", "audit_log", "agent_runs",
 ]
 
 
@@ -134,6 +139,11 @@ def connect(path=None):
         _conn.execute("PRAGMA journal_mode=WAL")
         if fresh or not _has_tables():
             reset()
+        # Databases made before the Planner existed get its table on first open.
+        _conn.execute("""CREATE TABLE IF NOT EXISTS agent_runs (id INTEGER PRIMARY KEY AUTOINCREMENT,
+            event TEXT, ticket_id TEXT, provider TEXT, model TEXT, status TEXT, plan TEXT, steps TEXT,
+            memory TEXT, outcome TEXT, started_at TEXT, ended_at TEXT)""")
+        _conn.commit()
     return _conn
 
 

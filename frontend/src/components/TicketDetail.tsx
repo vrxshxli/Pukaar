@@ -6,6 +6,78 @@ import { AgentTag, Button, Chip, ErrorNote, Icon, Spinner, ticketColor, ticketLa
 interface Detail extends Ticket {
   reports: { reason: string; confidence: number; created_at: string; text: string; channel: string; language: string; phone: string }[]
   history: AuditEntry[]
+  agent_runs?: AgentRun[]
+}
+
+interface AgentStep { n: number; tool: string; args: Record<string, unknown>; why: string; result: unknown }
+interface AgentRun {
+  id: number
+  provider: string | null
+  model: string | null
+  status: 'running' | 'done' | 'rules'
+  outcome: string | null
+  plan: { tool: string; why: string }[]
+  steps: AgentStep[]
+  memory: { short_term?: { tickets?: unknown[]; conversation?: unknown[] }; long_term?: { blocked_roads?: unknown[] }; episodic?: unknown[] }
+  started_at: string
+}
+
+function brief(v: unknown, n = 140) {
+  const s = typeof v === 'string' ? v : JSON.stringify(v)
+  return s && s.length > n ? s.slice(0, n - 1) + '…' : s
+}
+
+// The Planner's reasoning for this ticket: plan, each tool call and why, the result, the memory it read.
+function AgentRuns({ runs }: { runs: AgentRun[] }) {
+  if (!runs.length) {
+    return <p className="text-xs text-muted">No LLM Planner run for this ticket. It was handled by the rules (planner off, out of scope, or no model).</p>
+  }
+  return (
+    <ol className="space-y-3">
+      {runs.map((r) => {
+        const mem = r.memory || {}
+        const memUsed = [
+          `short-term: ${mem.short_term?.tickets?.length ?? 0} ticket(s), ${mem.short_term?.conversation?.length ?? 0} message(s)`,
+          `long-term: ${mem.long_term?.blocked_roads?.length ?? 0} blocked lane(s)`,
+          `episodic: ${Array.isArray(mem.episodic) ? mem.episodic.length : 0} past decision(s)`,
+        ]
+        return (
+          <li key={r.id} className="rounded-xl border border-line bg-card p-2.5">
+            <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
+              <span className="font-bold">Run #{r.id}</span>
+              <span className="rounded-full bg-accent-soft px-2 py-0.5 font-semibold text-accent">{r.provider ?? 'rules'} · {r.model ?? '—'}</span>
+              {r.status === 'rules'
+                ? <span className="rounded-full bg-urgent/12 px-2 py-0.5 font-bold text-urgent">Rules took over</span>
+                : r.status === 'done'
+                  ? <span className="rounded-full bg-safe/15 px-2 py-0.5 font-bold text-safe">Planner finished</span>
+                  : <span className="rounded-full bg-marigold/15 px-2 py-0.5 font-bold text-marigold">Running</span>}
+              <span className="ml-auto text-muted">{clock(r.started_at)}</span>
+            </div>
+            {r.outcome && <p className={`mt-1 text-[11px] ${r.status === 'rules' ? 'text-urgent' : 'text-muted'}`}>{r.outcome}</p>}
+            <p className="mt-1.5 text-[10.5px] font-semibold uppercase tracking-wide text-muted">Memory read</p>
+            <ul className="text-[11px] text-muted">{memUsed.map((m) => <li key={m}>· {m}</li>)}</ul>
+            {r.plan.length > 0 && (
+              <>
+                <p className="mt-1.5 text-[10.5px] font-semibold uppercase tracking-wide text-muted">Plan</p>
+                <ol className="list-decimal pl-4 text-[11px]">{r.plan.map((p, i) => <li key={i}><b>{p.tool}</b> — {p.why}</li>)}</ol>
+              </>
+            )}
+            <p className="mt-1.5 text-[10.5px] font-semibold uppercase tracking-wide text-muted">Steps</p>
+            <ol className="space-y-1.5">
+              {r.steps.map((s) => (
+                <li key={`${r.id}-${s.n}-${s.tool}`} className={`rounded-lg px-2 py-1.5 text-[11px] ${s.tool === 'replan' ? 'bg-marigold/10' : 'bg-soft'}`}>
+                  <div><b className="font-mono">{s.n}. {s.tool}</b>{s.tool !== 'replan' && <span className="text-muted"> {brief(s.args, 90)}</span>}</div>
+                  <div><span className="text-muted">why:</span> {s.why}</div>
+                  {s.tool !== 'replan' && <div className="text-muted">result: {brief(s.result)}</div>}
+                </li>
+              ))}
+              {r.steps.length === 0 && <li className="text-[11px] text-muted">No tool call completed.</li>}
+            </ol>
+          </li>
+        )
+      })}
+    </ol>
+  )
 }
 
 const LANG: Record<string, string> = { hi: 'Hindi', mr: 'Marathi', hinglish: 'Hinglish', en: 'English' }
@@ -28,7 +100,7 @@ export default function TicketDetail({ ticketId, officer, version, onClose }: {
 }) {
   const [t, setT] = useState<Detail | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [tab, setTab] = useState<'details' | 'reports' | 'timeline'>('details')
+  const [tab, setTab] = useState<'details' | 'agent' | 'reports' | 'timeline'>('details')
 
   useEffect(() => {
     api<Detail>(`/api/tickets/${ticketId}`).then((d) => { setT(d); setError(null) }).catch((e) => setError(e.message))
@@ -55,6 +127,7 @@ export default function TicketDetail({ ticketId, officer, version, onClose }: {
     { id: 'details', label: 'Details' },
     { id: 'reports', label: `Reports${t ? ` ${t.reports.length}` : ''}` },
     { id: 'timeline', label: 'Timeline' },
+    { id: 'agent', label: `Agent reasoning${t?.agent_runs?.length ? ` ${t.agent_runs.length}` : ''}` },
   ] as const
   return (
     <aside className="glass pointer-events-auto flex max-h-full min-h-0 w-full flex-col overflow-hidden" aria-label={`Ticket ${ticketId}`}>
@@ -121,6 +194,7 @@ export default function TicketDetail({ ticketId, officer, version, onClose }: {
             ))}
           </ul>
         )}
+        {t && tab === 'agent' && <AgentRuns runs={t.agent_runs ?? []} />}
         {t && tab === 'timeline' && (
           <ol className="space-y-1.5">
             {t.history.map((h) => (

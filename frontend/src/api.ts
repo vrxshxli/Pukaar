@@ -124,6 +124,7 @@ export interface State {
   automation: boolean
   auto_field: boolean
   llm: LlmStatus
+  planner?: { scope: 'off' | 'judgment' | 'all'; provider: string | null; model: string | null; max_steps: number }
   replay: ReplayStatus
   tickets: Ticket[]
   teams: Team[]

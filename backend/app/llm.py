@@ -87,6 +87,15 @@ def check_health(force=False):
 
 
 def status():
+    if mode() == "groq":
+        has_key = bool(groq_key())
+        return {
+            "mode": "groq", "effective": "groq" if has_key else "rules", "fallback": not has_key,
+            "model": GROQ_MODEL if has_key else None, "embeddings": None, "available": has_key,
+            "calls": _state["calls"], "fallbacks": _state["fallbacks"],
+            "last_error": None if has_key else "GROQ_API_KEY is not set, so rules are running",
+            "timeout_s": PLANNER_TIMEOUT,
+        }
     use_ollama = mode() == "ollama"
     available = check_health() if use_ollama else _state["available"]
     effective = "ollama" if use_ollama and available else "rules"
@@ -316,3 +325,116 @@ def similarity(a, b):
     dot = sum(x * y for x, y in zip(va, vb))
     norm = math.sqrt(sum(x * x for x in va)) * math.sqrt(sum(y * y for y in vb))
     return dot / norm if norm else None
+
+
+# ---------------------------------------------------------------------------
+# Hosted provider (Groq, free tier) and one JSON chat call for the Planner.
+#
+# llm_mode = "groq": Listen keeps the rules extractor (saves the free quota),
+# and the LLM Planner runs on Groq. llm_mode = "ollama": both run locally.
+# The key comes only from the GROQ_API_KEY environment variable.
+
+GROQ_URL = os.environ.get("GROQ_URL", "https://api.groq.com/openai/v1/chat/completions")
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+PLANNER_TIMEOUT = float(os.environ.get("PLANNER_TIMEOUT", "15"))
+RETRIES = int(os.environ.get("PLANNER_RETRIES", "3"))
+
+
+class LLMError(Exception):
+    """A planner call that did not produce usable JSON. `kind` says why."""
+
+    def __init__(self, kind, detail=""):
+        super().__init__(f"{kind}: {detail}"[:200])
+        self.kind, self.detail = kind, detail
+
+
+def groq_key():
+    return os.environ.get("GROQ_API_KEY", "").strip()
+
+
+def planner_provider():
+    """Which model the Planner uses right now, or None when only rules can run."""
+    m = mode()
+    if m == "groq" and groq_key():
+        return "groq"
+    if m == "ollama" and check_health():
+        return "ollama"
+    return None
+
+
+def planner_model():
+    p = planner_provider()
+    return GROQ_MODEL if p == "groq" else chat_model() if p == "ollama" else None
+
+
+def _parse_json(text):
+    text = (text or "").strip()
+    if text.startswith("```"):
+        text = text.strip("`")
+        text = text[text.find("{"):] if "{" in text else text
+    start, end = text.find("{"), text.rfind("}")
+    if start < 0 or end <= start:
+        raise LLMError("bad_json", text[:120])
+    try:
+        out = json.loads(text[start:end + 1])
+    except json.JSONDecodeError as e:
+        raise LLMError("bad_json", str(e))
+    if not isinstance(out, dict):
+        raise LLMError("bad_json", "not an object")
+    return out
+
+
+def _groq_chat(messages, sleep=time.sleep):
+    import httpx
+    body = {"model": GROQ_MODEL, "messages": messages, "temperature": 0,
+            "response_format": {"type": "json_object"}, "max_tokens": 700}
+    headers = {"Authorization": f"Bearer {groq_key()}", "Content-Type": "application/json"}
+    delay = 1.5
+    for attempt in range(RETRIES + 1):
+        try:
+            r = httpx.post(GROQ_URL, json=body, headers=headers, timeout=PLANNER_TIMEOUT)
+        except httpx.TimeoutException as e:
+            raise LLMError("timeout", str(e))
+        except httpx.HTTPError as e:
+            raise LLMError("unavailable", type(e).__name__)
+        if r.status_code in (429, 503) and attempt < RETRIES:
+            # Rate limited: wait as long as the server asks (or back off), then try again.
+            try:
+                wait = float(r.headers.get("retry-after", delay))
+            except ValueError:
+                wait = delay
+            sleep(min(wait, 20))
+            delay *= 2
+            continue
+        if r.status_code == 429:
+            raise LLMError("rate_limit", r.text[:120])
+        if r.status_code >= 400:
+            raise LLMError("http", f"{r.status_code} {r.text[:120]}")
+        try:
+            return r.json()["choices"][0]["message"]["content"]
+        except (KeyError, IndexError, ValueError) as e:
+            raise LLMError("bad_json", f"unexpected response: {e}")
+    raise LLMError("rate_limit", "retries exhausted")
+
+
+def _ollama_chat(messages):
+    try:
+        response = _client(timeout=PLANNER_TIMEOUT).chat(model=chat_model(), messages=messages, format="json",
+                                                         options={"temperature": 0})
+    except Exception as e:
+        kind = "timeout" if "timed out" in str(e).lower() or "timeout" in type(e).__name__.lower() else "unavailable"
+        raise LLMError(kind, f"{type(e).__name__}: {str(e)[:100]}")
+    return response.message.content
+
+
+def chat_json(messages, provider=None):
+    """One planner turn: messages in, a JSON object out, or LLMError."""
+    provider = provider or planner_provider()
+    if provider is None:
+        raise LLMError("unavailable", "no LLM provider configured")
+    _state["calls"] += 1
+    started = time.time()
+    text = _groq_chat(messages) if provider == "groq" else _ollama_chat(messages)
+    if time.time() - started > PLANNER_TIMEOUT * (RETRIES + 2):
+        raise LLMError("timeout", "planner turn took too long")
+    return _parse_json(text)

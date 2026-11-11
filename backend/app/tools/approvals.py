@@ -26,7 +26,15 @@ def decode(row):
 
 
 def pending():
-    return [decode(r) for r in db.query("SELECT * FROM approvals WHERE status = 'pending' ORDER BY id")]
+    rows = [decode(r) for r in db.query("SELECT * FROM approvals WHERE status = 'pending' ORDER BY id")]
+    for r in rows:
+        # Tickets get better names as reports merge, so dispatch cards use the current one.
+        if r["kind"] == "dispatch" and r["ticket_id"] and r["team_id"]:
+            names = db.one("""SELECT t.title, tm.name FROM tickets t, teams tm WHERE t.id = ? AND tm.id = ?""",
+                           (r["ticket_id"], r["team_id"]))
+            if names:
+                r["title"] = f"Send {names['name']} to {names['title']}?"
+    return rows
 
 
 def require_approved(approval, kind, ticket_id=None, team_id=None):

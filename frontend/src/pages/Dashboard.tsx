@@ -4,6 +4,7 @@ import ActivityFeed from '../components/ActivityFeed'
 import ApprovalCard from '../components/ApprovalCard'
 import AuditLog from '../components/AuditLog'
 import Header from '../components/Header'
+import ReplayControls from '../components/ReplayControls'
 import TicketDetail from '../components/TicketDetail'
 import TicketQueue from '../components/TicketQueue'
 import WardMap from '../components/WardMap'
@@ -63,7 +64,9 @@ export default function Dashboard() {
     <div className="flex h-full flex-col">
       <Header state={state} connected={connected} officer={officer} setOfficer={setOfficer}
         onToggleAutomation={() => act(() => api('/api/settings', { automation: !state.automation }))}
-        onLlmMode={(mode) => act(() => api('/api/settings', { llm_mode: mode }))} />
+        onLlmMode={(mode) => act(() => api('/api/settings', { llm_mode: mode }))}>
+        <ReplayControls replay={state.replay} onError={setActionError} />
+      </Header>
       {!state.automation && (
         <div className="bg-urgent px-4 py-1 text-center text-xs font-bold text-white">
           Automation is off: agents keep logging, but no message is sent and no new proposal is made.

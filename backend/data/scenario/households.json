@@ -9,7 +9,7 @@
     "lat": 19.0762,
     "lng": 72.8761,
     "node": "L4_mid",
-    "people": 2,
+    "people": 3,
     "members": [
       {
         "name": "Kamla Devi",
@@ -20,6 +20,11 @@
         "name": "Raju",
         "age": 9,
         "note": "grandson, fever"
+      },
+      {
+        "name": "Sunita",
+        "age": 34,
+        "note": "daughter-in-law"
       }
     ],
     "phone": "+91 90000 00412",

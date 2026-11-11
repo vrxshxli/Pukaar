@@ -85,22 +85,37 @@ def match_score(report, fields, ticket, embed_fn=None):
         score += 0.6
         reasons.append("same sender")
 
-    hint = fields.get("household_hint")
-    if hint and ticket.get("household_id"):
+    hint, guess = fields.get("household_hint"), fields.get("household_guess")
+    if ticket.get("household_id") and (hint or guess):
         if hint == ticket["household_id"]:
             score += 0.5
             reasons.append("same family name")
-        else:
+        elif guess == ticket["household_id"]:
+            score += 0.35
+            reasons.append("matches the household registry")
+        elif hint:
             score -= 0.6
             reasons.append("different family name")
+    elif ticket.get("household_id") and fields.get("name"):
+        score -= 0.6
+        reasons.append("different family name")
+    elif fields.get("name") and not ticket.get("household_id"):
+        name_score = surname_match(fields["name"], ticket.get("title"))
+        if name_score is not None:
+            if name_score >= 85:
+                score += 0.45
+                reasons.append("same family name")
+            else:
+                score -= 0.6
+                reasons.append("different family name")
 
     if fields.get("landmark") and fields["landmark"] == ticket.get("landmark"):
-        score += 0.35
+        score += 0.25
         reasons.append("same landmark")
     t_lane = (ticket.get("area") or "").split(",")[0]
     if fields.get("lane") and t_lane:
         if fields["lane"] == t_lane:
-            score += 0.25
+            score += 0.15
             reasons.append(f"same lane ({t_lane})")
         elif t_lane.startswith("Lane") and fields["lane"].startswith("Lane"):
             score -= 0.4
@@ -109,20 +124,20 @@ def match_score(report, fields, ticket, embed_fn=None):
     if report["lat"] is not None and ticket.get("lat") is not None:
         d = geo.haversine_m(report["lat"], report["lng"], ticket["lat"], ticket["lng"])
         if d < 60:
-            score += 0.15
+            score += 0.05
             reasons.append(f"{round(d)} m apart")
         elif d > 400:
             score -= 0.3
 
-    if fields.get("people") and ticket.get("people") and not fields.get("people_implied"):
-        if abs(fields["people"] - ticket["people"]) >= 3:
-            score -= 0.2
-            reasons.append("different number of people")
+    score += _detail_evidence(fields, ticket, reasons)
 
     if score > 0 and ticket.get("created_at"):
         minutes = _minutes_between(report["created_at"], ticket["last_update_at"] or ticket["created_at"])
-        if minutes <= 30:
+        if minutes <= 10:
             score += 0.1
+            reasons.append(f"{round(minutes)} minutes apart")
+        elif minutes <= 30:
+            score += 0.05
             reasons.append(f"{round(minutes)} minutes apart")
 
     if embed_fn and score > 0.2:
@@ -136,6 +151,53 @@ def match_score(report, fields, ticket, embed_fn=None):
                 score += 0.1
                 reasons.append(f"similar meaning ({sim:.2f})")
     return score, reasons
+
+
+GENERIC_TITLE_WORDS = {"household", "elder", "and", "child", "welfare", "check", "supplies", "needed", "family",
+                       "lane", "shanti", "nagar", "unknown", "location", "field", "report"}
+
+
+def surname_match(name, title):
+    """Compare the family names in a report and a ticket title. None when either has no name."""
+    from ..names import same_name_score
+
+    def core(text):
+        words = [w for w in (text or "").replace(",", " ").split() if w.lower() not in GENERIC_TITLE_WORDS and not w.isdigit()]
+        return " ".join(words).lower()
+
+    a, b = core(name), core(title)
+    if not a or not b:
+        return None
+    return same_name_score(a, b)
+
+
+def _detail_evidence(fields, ticket, reasons):
+    """Matching details make a location match believable; clashing ones make it doubtful."""
+    points = 0.0
+    if fields.get("people") and ticket.get("people") and not fields.get("people_implied"):
+        if fields["people"] == ticket["people"]:
+            points += 0.15
+            reasons.append(f"same number of people ({fields['people']})")
+        elif abs(fields["people"] - ticket["people"]) >= 2:
+            points -= 0.3
+            reasons.append("different number of people")
+    mine, theirs = set(fields.get("vulnerable", [])), set(ticket.get("vulnerable") or [])
+    if mine and theirs:
+        if mine == theirs:
+            points += 0.1
+            reasons.append("same vulnerable members")
+        elif not mine & theirs:
+            points -= 0.15
+    medical = set(filter(None, (ticket.get("medical") or "").split(", ")))
+    if set(fields.get("medical", [])) & medical:
+        points += 0.1
+        reasons.append("same medical need")
+    if fields.get("water_level") and ticket.get("water_level"):
+        if fields["water_level"] == ticket["water_level"]:
+            points += 0.05
+        elif "roof" in (fields["water_level"], ticket["water_level"]):
+            points -= 0.1
+    return points
 
 
 def merge_reason_text(reasons, languages):
@@ -161,7 +223,8 @@ def create_ticket(report_id, kind="rescue", status="open", verify_reason=None):
     ticket_id = next_ticket_id()
     now = db.now_iso()
     lane = fields.get("lane")
-    household = scenario.household_by_id(fields.get("household_hint")) if fields.get("household_hint") else None
+    household_id = fields.get("household_hint") or fields.get("household_guess")
+    household = scenario.household_by_id(household_id) if household_id else None
     title = fields.get("name") or _default_title(kind, fields, lane)
     db.insert("tickets", id=ticket_id, title=title,
               area=f"{lane}, Shanti Nagar" if lane else "Location unknown",
@@ -229,9 +292,12 @@ def merge_into_ticket(report_id, ticket_id, reason, confidence=1.0):
         updates["battery"] = fields["battery"]
     if fields.get("rising"):
         updates["rising"] = 1
-    if fields.get("household_hint") and not ticket["household_id"]:
+    if fields.get("household_hint") and ticket["household_id"] in (None, fields["household_hint"]) \
+            and ticket["title"] != fields["name"]:
         updates["household_id"] = fields["household_hint"]
         updates["title"] = fields["name"]
+    elif fields.get("household_guess") and not ticket["household_id"]:
+        updates["household_id"] = fields["household_guess"]
     elif fields.get("name") and ticket["title"].startswith(("Household", "Elder and child")):
         updates["title"] = fields["name"]
     if ticket["lat"] is None and report["lat"] is not None:

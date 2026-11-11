@@ -34,7 +34,8 @@ class Triage(Agent):
         candidates = [c for c in candidates if self._same_kind(c, kind)]
         best = candidates[0] if candidates else None
 
-        if best and best["status"] in ("safe", "closed") and best["score"] >= SAFE_MATCH_AT:
+        if best and best["status"] in ("safe", "closed") and best["score"] >= SAFE_MATCH_AT and \
+                self._identity_evidence(best, fields):
             report = db.one("SELECT * FROM reports WHERE id = ?", (report_id,))
             tickets.link_report(best["ticket_id"], report, "repost about a family already safe", best["score"])
             self.log(f"Triage matched a repost to {best['ticket_id']} ({best['title']}), already safe: "
@@ -53,6 +54,13 @@ class Triage(Agent):
         if best and best["score"] >= tickets.SUGGEST_MERGE_AT and best["status"] not in ("safe", "closed"):
             self._suggest_merge(ticket_id, best)
         return {"action": "created", "ticket_id": ticket_id, "priority": scored["priority"]}
+
+    @staticmethod
+    def _identity_evidence(candidate, fields):
+        """Only call something a repost about a rescued family when we know it is that family.
+        A new family on the same lane must never be told they were already rescued."""
+        strong = {"same sender", "same family name", "matches the household registry"}
+        return bool(strong & set(candidate["reasons"])) or bool(fields.get("repost") and fields.get("name"))
 
     @staticmethod
     def _same_kind(candidate, kind):

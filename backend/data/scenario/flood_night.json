@@ -1,0 +1,7344 @@
+{
+ "seed": 2026,
+ "start": "2026-07-14T21:30:00",
+ "end": "2026-07-15T02:30:00",
+ "messages": [
+  {
+   "time": "2026-07-14T21:38:00",
+   "phone": "+91 90000 00412",
+   "sender": "Kamla Devi",
+   "channel": "voice",
+   "language": "hi",
+   "text": "पानी घुटनों तक आ गया है, पोते को बुखार है… गली चार, हनुमान मंदिर के पीछे",
+   "truth": {
+    "family": "kamla",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [
+      "fever"
+     ],
+     "water": "knee",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 1
+  },
+  {
+   "time": "2026-07-14T21:39:00",
+   "phone": "+91 90000 00412",
+   "sender": "Kamla Devi",
+   "channel": "voice",
+   "language": "hi",
+   "text": "3 लोग। पोते को बुखार है",
+   "truth": {
+    "family": "kamla",
+    "kind": "followup",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [
+      "fever"
+     ],
+     "water": null,
+     "lane": null
+    }
+   },
+   "id": 2
+  },
+  {
+   "time": "2026-07-14T21:40:00",
+   "phone": "+91 90000 10059",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "पानी छाती तक है। हम 6 लोग हैं। जल्दी मदद भेजिए छोटा बच्चा साथ में हैं।",
+   "truth": {
+    "family": "fam19",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "chest",
+     "lane": null
+    }
+   },
+   "id": 3
+  },
+  {
+   "time": "2026-07-14T21:40:00",
+   "phone": "+91 90000 10181",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "Vihar lake ka dam toot gaya, sab log upar jao, share karo",
+   "truth": {
+    "family": "rumour_dam_burst",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "dam_burst"
+    }
+   },
+   "id": 4
+  },
+  {
+   "time": "2026-07-14T21:41:00",
+   "phone": "+91 90000 05101",
+   "sender": "Priya (daughter)",
+   "channel": "post",
+   "language": "en",
+   "text": "Please help my mother Kamla Devi, Lane 4 behind Hanuman temple, Shanti Nagar. Water rising!!",
+   "truth": {
+    "family": "kamla",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 4"
+    }
+   },
+   "id": 5
+  },
+  {
+   "time": "2026-07-14T21:41:00",
+   "phone": "+91 90000 10128",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Help! water is entering the house at Lane 6. We are 5 people.",
+   "truth": {
+    "family": "fam48",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 6
+  },
+  {
+   "time": "2026-07-14T21:41:00",
+   "phone": "+91 90000 10255",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Baby food and milk needed near the mosque on lane 7",
+   "truth": {
+    "family": "sup_mosque",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 7
+  },
+  {
+   "time": "2026-07-14T21:42:00",
+   "phone": "+91 90000 10059",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "गली 9",
+   "truth": {
+    "family": "fam19",
+    "kind": "followup",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 9"
+    }
+   },
+   "id": 8
+  },
+  {
+   "time": "2026-07-14T21:44:00",
+   "phone": "+91 90000 05102",
+   "sender": "Neighbour",
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "shantinagar gali 4 mandir ke peeche budhi amma aur bachcha phase hai",
+   "truth": {
+    "family": "kamla",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 4"
+    }
+   },
+   "id": 9
+  },
+  {
+   "time": "2026-07-14T21:44:00",
+   "phone": "+91 90000 10018",
+   "sender": null,
+   "channel": "voice",
+   "language": "en",
+   "text": "Help! water is at waist level at Lane 3. We are 4 people.",
+   "truth": {
+    "family": "fam03",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 10
+  },
+  {
+   "time": "2026-07-14T21:44:00",
+   "phone": "+91 90000 10044",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "गली 9 में पानी कमर तक है। हम 2 लोग हैं। जल्दी मदद भेजिए बुज़ुर्ग दादी साथ में हैं।",
+   "truth": {
+    "family": "fam15",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 11
+  },
+  {
+   "time": "2026-07-14T21:46:00",
+   "phone": "+91 90000 10212",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "घर में पानी आ रहा है, क्या करें?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 12
+  },
+  {
+   "time": "2026-07-14T21:46:00",
+   "phone": "+91 90000 10264",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Camp 5 mein khana aur peene ka paani chahiye, 30 log hain",
+   "truth": {
+    "family": "sup_camp5",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 13
+  },
+  {
+   "time": "2026-07-14T21:47:00",
+   "phone": "+91 90000 10005",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "FWD: Pinto family Lane 2 trapped with grandma, 4 people, please share!!",
+   "truth": {
+    "family": "pinto",
+    "kind": "repost_safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 14
+  },
+  {
+   "time": "2026-07-14T21:49:00",
+   "phone": "+91 90000 10204",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "शिविर कहाँ है? हम कहाँ जाएँ?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 15
+  },
+  {
+   "time": "2026-07-14T21:49:00",
+   "phone": "+91 90000 10226",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "Station Road pe paani bhar gaya, rasta band hai",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Station Road"
+    }
+   },
+   "id": 16
+  },
+  {
+   "time": "2026-07-14T21:51:00",
+   "phone": "+91 90000 10129",
+   "sender": null,
+   "channel": "call",
+   "language": "hi",
+   "text": "Dalvi परिवार गली 6 में फंसा है, घर में पानी आ गया है। छोटा बच्चा साथ में हैं।",
+   "truth": {
+    "family": "fam48",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 17
+  },
+  {
+   "time": "2026-07-14T21:52:00",
+   "phone": "+91 90000 00909",
+   "sender": "Thomas Joseph",
+   "channel": "sms",
+   "language": "en",
+   "text": "We are 5 people on the roof at Lane 9, small child with us, please hurry. Joseph family",
+   "truth": {
+    "family": "joseph",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 18
+  },
+  {
+   "time": "2026-07-14T21:53:00",
+   "phone": "+91 90000 10168",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "गल्ली 9 मध्ये पाणी कंबरेपर्यंत आहे. आम्ही 3 जण आहोत. लवकर मदत करा आजोबांना डायलिसिस हवे आहे.",
+   "truth": {
+    "family": "fam64",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 19
+  },
+  {
+   "time": "2026-07-14T21:54:00",
+   "phone": "+91 90000 10134",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "गल्ली 5 मध्ये पाणी गुडघ्यापर्यंत आले आहे. आम्ही 3 जण आहोत. लवकर मदत करा लहान बाळ सोबत आहेत.",
+   "truth": {
+    "family": "fam51",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 20
+  },
+  {
+   "time": "2026-07-14T21:56:00",
+   "phone": "+91 90000 10019",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "Paradkar family gali 3 mein phasi hai, paani kamar tak hai",
+   "truth": {
+    "family": "fam03",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 21
+  },
+  {
+   "time": "2026-07-14T21:58:00",
+   "phone": "+91 90000 10002",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Joseph family lane 9 chhat par phase hain, 5 log, chhota bachcha bhi hai",
+   "truth": {
+    "family": "joseph",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 22
+  },
+  {
+   "time": "2026-07-14T21:58:00",
+   "phone": "+91 90000 10185",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "Dam burst news is true, my cousin in BMC said so, forward",
+   "truth": {
+    "family": "rumour_dam_burst",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "dam_burst"
+    }
+   },
+   "id": 23
+  },
+  {
+   "time": "2026-07-14T22:00:00",
+   "phone": "+91 90000 10020",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "Paradkar कुटुंब गल्ली 3 मध्ये अडकले आहे, पाणी कंबरेपर्यंत आहे.",
+   "truth": {
+    "family": "fam03",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 24
+  },
+  {
+   "time": "2026-07-14T22:01:00",
+   "phone": "+91 90000 10060",
+   "sender": null,
+   "channel": "post",
+   "language": "hinglish",
+   "text": "Pandey family gali 9 mein phasi hai, paani chhati tak hai 6 log hain saath mein chhota bachcha",
+   "truth": {
+    "family": "fam19",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "chest",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 25
+  },
+  {
+   "time": "2026-07-14T22:02:00",
+   "phone": "+91 90000 00707",
+   "sender": "Rukhsar Shaikh",
+   "channel": "voice",
+   "language": "hi",
+   "text": "गली 7 मस्जिद के पास पहली मंजिल पर पानी अंदर आ रहा है, 4 लोग हैं",
+   "truth": {
+    "family": "shaikh",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 26
+  },
+  {
+   "time": "2026-07-14T22:03:00",
+   "phone": "+91 90000 10099",
+   "sender": null,
+   "channel": "voice",
+   "language": "hi",
+   "text": "गली 7 में पानी छाती तक है। हम 6 लोग हैं। जल्दी मदद भेजिए बुज़ुर्ग दादी साथ में हैं।",
+   "truth": {
+    "family": "fam35",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "chest",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 27
+  },
+  {
+   "time": "2026-07-14T22:05:00",
+   "phone": "+91 90000 10001",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "Kamla Devi aur unka pota gali 4 mein abhi bhi phase hain, please share karo, phone 14% hai",
+   "truth": {
+    "family": "kamla",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 4"
+    }
+   },
+   "id": 28
+  },
+  {
+   "time": "2026-07-14T22:06:00",
+   "phone": "+91 90000 10061",
+   "sender": null,
+   "channel": "call",
+   "language": "mr",
+   "text": "पांडे कुटुंब गल्ली 9 मध्ये अडकले आहे, पाणी छातीपर्यंत आहे. लहान बाळ सोबत आहेत.",
+   "truth": {
+    "family": "fam19",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "chest",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 29
+  },
+  {
+   "time": "2026-07-14T22:07:00",
+   "phone": "+91 90000 10124",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "हम छत पर हैं। हम 3 लोग हैं। जल्दी मदद भेजिए छोटा बच्चा और बुज़ुर्ग दादी साथ में हैं।",
+   "truth": {
+    "family": "fam46",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [],
+     "water": "roof",
+     "lane": null
+    }
+   },
+   "id": 30
+  },
+  {
+   "time": "2026-07-14T22:07:00",
+   "phone": "+91 90000 10270",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "camp 3 school mein blanket aur ORS chahiye",
+   "truth": {
+    "family": "sup_camp3",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 31
+  },
+  {
+   "time": "2026-07-14T22:09:00",
+   "phone": "+91 90000 10124",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "गली 6",
+   "truth": {
+    "family": "fam46",
+    "kind": "followup",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 6"
+    }
+   },
+   "id": 32
+  },
+  {
+   "time": "2026-07-14T22:09:00",
+   "phone": "+91 90000 10236",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "power cut in whole Shanti Nagar",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 33
+  },
+  {
+   "time": "2026-07-14T22:10:00",
+   "phone": "+91 90000 10111",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "गल्ली 1 मध्ये पाणी गुडघ्यापर्यंत आले आहे. आम्ही 3 जण आहोत. लवकर मदत करा बाळाला ताप आहे.",
+   "truth": {
+    "family": "fam40",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [
+      "fever"
+     ],
+     "water": "knee",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 34
+  },
+  {
+   "time": "2026-07-14T22:11:00",
+   "phone": "+91 90000 10078",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "गल्ली 6 मध्ये घरात पाणी आले आहे. आम्ही 2 जण आहोत. लवकर मदत करा लहान बाळ सोबत आहेत.",
+   "truth": {
+    "family": "fam27",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 35
+  },
+  {
+   "time": "2026-07-14T22:12:00",
+   "phone": "+91 90000 10012",
+   "sender": null,
+   "channel": "voice",
+   "language": "hinglish",
+   "text": "gali 2 mein ghar mein paani aa gaya hai, hum 5 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam00",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 36
+  },
+  {
+   "time": "2026-07-14T22:13:00",
+   "phone": "+91 90000 10199",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "बिजली का तार पानी में गिरा है, क्या करें?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 37
+  },
+  {
+   "time": "2026-07-14T22:13:00",
+   "phone": "+91 90000 10223",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "How do I check if my family is safe?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 38
+  },
+  {
+   "time": "2026-07-14T22:14:00",
+   "phone": "+91 90000 10047",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "Shetty कुटुंब गल्ली 9 मध्ये अडकले आहे. 2 जण आहेत. आजी सोबत आहेत.",
+   "truth": {
+    "family": "fam15",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 9"
+    }
+   },
+   "id": 39
+  },
+  {
+   "time": "2026-07-14T22:14:00",
+   "phone": "+91 90000 10252",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Camp 5 mein khana aur peene ka paani chahiye, 30 log hain",
+   "truth": {
+    "family": "sup_camp5",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 40
+  },
+  {
+   "time": "2026-07-14T22:15:00",
+   "phone": "+91 90000 10003",
+   "sender": null,
+   "channel": "post",
+   "language": "en",
+   "text": "URGENT: Joseph family of 5 stuck on the roof in Lane 9 Shanti Nagar with a toddler and grandma 72",
+   "truth": {
+    "family": "joseph",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 41
+  },
+  {
+   "time": "2026-07-14T22:15:00",
+   "phone": "+91 90000 10040",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "गल्ली 8 मध्ये पाणी कंबरेपर्यंत आहे. आम्ही 4 जण आहोत. लवकर मदत करा",
+   "truth": {
+    "family": "fam13",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 42
+  },
+  {
+   "time": "2026-07-14T22:16:00",
+   "phone": "+91 90000 10207",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "हेल्पलाइन नंबर क्या है?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 43
+  },
+  {
+   "time": "2026-07-14T22:17:00",
+   "phone": "+91 90000 10045",
+   "sender": null,
+   "channel": "post",
+   "language": "hinglish",
+   "text": "Shetty family gali 9 mein phasi hai, paani kamar tak hai 2 log hain saath mein budhi dadi",
+   "truth": {
+    "family": "fam15",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 44
+  },
+  {
+   "time": "2026-07-14T22:18:00",
+   "phone": "+91 90000 10103",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Help! water is entering the house at Lane 2. We are 3 people. With a small child and my father in a wheelchair.",
+   "truth": {
+    "family": "fam37",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child",
+      "disabled"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 45
+  },
+  {
+   "time": "2026-07-14T22:20:00",
+   "phone": "+91 90000 00707",
+   "sender": "Rukhsar Shaikh",
+   "channel": "voice",
+   "language": "hi",
+   "text": "गली 7 मस्जिद के पास गैस की बदबू आ रही है और पानी अंदर है, क्या करें?",
+   "truth": {
+    "family": "shaikh",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 7",
+     "danger": [
+      "gas"
+     ]
+    }
+   },
+   "id": 46
+  },
+  {
+   "time": "2026-07-14T22:23:00",
+   "phone": "+91 90000 10104",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Chougule family gali 2 mein phasi hai, ghar mein paani aa gaya hai saath mein chhota bachcha aur viklang papa",
+   "truth": {
+    "family": "fam37",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child",
+      "disabled"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 47
+  },
+  {
+   "time": "2026-07-14T22:23:00",
+   "phone": "+91 90000 10169",
+   "sender": null,
+   "channel": "call",
+   "language": "en",
+   "text": "The Kadam family is stuck at Lane 9, water is at waist level. Grandfather needs dialysis.",
+   "truth": {
+    "family": "fam64",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 48
+  },
+  {
+   "time": "2026-07-14T22:24:00",
+   "phone": "+91 90000 10006",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "Pinto family gali 2 mein phase hain, budhi dadi ke saath, please share karo",
+   "truth": {
+    "family": "pinto",
+    "kind": "repost_safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 49
+  },
+  {
+   "time": "2026-07-14T22:24:00",
+   "phone": "+91 90000 10038",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Help! we are stuck at near the mosque on Lane 7. We are 3 people.",
+   "truth": {
+    "family": "fam12",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 7"
+    }
+   },
+   "id": 50
+  },
+  {
+   "time": "2026-07-14T22:24:00",
+   "phone": "+91 90000 10112",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "Ansari family gali 1 mein phasi hai, paani ghutno tak aa gaya hai saath mein chhota bachcha aur budhi dadi bachche ko bukhar hai",
+   "truth": {
+    "family": "fam40",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [
+      "fever"
+     ],
+     "water": "knee",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 51
+  },
+  {
+   "time": "2026-07-14T22:25:00",
+   "phone": "+91 90000 10113",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Help! water is at knee level at Lane 2. We are 5 people. With a small child and my old grandmother.",
+   "truth": {
+    "family": "fam41",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 52
+  },
+  {
+   "time": "2026-07-14T22:25:00",
+   "phone": "+91 90000 10135",
+   "sender": null,
+   "channel": "post",
+   "language": "en",
+   "text": "The Sayyed family is stuck at Lane 5, water is at knee level. 3 people inside. With a small child.",
+   "truth": {
+    "family": "fam51",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 53
+  },
+  {
+   "time": "2026-07-14T22:25:00",
+   "phone": "+91 90000 10150",
+   "sender": null,
+   "channel": "voice",
+   "language": "mr",
+   "text": "गल्ली 8, पाण्याची टाकीजवळ मध्ये आम्ही छतावर आहोत. आम्ही 7 जण आहोत. लवकर मदत करा लहान बाळ आणि अपंग वडील सोबत आहेत.",
+   "truth": {
+    "family": "fam57",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [
+      "child",
+      "disabled"
+     ],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 54
+  },
+  {
+   "time": "2026-07-14T22:25:00",
+   "phone": "+91 90000 10018",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "कोई नहीं आया अभी तक, कब आएगा?",
+   "truth": {
+    "family": "fam03",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 55
+  },
+  {
+   "time": "2026-07-14T22:28:00",
+   "phone": "+91 90000 10101",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "गल्ली 7 मशिदीजवळ मध्ये पाणी कंबरेपर्यंत आहे. आम्ही 6 जण आहोत. लवकर मदत करा आजोबांना डायलिसिस हवे आहे.",
+   "truth": {
+    "family": "fam36",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "waist",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 56
+  },
+  {
+   "time": "2026-07-14T22:31:00",
+   "phone": "+91 90000 10004",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Shaikh family gali no 7 masjid ke paas, ghar mein paani aa gaya hai aur gas leak bhi hai",
+   "truth": {
+    "family": "shaikh",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 7",
+     "danger": [
+      "gas"
+     ]
+    }
+   },
+   "id": 57
+  },
+  {
+   "time": "2026-07-14T22:32:00",
+   "phone": "+91 90000 10091",
+   "sender": null,
+   "channel": "voice",
+   "language": "hi",
+   "text": "गली 4 में पानी कमर तक है। हम 3 लोग हैं। जल्दी मदद भेजिए",
+   "truth": {
+    "family": "fam32",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 58
+  },
+  {
+   "time": "2026-07-14T22:32:00",
+   "phone": "+91 90000 10102",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "The Fernandes family is stuck at near the mosque on Lane 7. With my old grandmother.",
+   "truth": {
+    "family": "fam36",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 7"
+    }
+   },
+   "id": 59
+  },
+  {
+   "time": "2026-07-14T22:33:00",
+   "phone": "+91 90000 10170",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "Kadam family gali 9 mein phasi hai, paani kamar tak hai dadaji ko dialysis chahiye",
+   "truth": {
+    "family": "fam64",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 60
+  },
+  {
+   "time": "2026-07-14T22:34:00",
+   "phone": "+91 90000 10124",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "boat kab aayegi? koi nahi aaya",
+   "truth": {
+    "family": "fam46",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 61
+  },
+  {
+   "time": "2026-07-14T22:35:00",
+   "phone": "+91 90000 10100",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "More family gali 7 mein phasi hai, paani chhati tak hai 6 log hain saath mein budhi dadi",
+   "truth": {
+    "family": "fam35",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "chest",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 62
+  },
+  {
+   "time": "2026-07-14T22:36:00",
+   "phone": "+91 90000 10219",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "शिविर कहाँ है? हम कहाँ जाएँ?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 63
+  },
+  {
+   "time": "2026-07-14T22:37:00",
+   "phone": "+91 90000 10035",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Help! water is at knee level at Lane 2. We are 3 people.",
+   "truth": {
+    "family": "fam11",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 64
+  },
+  {
+   "time": "2026-07-14T22:37:00",
+   "phone": "+91 90000 10067",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "gali 3 mein paani kamar tak hai, hum 4 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam23",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 65
+  },
+  {
+   "time": "2026-07-14T22:38:00",
+   "phone": "+91 90000 10092",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The Kale family is stuck at Lane 4, water is at waist level. 3 people inside.",
+   "truth": {
+    "family": "fam32",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 66
+  },
+  {
+   "time": "2026-07-14T22:40:00",
+   "phone": "+91 90000 05300",
+   "sender": "Mohan's daughter",
+   "channel": "sms",
+   "language": "mr",
+   "text": "माझे वडील मोहन सेक्टर 3 मध्ये एकटे राहतात, फोन उचलत नाही. कृपया कोणी तरी बघा",
+   "truth": {
+    "family": "mohan",
+    "kind": "welfare",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Sector 3"
+    }
+   },
+   "id": 67
+  },
+  {
+   "time": "2026-07-14T22:40:00",
+   "phone": "+91 90000 10261",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Diabetic patient needs insulin, Lane 1, house 22",
+   "truth": {
+    "family": "sup_lane1",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 68
+  },
+  {
+   "time": "2026-07-14T22:41:00",
+   "phone": "+91 90000 10048",
+   "sender": null,
+   "channel": "voice",
+   "language": "hinglish",
+   "text": "gali 5 mein paani ghutno tak aa gaya hai, hum 7 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam16",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 69
+  },
+  {
+   "time": "2026-07-14T22:42:00",
+   "phone": "+91 90000 10125",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The Shaikh Noor family is stuck at Lane 6, they are on the roof. 3 people inside. With a small child and my old grandmother.",
+   "truth": {
+    "family": "fam46",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 70
+  },
+  {
+   "time": "2026-07-14T22:43:00",
+   "phone": "+91 90000 10013",
+   "sender": null,
+   "channel": "call",
+   "language": "hi",
+   "text": "Tambe परिवार गली 2 में फंसा है। 5 लोग हैं। बुज़ुर्ग दादी और गर्भवती बहू साथ में हैं।",
+   "truth": {
+    "family": "fam00",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [
+      "elderly",
+      "pregnant"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 71
+  },
+  {
+   "time": "2026-07-14T22:45:00",
+   "phone": "+91 90000 10192",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "Army boats only for VIP colonies, nobody will come for us",
+   "truth": {
+    "family": "rumour_army_vip",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "army_vip"
+    }
+   },
+   "id": 72
+  },
+  {
+   "time": "2026-07-14T22:47:00",
+   "phone": "+91 90000 10086",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "गल्ली 7 मशिदीजवळ मध्ये आम्ही अडकलो आहोत. आम्ही 6 जण आहोत. लवकर मदत करा लहान बाळ आणि आजी सोबत आहेत. आजोबांना डायलिसिस हवे आहे.",
+   "truth": {
+    "family": "fam30",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [
+      "dialysis"
+     ],
+     "water": null,
+     "lane": "Lane 7"
+    }
+   },
+   "id": 73
+  },
+  {
+   "time": "2026-07-14T22:48:00",
+   "phone": "+91 90000 10039",
+   "sender": null,
+   "channel": "call",
+   "language": "hi",
+   "text": "Salvi परिवार गली 7 में फंसा है, पानी घुटनों तक आ गया है। छोटा बच्चा और विकलांग पिताजी साथ में हैं।",
+   "truth": {
+    "family": "fam12",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child",
+      "disabled"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 74
+  },
+  {
+   "time": "2026-07-14T22:48:00",
+   "phone": "+91 90000 10046",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The Shetty family is stuck at Lane 9, water is at waist level. With my old grandmother.",
+   "truth": {
+    "family": "fam15",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 75
+  },
+  {
+   "time": "2026-07-14T22:49:00",
+   "phone": "+91 90000 10021",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "गली 8 में पानी कमर तक है। हम 6 लोग हैं। जल्दी मदद भेजिए बुज़ुर्ग दादी साथ में हैं।",
+   "truth": {
+    "family": "fam04",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 76
+  },
+  {
+   "time": "2026-07-14T22:50:00",
+   "phone": "+91 90000 10065",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Help! we are stuck at Lane 6. We are 5 people. Grandmother has fainted and is unconscious.",
+   "truth": {
+    "family": "fam22",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [
+      "unconscious"
+     ],
+     "water": null,
+     "lane": "Lane 6"
+    }
+   },
+   "id": 77
+  },
+  {
+   "time": "2026-07-14T22:50:00",
+   "phone": "+91 90000 10254",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "गली 3 में खाना और दूध चाहिए, 10 लोग हैं",
+   "truth": {
+    "family": "sup_lane3",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 78
+  },
+  {
+   "time": "2026-07-14T22:51:00",
+   "phone": "+91 90000 10121",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "गली 6 में पानी घुटनों तक आ गया है। हम 5 लोग हैं। जल्दी मदद भेजिए",
+   "truth": {
+    "family": "fam44",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 79
+  },
+  {
+   "time": "2026-07-14T22:52:00",
+   "phone": "+91 90000 10099",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "any update? still waiting",
+   "truth": {
+    "family": "fam35",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 80
+  },
+  {
+   "time": "2026-07-14T22:53:00",
+   "phone": "+91 90000 10096",
+   "sender": null,
+   "channel": "voice",
+   "language": "hi",
+   "text": "गली 1 में पानी घुटनों तक आ गया है। हम 5 लोग हैं। जल्दी मदद भेजिए",
+   "truth": {
+    "family": "fam34",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 81
+  },
+  {
+   "time": "2026-07-14T22:54:00",
+   "phone": "+91 90000 10105",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "गली 1 में हम फंसे हैं। हम 6 लोग हैं। जल्दी मदद भेजिए गर्भवती बहू साथ में हैं।",
+   "truth": {
+    "family": "fam38",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "pregnant"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 1"
+    }
+   },
+   "id": 82
+  },
+  {
+   "time": "2026-07-14T22:55:00",
+   "phone": "+91 90000 10215",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "There is a spark near the meter box and water on the floor, what should I do?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 83
+  },
+  {
+   "time": "2026-07-14T22:55:00",
+   "phone": "+91 90000 10265",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Lane 3 mein 10 logon ke liye khana chahiye",
+   "truth": {
+    "family": "sup_lane3",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 84
+  },
+  {
+   "time": "2026-07-14T22:56:00",
+   "phone": "+91 90000 10032",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "gali 8 mein ghar mein paani aa gaya hai, hum 4 log hain, jaldi madad bhejo saath mein viklang papa aur budhi dadi dadaji ko dialysis chahiye",
+   "truth": {
+    "family": "fam09",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [
+      "disabled",
+      "elderly"
+     ],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "entering",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 85
+  },
+  {
+   "time": "2026-07-14T22:57:00",
+   "phone": "+91 90000 10069",
+   "sender": null,
+   "channel": "call",
+   "language": "en",
+   "text": "The Hegde family is stuck at Lane 3, water is at waist level.",
+   "truth": {
+    "family": "fam23",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 86
+  },
+  {
+   "time": "2026-07-14T22:57:00",
+   "phone": "+91 90000 10122",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Shirke family gali 6 mein phasi hai, paani ghutno tak aa gaya hai saath mein chhota bachcha",
+   "truth": {
+    "family": "fam44",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 87
+  },
+  {
+   "time": "2026-07-14T22:58:00",
+   "phone": "+91 90000 10007",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "पिंटो परिवार गली 2 में फंसा है, दादी के साथ, कृपया शेयर करें",
+   "truth": {
+    "family": "pinto",
+    "kind": "repost_safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 88
+  },
+  {
+   "time": "2026-07-14T22:58:00",
+   "phone": "+91 90000 10114",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "Gaikwad कुटुंब गल्ली 2 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे. लहान बाळ आणि आजी सोबत आहेत.",
+   "truth": {
+    "family": "fam41",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 89
+  },
+  {
+   "time": "2026-07-14T22:58:00",
+   "phone": "+91 90000 10150",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "any update? still waiting",
+   "truth": {
+    "family": "fam57",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 90
+  },
+  {
+   "time": "2026-07-14T22:59:00",
+   "phone": "+91 90000 10023",
+   "sender": null,
+   "channel": "call",
+   "language": "hinglish",
+   "text": "Kulkarni family gali 8 mein phasi hai, paani kamar tak hai 6 log hain saath mein budhi dadi",
+   "truth": {
+    "family": "fam04",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 91
+  },
+  {
+   "time": "2026-07-14T23:00:00",
+   "phone": "+91 90000 10151",
+   "sender": null,
+   "channel": "post",
+   "language": "hi",
+   "text": "माने परिवार गली 8, पानी की टंकी के पास में फंसा है, वे छत पर हैं। 7 लोग हैं।",
+   "truth": {
+    "family": "fam57",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 92
+  },
+  {
+   "time": "2026-07-14T23:01:00",
+   "phone": "+91 90000 10037",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "Rathod कुटुंब गल्ली 2 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे. लहान बाळ आणि गरोदर सून सोबत आहेत.",
+   "truth": {
+    "family": "fam11",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child",
+      "pregnant"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 93
+  },
+  {
+   "time": "2026-07-14T23:02:00",
+   "phone": "+91 90000 10253",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Lane 3 mein 10 logon ke liye khana chahiye",
+   "truth": {
+    "family": "sup_lane3",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 94
+  },
+  {
+   "time": "2026-07-14T23:05:00",
+   "phone": "+91 90000 10011",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Mohan kaka sector 3 akele rehte hain, phone nahi utha rahe, check on him please",
+   "truth": {
+    "family": "mohan",
+    "kind": "welfare",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Sector 3"
+    }
+   },
+   "id": 95
+  },
+  {
+   "time": "2026-07-14T23:06:00",
+   "phone": "+91 90000 10159",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "गल्ली 8, पाण्याची टाकीजवळ मध्ये पाणी कंबरेपर्यंत आहे. आम्ही 4 जण आहोत. लवकर मदत करा लहान बाळ सोबत आहेत.",
+   "truth": {
+    "family": "fam61",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 96
+  },
+  {
+   "time": "2026-07-14T23:07:00",
+   "phone": "+91 90000 10022",
+   "sender": null,
+   "channel": "call",
+   "language": "en",
+   "text": "The Kulkarni family is stuck at Lane 8, water is at waist level. With my old grandmother.",
+   "truth": {
+    "family": "fam04",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 97
+  },
+  {
+   "time": "2026-07-14T23:07:00",
+   "phone": "+91 90000 10194",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "Tsunami warning for Mumbai tonight, move to higher floors",
+   "truth": {
+    "family": "rumour_whole_area_drown",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "whole_area_drown"
+    }
+   },
+   "id": 98
+  },
+  {
+   "time": "2026-07-14T23:08:00",
+   "phone": "+91 90000 10051",
+   "sender": null,
+   "channel": "call",
+   "language": "hi",
+   "text": "Waghmare परिवार गली 5 में फंसा है, पानी घुटनों तक आ गया है।",
+   "truth": {
+    "family": "fam16",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 99
+  },
+  {
+   "time": "2026-07-14T23:09:00",
+   "phone": "+91 90000 10036",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "Rathod परिवार गली 2 में फंसा है। छोटा बच्चा और गर्भवती बहू साथ में हैं।",
+   "truth": {
+    "family": "fam11",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child",
+      "pregnant"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 100
+  },
+  {
+   "time": "2026-07-14T23:09:00",
+   "phone": "+91 90000 10049",
+   "sender": null,
+   "channel": "call",
+   "language": "mr",
+   "text": "Waghmare कुटुंब गल्ली 5 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे.",
+   "truth": {
+    "family": "fam16",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 101
+  },
+  {
+   "time": "2026-07-14T23:09:00",
+   "phone": "+91 90000 10113",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "boat kab aayegi? koi nahi aaya",
+   "truth": {
+    "family": "fam41",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 102
+  },
+  {
+   "time": "2026-07-14T23:09:00",
+   "phone": "+91 90000 10128",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "we are safe now, reached camp",
+   "truth": {
+    "family": "fam48",
+    "kind": "safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 103
+  },
+  {
+   "time": "2026-07-14T23:09:00",
+   "phone": "+91 90000 10256",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "मशिदीजवळ गल्ली 7 मध्ये दूध आणि औषध पाहिजे",
+   "truth": {
+    "family": "sup_mosque",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 104
+  },
+  {
+   "time": "2026-07-14T23:10:00",
+   "phone": "+91 90000 10066",
+   "sender": null,
+   "channel": "call",
+   "language": "hinglish",
+   "text": "Patil family gali 6 mein phasi hai, paani ghutno tak aa gaya hai dadi behosh ho gayi hain",
+   "truth": {
+    "family": "fam22",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [
+      "unconscious"
+     ],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 105
+  },
+  {
+   "time": "2026-07-14T23:10:00",
+   "phone": "+91 90000 10106",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The Tiwari family is stuck at Lane 1, water is at waist level.",
+   "truth": {
+    "family": "fam38",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 106
+  },
+  {
+   "time": "2026-07-14T23:11:00",
+   "phone": "+91 90000 10068",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "Hegde परिवार गली 3 में फंसा है, पानी कमर तक है। 4 लोग हैं।",
+   "truth": {
+    "family": "fam23",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 107
+  },
+  {
+   "time": "2026-07-14T23:11:00",
+   "phone": "+91 90000 10038",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "boat kab aayegi? koi nahi aaya",
+   "truth": {
+    "family": "fam12",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 108
+  },
+  {
+   "time": "2026-07-14T23:12:00",
+   "phone": "+91 90000 10087",
+   "sender": null,
+   "channel": "call",
+   "language": "hi",
+   "text": "Sheikh Ali परिवार गली 7 मस्जिद के पास में फंसा है, पानी घुटनों तक आ गया है। 6 लोग हैं। छोटा बच्चा और बुज़ुर्ग दादी साथ में हैं। दादाजी को डायलिसिस चाहिए।",
+   "truth": {
+    "family": "fam30",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "knee",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 109
+  },
+  {
+   "time": "2026-07-14T23:14:00",
+   "phone": "+91 90000 10033",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "The Naik family is stuck at Lane 8, water is entering the house. With my father in a wheelchair and my old grandmother. Grandfather needs dialysis.",
+   "truth": {
+    "family": "fam09",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "disabled",
+      "elderly"
+     ],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "entering",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 110
+  },
+  {
+   "time": "2026-07-14T23:16:00",
+   "phone": "+91 90000 10136",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Help! water is at knee level at Lane 6. We are 1 people.",
+   "truth": {
+    "family": "fam52",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 1,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 111
+  },
+  {
+   "time": "2026-07-14T23:18:00",
+   "phone": "+91 90000 10021",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "any update? still waiting",
+   "truth": {
+    "family": "fam04",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 112
+  },
+  {
+   "time": "2026-07-14T23:19:00",
+   "phone": "+91 90000 10050",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "The Waghmare family is stuck at Lane 5, water is at knee level. 7 people inside.",
+   "truth": {
+    "family": "fam16",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 113
+  },
+  {
+   "time": "2026-07-14T23:19:00",
+   "phone": "+91 90000 10073",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "gali 9 mein paani kamar tak hai, hum 2 log hain, jaldi madad bhejo saath mein chhota bachcha",
+   "truth": {
+    "family": "fam25",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 114
+  },
+  {
+   "time": "2026-07-14T23:19:00",
+   "phone": "+91 90000 10091",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "कोई नहीं आया अभी तक, कब आएगा?",
+   "truth": {
+    "family": "fam32",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 115
+  },
+  {
+   "time": "2026-07-14T23:20:00",
+   "phone": "+91 90000 10097",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The Kotian family is stuck at Lane 1, water is at knee level. 5 people inside.",
+   "truth": {
+    "family": "fam34",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 116
+  },
+  {
+   "time": "2026-07-14T23:22:00",
+   "phone": "+91 90000 10014",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "gali 6 mein hum chhat par hain, hum 7 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam01",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 117
+  },
+  {
+   "time": "2026-07-14T23:22:00",
+   "phone": "+91 90000 10074",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "Wagh परिवार गली 9 में फंसा है, पानी कमर तक है। 2 लोग हैं।",
+   "truth": {
+    "family": "fam25",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 118
+  },
+  {
+   "time": "2026-07-14T23:22:00",
+   "phone": "+91 90000 10221",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "What is the helpline number for the control room?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 119
+  },
+  {
+   "time": "2026-07-14T23:22:00",
+   "phone": "+91 90000 10225",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Lane 6 road blocked, water above waist near the market",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 6"
+    }
+   },
+   "id": 120
+  },
+  {
+   "time": "2026-07-14T23:23:00",
+   "phone": "+91 90000 10157",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "gali 3 mein paani kamar tak hai, hum 7 log hain, jaldi madad bhejo saath mein chhota bachcha aur budhi dadi",
+   "truth": {
+    "family": "fam60",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 121
+  },
+  {
+   "time": "2026-07-14T23:24:00",
+   "phone": "+91 90000 10202",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Where is the nearest relief camp?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 122
+  },
+  {
+   "time": "2026-07-14T23:25:00",
+   "phone": "+91 90000 10208",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "How do I check if my family is safe?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 123
+  },
+  {
+   "time": "2026-07-14T23:26:00",
+   "phone": "+91 90000 10076",
+   "sender": null,
+   "channel": "voice",
+   "language": "hinglish",
+   "text": "gali 6 mein paani ghutno tak aa gaya hai, hum 2 log hain, jaldi madad bhejo saath mein chhota bachcha",
+   "truth": {
+    "family": "fam26",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 124
+  },
+  {
+   "time": "2026-07-14T23:31:00",
+   "phone": "+91 90000 10240",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "River Road flooded, two cars stuck, road is closed",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "River Road"
+    }
+   },
+   "id": 125
+  },
+  {
+   "time": "2026-07-14T23:32:00",
+   "phone": "+91 90000 10130",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "गली 4, हनुमान मंदिर के पीछे में पानी कमर तक है। हम 4 लोग हैं। जल्दी मदद भेजिए",
+   "truth": {
+    "family": "fam49",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 126
+  },
+  {
+   "time": "2026-07-14T23:33:00",
+   "phone": "+91 90000 10160",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "Bhatt परिवार गली 8, पानी की टंकी के पास में फंसा है, पानी कमर तक है। 4 लोग हैं। छोटा बच्चा साथ में हैं।",
+   "truth": {
+    "family": "fam61",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 127
+  },
+  {
+   "time": "2026-07-14T23:33:00",
+   "phone": "+91 90000 10171",
+   "sender": null,
+   "channel": "voice",
+   "language": "en",
+   "text": "Help! water is at knee level at Lane 5. We are 6 people. Grandfather needs dialysis.",
+   "truth": {
+    "family": "fam65",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "knee",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 128
+  },
+  {
+   "time": "2026-07-14T23:37:00",
+   "phone": "+91 90000 10031",
+   "sender": null,
+   "channel": "voice",
+   "language": "hi",
+   "text": "गली 8 में पानी घुटनों तक आ गया है। हम 6 लोग हैं। जल्दी मदद भेजिए बुज़ुर्ग दादी साथ में हैं।",
+   "truth": {
+    "family": "fam08",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 129
+  },
+  {
+   "time": "2026-07-14T23:37:00",
+   "phone": "+91 90000 10137",
+   "sender": null,
+   "channel": "post",
+   "language": "mr",
+   "text": "Nair कुटुंब गल्ली 6 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे. 1 जण आहेत.",
+   "truth": {
+    "family": "fam52",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 1,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 130
+  },
+  {
+   "time": "2026-07-14T23:37:00",
+   "phone": "+91 90000 10105",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "कोई नहीं आया अभी तक, कब आएगा?",
+   "truth": {
+    "family": "fam38",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 131
+  },
+  {
+   "time": "2026-07-14T23:39:00",
+   "phone": "+91 90000 10098",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "Kotian कुटुंब गल्ली 1 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे. 5 जण आहेत.",
+   "truth": {
+    "family": "fam34",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 132
+  },
+  {
+   "time": "2026-07-14T23:39:00",
+   "phone": "+91 90000 10117",
+   "sender": null,
+   "channel": "voice",
+   "language": "hi",
+   "text": "गली 3 में घर में पानी आ गया है। हम 6 लोग हैं। जल्दी मदद भेजिए",
+   "truth": {
+    "family": "fam43",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 133
+  },
+  {
+   "time": "2026-07-14T23:39:00",
+   "phone": "+91 90000 10111",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "hum safe hain, camp pahunch gaye",
+   "truth": {
+    "family": "fam40",
+    "kind": "safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 134
+  },
+  {
+   "time": "2026-07-14T23:39:00",
+   "phone": "+91 90000 10232",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Lane 6 still blocked, water rising near the shops",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 6"
+    }
+   },
+   "id": 135
+  },
+  {
+   "time": "2026-07-14T23:40:00",
+   "phone": "+91 90000 10008",
+   "sender": null,
+   "channel": "post",
+   "language": "en",
+   "text": "Pls share: Pinto family Lane 2 Shanti Nagar, 4 people incl. 78 yr old grandmother, water rising",
+   "truth": {
+    "family": "pinto",
+    "kind": "repost_safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 136
+  },
+  {
+   "time": "2026-07-14T23:41:00",
+   "phone": "+91 90000 10222",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "हेल्पलाइन नंबर क्या है?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 137
+  },
+  {
+   "time": "2026-07-14T23:44:00",
+   "phone": "+91 90000 10237",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "लाईट गेली आहे गल्ली 9 मध्ये",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 138
+  },
+  {
+   "time": "2026-07-14T23:45:00",
+   "phone": "+91 90000 10154",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Help! water is at knee level at Lane 8. We are 3 people.",
+   "truth": {
+    "family": "fam59",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 139
+  },
+  {
+   "time": "2026-07-14T23:46:00",
+   "phone": "+91 90000 10055",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "gali 6 mein paani kamar tak hai, hum 5 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam18",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 140
+  },
+  {
+   "time": "2026-07-14T23:48:00",
+   "phone": "+91 90000 10118",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "खान कुटुंब गल्ली 3 मध्ये अडकले आहे. 6 जण आहेत.",
+   "truth": {
+    "family": "fam43",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 3"
+    }
+   },
+   "id": 141
+  },
+  {
+   "time": "2026-07-14T23:48:00",
+   "phone": "+91 90000 10203",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "relief camp kahan hai? kahan jayein?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 142
+  },
+  {
+   "time": "2026-07-14T23:49:00",
+   "phone": "+91 90000 10077",
+   "sender": null,
+   "channel": "post",
+   "language": "hi",
+   "text": "Pereira परिवार गली 6 में फंसा है, पानी घुटनों तक आ गया है। छोटा बच्चा साथ में हैं।",
+   "truth": {
+    "family": "fam26",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 143
+  },
+  {
+   "time": "2026-07-14T23:51:00",
+   "phone": "+91 90000 10158",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The Shinde family is stuck at Lane 3, water is at waist level. 7 people inside. With a small child and my old grandmother.",
+   "truth": {
+    "family": "fam60",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [
+      "child",
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 144
+  },
+  {
+   "time": "2026-07-14T23:51:00",
+   "phone": "+91 90000 10173",
+   "sender": null,
+   "channel": "post",
+   "language": "hi",
+   "text": "Siddiqui परिवार गली 5 में फंसा है, पानी घुटनों तक आ गया है। बुज़ुर्ग दादी साथ में हैं। दादाजी को डायलिसिस चाहिए।",
+   "truth": {
+    "family": "fam65",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "knee",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 145
+  },
+  {
+   "time": "2026-07-14T23:51:00",
+   "phone": "+91 90000 10183",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "पवई धरण फुटले आहे, सगळ्यांनी वर जा",
+   "truth": {
+    "family": "rumour_dam_burst",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "dam_burst"
+    }
+   },
+   "id": 146
+  },
+  {
+   "time": "2026-07-14T23:52:00",
+   "phone": "+91 90000 10024",
+   "sender": null,
+   "channel": "call",
+   "language": "mr",
+   "text": "Kulkarni कुटुंब गल्ली 8 मध्ये अडकले आहे, पाणी कंबरेपर्यंत आहे. आजी सोबत आहेत.",
+   "truth": {
+    "family": "fam04",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 147
+  },
+  {
+   "time": "2026-07-14T23:52:00",
+   "phone": "+91 90000 10107",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Tiwari family gali 1 mein phasi hai, paani kamar tak hai saath mein pregnant bahu",
+   "truth": {
+    "family": "fam38",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "pregnant"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 148
+  },
+  {
+   "time": "2026-07-14T23:52:00",
+   "phone": "+91 90000 10258",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "camp 3 school mein blanket aur ORS chahiye",
+   "truth": {
+    "family": "sup_camp3",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 149
+  },
+  {
+   "time": "2026-07-14T23:53:00",
+   "phone": "+91 90000 10241",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "गली 6 में पानी भरा है, रास्ता बंद है",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 6"
+    }
+   },
+   "id": 150
+  },
+  {
+   "time": "2026-07-14T23:54:00",
+   "phone": "+91 90000 10078",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "hum safe hain, camp pahunch gaye",
+   "truth": {
+    "family": "fam27",
+    "kind": "safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 151
+  },
+  {
+   "time": "2026-07-14T23:54:00",
+   "phone": "+91 90000 10196",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "paani badh raha hai, kya karein?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 152
+  },
+  {
+   "time": "2026-07-14T23:54:00",
+   "phone": "+91 90000 10234",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "No electricity in Lane 8 since 10 pm",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 153
+  },
+  {
+   "time": "2026-07-14T23:55:00",
+   "phone": "+91 90000 10227",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "River Road flooded, two cars stuck, road is closed",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "River Road"
+    }
+   },
+   "id": 154
+  },
+  {
+   "time": "2026-07-14T23:58:00",
+   "phone": "+91 90000 10249",
+   "sender": null,
+   "channel": "call",
+   "language": "en",
+   "text": "power cut in whole Shanti Nagar",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 155
+  },
+  {
+   "time": "2026-07-15T00:00:00",
+   "phone": "+91 90000 10052",
+   "sender": null,
+   "channel": "voice",
+   "language": "hinglish",
+   "text": "gali 5 mein paani kamar tak hai, hum 3 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam17",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 156
+  },
+  {
+   "time": "2026-07-15T00:01:00",
+   "phone": "+91 90000 10172",
+   "sender": null,
+   "channel": "post",
+   "language": "mr",
+   "text": "Siddiqui कुटुंब गल्ली 5 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे. 6 जण आहेत. आजी सोबत आहेत. आजोबांना डायलिसिस हवे आहे.",
+   "truth": {
+    "family": "fam65",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "knee",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 157
+  },
+  {
+   "time": "2026-07-15T00:01:00",
+   "phone": "+91 90000 10214",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "बिजली का तार पानी में गिरा है, क्या करें?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 158
+  },
+  {
+   "time": "2026-07-15T00:02:00",
+   "phone": "+91 90000 10053",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "The Bhosle family is stuck at Lane 5, water is at waist level. 3 people inside. Grandfather needs dialysis.",
+   "truth": {
+    "family": "fam17",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "waist",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 159
+  },
+  {
+   "time": "2026-07-15T00:03:00",
+   "phone": "+91 90000 10028",
+   "sender": null,
+   "channel": "voice",
+   "language": "hinglish",
+   "text": "gali 4 mein ghar mein paani aa gaya hai, hum 5 log hain, jaldi madad bhejo saath mein chhota bachcha",
+   "truth": {
+    "family": "fam07",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 160
+  },
+  {
+   "time": "2026-07-15T00:03:00",
+   "phone": "+91 90000 10071",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Help! we are stuck at Lane 2. We are 4 people.",
+   "truth": {
+    "family": "fam24",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 161
+  },
+  {
+   "time": "2026-07-15T00:04:00",
+   "phone": "+91 90000 10155",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "Lokhande कुटुंब गल्ली 8 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे. 3 जण आहेत.",
+   "truth": {
+    "family": "fam59",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 162
+  },
+  {
+   "time": "2026-07-15T00:06:00",
+   "phone": "+91 90000 10251",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Need drinking water and food for 30 people at Camp 5 community hall",
+   "truth": {
+    "family": "sup_camp5",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 163
+  },
+  {
+   "time": "2026-07-15T00:07:00",
+   "phone": "+91 90000 10029",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "Mhatre कुटुंब गल्ली 4 मध्ये अडकले आहे, घरात पाणी आले आहे. 5 जण आहेत.",
+   "truth": {
+    "family": "fam07",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 164
+  },
+  {
+   "time": "2026-07-15T00:07:00",
+   "phone": "+91 90000 10083",
+   "sender": null,
+   "channel": "voice",
+   "language": "hinglish",
+   "text": "gali 6 mein hum phase hain, hum 3 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam29",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 6"
+    }
+   },
+   "id": 165
+  },
+  {
+   "time": "2026-07-15T00:11:00",
+   "phone": "+91 90000 10062",
+   "sender": null,
+   "channel": "voice",
+   "language": "en",
+   "text": "Help! water is at knee level. We are 6 people. With my old grandmother.",
+   "truth": {
+    "family": "fam20",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": null
+    }
+   },
+   "id": 166
+  },
+  {
+   "time": "2026-07-15T00:11:00",
+   "phone": "+91 90000 10130",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "अजून कोणी आले नाही, कधी येणार?",
+   "truth": {
+    "family": "fam49",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 167
+  },
+  {
+   "time": "2026-07-15T00:12:00",
+   "phone": "+91 90000 10220",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "शिबिर कुठे आहे?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 168
+  },
+  {
+   "time": "2026-07-15T00:12:00",
+   "phone": "+91 90000 10233",
+   "sender": null,
+   "channel": "call",
+   "language": "hinglish",
+   "text": "light gayi lane 3 mein, sab andhera hai",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 169
+  },
+  {
+   "time": "2026-07-15T00:13:00",
+   "phone": "+91 90000 10056",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "Gawde परिवार गली 6 में फंसा है, पानी कमर तक है।",
+   "truth": {
+    "family": "fam18",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 170
+  },
+  {
+   "time": "2026-07-15T00:13:00",
+   "phone": "+91 90000 10058",
+   "sender": null,
+   "channel": "post",
+   "language": "en",
+   "text": "The Gawde family is stuck at Lane 6. 5 people inside.",
+   "truth": {
+    "family": "fam18",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 6"
+    }
+   },
+   "id": 171
+  },
+  {
+   "time": "2026-07-15T00:13:00",
+   "phone": "+91 90000 10062",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Lane 8",
+   "truth": {
+    "family": "fam20",
+    "kind": "followup",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 8"
+    }
+   },
+   "id": 172
+  },
+  {
+   "time": "2026-07-15T00:14:00",
+   "phone": "+91 90000 10131",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "गल्ली 6 मध्ये पाणी कंबरेपर्यंत आहे. आम्ही 2 जण आहोत. लवकर मदत करा",
+   "truth": {
+    "family": "fam50",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 173
+  },
+  {
+   "time": "2026-07-15T00:15:00",
+   "phone": "+91 90000 10239",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "Station Road pe paani bhar gaya, rasta band hai",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Station Road"
+    }
+   },
+   "id": 174
+  },
+  {
+   "time": "2026-07-15T00:16:00",
+   "phone": "+91 90000 10063",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "गल्ली 6 मध्ये आम्ही अडकलो आहोत. आम्ही 2 जण आहोत. लवकर मदत करा",
+   "truth": {
+    "family": "fam21",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 6"
+    }
+   },
+   "id": 175
+  },
+  {
+   "time": "2026-07-15T00:17:00",
+   "phone": "+91 90000 10025",
+   "sender": null,
+   "channel": "voice",
+   "language": "hinglish",
+   "text": "gali 6 mein paani ghutno tak aa gaya hai, hum 2 log hain, jaldi madad bhejo saath mein chhota bachcha",
+   "truth": {
+    "family": "fam05",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 176
+  },
+  {
+   "time": "2026-07-15T00:19:00",
+   "phone": "+91 90000 10070",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "Hegde कुटुंब गल्ली 3 मध्ये अडकले आहे, पाणी कंबरेपर्यंत आहे.",
+   "truth": {
+    "family": "fam23",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 177
+  },
+  {
+   "time": "2026-07-15T00:20:00",
+   "phone": "+91 90000 10108",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "gali 9 mein paani kamar tak hai, hum 5 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam39",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 178
+  },
+  {
+   "time": "2026-07-15T00:20:00",
+   "phone": "+91 90000 10197",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "घर में पानी आ रहा है, क्या करें?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 179
+  },
+  {
+   "time": "2026-07-15T00:21:00",
+   "phone": "+91 90000 10138",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "gali 6 mein paani kamar tak hai, hum 5 log hain, jaldi madad bhejo saath mein budhi dadi",
+   "truth": {
+    "family": "fam53",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 180
+  },
+  {
+   "time": "2026-07-15T00:21:00",
+   "phone": "+91 90000 10156",
+   "sender": null,
+   "channel": "call",
+   "language": "hinglish",
+   "text": "Lokhande family gali 8 mein phasi hai, paani ghutno tak aa gaya hai 3 log hain",
+   "truth": {
+    "family": "fam59",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 181
+  },
+  {
+   "time": "2026-07-15T00:22:00",
+   "phone": "+91 90000 10064",
+   "sender": null,
+   "channel": "call",
+   "language": "en",
+   "text": "The Rao family is stuck at Lane 6, they are on the roof. 2 people inside.",
+   "truth": {
+    "family": "fam21",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 182
+  },
+  {
+   "time": "2026-07-15T00:22:00",
+   "phone": "+91 90000 10132",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "Solanki परिवार गली 6 में फंसा है, पानी कमर तक है। 2 लोग हैं। बुज़ुर्ग दादी साथ में हैं।",
+   "truth": {
+    "family": "fam50",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 183
+  },
+  {
+   "time": "2026-07-15T00:22:00",
+   "phone": "+91 90000 10193",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "boats only for vip, hum logon ke liye koi nahi aayega",
+   "truth": {
+    "family": "rumour_army_vip",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "army_vip"
+    }
+   },
+   "id": 184
+  },
+  {
+   "time": "2026-07-15T00:23:00",
+   "phone": "+91 90000 10119",
+   "sender": null,
+   "channel": "post",
+   "language": "hinglish",
+   "text": "Khan family gali 3 mein phasi hai, ghar mein paani aa gaya hai",
+   "truth": {
+    "family": "fam43",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 185
+  },
+  {
+   "time": "2026-07-15T00:24:00",
+   "phone": "+91 90000 10054",
+   "sender": null,
+   "channel": "post",
+   "language": "mr",
+   "text": "Bhosle कुटुंब गल्ली 5 मध्ये अडकले आहे, पाणी कंबरेपर्यंत आहे. आजोबांना डायलिसिस हवे आहे.",
+   "truth": {
+    "family": "fam17",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [
+      "dialysis"
+     ],
+     "water": "waist",
+     "lane": "Lane 5"
+    }
+   },
+   "id": 186
+  },
+  {
+   "time": "2026-07-15T00:25:00",
+   "phone": "+91 90000 10182",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "बांध टूट गया है, पूरा कुर्ला डूब जाएगा, सबको बताओ",
+   "truth": {
+    "family": "rumour_dam_burst",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "dam_burst"
+    }
+   },
+   "id": 187
+  },
+  {
+   "time": "2026-07-15T00:25:00",
+   "phone": "+91 90000 10262",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Lane 9 roof pe log hain, unko khana chahiye",
+   "truth": {
+    "family": "sup_lane9",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 188
+  },
+  {
+   "time": "2026-07-15T00:27:00",
+   "phone": "+91 90000 10260",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "गली 8 टंकी के पास पीने का पानी चाहिए, 15 लोग",
+   "truth": {
+    "family": "sup_tank",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 189
+  },
+  {
+   "time": "2026-07-15T00:29:00",
+   "phone": "+91 90000 10075",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "Wagh कुटुंब गल्ली 9 मध्ये अडकले आहे, पाणी कंबरेपर्यंत आहे. 2 जण आहेत. लहान बाळ सोबत आहेत.",
+   "truth": {
+    "family": "fam25",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 190
+  },
+  {
+   "time": "2026-07-15T00:29:00",
+   "phone": "+91 90000 10164",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "गल्ली 7 मध्ये पाणी गुडघ्यापर्यंत आले आहे. आम्ही 4 जण आहोत. लवकर मदत करा",
+   "truth": {
+    "family": "fam63",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 191
+  },
+  {
+   "time": "2026-07-15T00:31:00",
+   "phone": "+91 90000 10041",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "paani ghutno tak aa gaya hai, hum 3 log hain, jaldi madad bhejo saath mein chhota bachcha aur pregnant bahu papa ko saans lene mein dikkat hai",
+   "truth": {
+    "family": "fam14",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child",
+      "pregnant"
+     ],
+     "medical": [
+      "breathing"
+     ],
+     "water": "knee",
+     "lane": null
+    }
+   },
+   "id": 192
+  },
+  {
+   "time": "2026-07-15T00:31:00",
+   "phone": "+91 90000 10072",
+   "sender": null,
+   "channel": "call",
+   "language": "hi",
+   "text": "Lobo परिवार गली 2 में फंसा है, पानी घुटनों तक आ गया है। 4 लोग हैं।",
+   "truth": {
+    "family": "fam24",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 193
+  },
+  {
+   "time": "2026-07-15T00:31:00",
+   "phone": "+91 90000 10205",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "शिबिर कुठे आहे?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 194
+  },
+  {
+   "time": "2026-07-15T00:33:00",
+   "phone": "+91 90000 10041",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "gali 7",
+   "truth": {
+    "family": "fam14",
+    "kind": "followup",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 7"
+    }
+   },
+   "id": 195
+  },
+  {
+   "time": "2026-07-15T00:35:00",
+   "phone": "+91 90000 10009",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "पिंटो कुटुंब गल्ली 2 मध्ये अडकले आहे, आजी सोबत आहेत, कृपया शेअर करा",
+   "truth": {
+    "family": "pinto",
+    "kind": "repost_safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 196
+  },
+  {
+   "time": "2026-07-15T00:35:00",
+   "phone": "+91 90000 10084",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "Pillai कुटुंब गल्ली 6 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे. 3 जण आहेत. लहान बाळ सोबत आहेत.",
+   "truth": {
+    "family": "fam29",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 197
+  },
+  {
+   "time": "2026-07-15T00:35:00",
+   "phone": "+91 90000 10166",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The Kharat family is stuck at Lane 7, water is at knee level.",
+   "truth": {
+    "family": "fam63",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 198
+  },
+  {
+   "time": "2026-07-15T00:35:00",
+   "phone": "+91 90000 10083",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "boat kab aayegi? koi nahi aaya",
+   "truth": {
+    "family": "fam29",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 199
+  },
+  {
+   "time": "2026-07-15T00:36:00",
+   "phone": "+91 90000 10120",
+   "sender": null,
+   "channel": "call",
+   "language": "en",
+   "text": "The Khan family is stuck at Lane 3, water is entering the house.",
+   "truth": {
+    "family": "fam43",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 200
+  },
+  {
+   "time": "2026-07-15T00:36:00",
+   "phone": "+91 90000 10190",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "bijli 3 din tak nahi aayegi, sab charge kar lo",
+   "truth": {
+    "family": "rumour_power_cut_days",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "power_cut_days"
+    }
+   },
+   "id": 201
+  },
+  {
+   "time": "2026-07-15T00:38:00",
+   "phone": "+91 90000 10110",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "Barve कुटुंब गल्ली 9 मध्ये अडकले आहे, पाणी कंबरेपर्यंत आहे. 5 जण आहेत.",
+   "truth": {
+    "family": "fam39",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 202
+  },
+  {
+   "time": "2026-07-15T00:39:00",
+   "phone": "+91 90000 10242",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Lane 3 waterlogged, tree fallen near the corner",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 3"
+    }
+   },
+   "id": 203
+  },
+  {
+   "time": "2026-07-15T00:40:00",
+   "phone": "+91 90000 10211",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "paani badh raha hai, kya karein?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 204
+  },
+  {
+   "time": "2026-07-15T00:42:00",
+   "phone": "+91 90000 10188",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "कैंप 3 बंद हो गया है, वहाँ मत जाओ",
+   "truth": {
+    "family": "rumour_camp_flooded",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "camp_flooded"
+    }
+   },
+   "id": 205
+  },
+  {
+   "time": "2026-07-15T00:43:00",
+   "phone": "+91 90000 10266",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "गली 3 में खाना और दूध चाहिए, 10 लोग हैं",
+   "truth": {
+    "family": "sup_lane3",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 206
+  },
+  {
+   "time": "2026-07-15T00:44:00",
+   "phone": "+91 90000 10187",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "camp 3 band ho gaya, wahan paani bhar gaya",
+   "truth": {
+    "family": "rumour_camp_flooded",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "camp_flooded"
+    }
+   },
+   "id": 207
+  },
+  {
+   "time": "2026-07-15T00:45:00",
+   "phone": "+91 90000 10025",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "any update? still waiting",
+   "truth": {
+    "family": "fam05",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 208
+  },
+  {
+   "time": "2026-07-15T00:45:00",
+   "phone": "+91 90000 10209",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Is it safe to walk to Station Road now?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 209
+  },
+  {
+   "time": "2026-07-15T00:46:00",
+   "phone": "+91 90000 10142",
+   "sender": null,
+   "channel": "voice",
+   "language": "en",
+   "text": "Help! water is entering the house at near the water tank, Lane 8. We are 2 people. With my old grandmother.",
+   "truth": {
+    "family": "fam55",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 210
+  },
+  {
+   "time": "2026-07-15T00:48:00",
+   "phone": "+91 90000 10186",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "Camp 3 is flooded, don't go there, forward",
+   "truth": {
+    "family": "rumour_camp_flooded",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "camp_flooded"
+    }
+   },
+   "id": 211
+  },
+  {
+   "time": "2026-07-15T00:48:00",
+   "phone": "+91 90000 10272",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "गली 8 टंकी के पास पीने का पानी चाहिए, 15 लोग",
+   "truth": {
+    "family": "sup_tank",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 212
+  },
+  {
+   "time": "2026-07-15T00:50:00",
+   "phone": "+91 90000 10133",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "Solanki family gali 6 mein phasi hai 2 log hain saath mein budhi dadi",
+   "truth": {
+    "family": "fam50",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 6"
+    }
+   },
+   "id": 213
+  },
+  {
+   "time": "2026-07-15T00:50:00",
+   "phone": "+91 90000 10246",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "light gayi lane 3 mein, sab andhera hai",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 214
+  },
+  {
+   "time": "2026-07-15T00:51:00",
+   "phone": "+91 90000 10030",
+   "sender": null,
+   "channel": "post",
+   "language": "en",
+   "text": "The Mhatre family is stuck at Lane 4. With a small child.",
+   "truth": {
+    "family": "fam07",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 4"
+    }
+   },
+   "id": 215
+  },
+  {
+   "time": "2026-07-15T00:52:00",
+   "phone": "+91 90000 10079",
+   "sender": null,
+   "channel": "voice",
+   "language": "hi",
+   "text": "गली 1 में हम फंसे हैं। हम 7 लोग हैं। जल्दी मदद भेजिए",
+   "truth": {
+    "family": "fam28",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 1"
+    }
+   },
+   "id": 216
+  },
+  {
+   "time": "2026-07-15T00:52:00",
+   "phone": "+91 90000 10109",
+   "sender": null,
+   "channel": "post",
+   "language": "hi",
+   "text": "Barve परिवार गली 9 में फंसा है, पानी कमर तक है।",
+   "truth": {
+    "family": "fam39",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 217
+  },
+  {
+   "time": "2026-07-15T00:52:00",
+   "phone": "+91 90000 10217",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Where is the nearest relief camp?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 218
+  },
+  {
+   "time": "2026-07-15T00:52:00",
+   "phone": "+91 90000 10229",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Lane 3 waterlogged, tree fallen near the corner",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 3"
+    }
+   },
+   "id": 219
+  },
+  {
+   "time": "2026-07-15T00:53:00",
+   "phone": "+91 90000 10034",
+   "sender": null,
+   "channel": "voice",
+   "language": "mr",
+   "text": "गल्ली 2 मध्ये आम्ही अडकलो आहोत. आम्ही 2 जण आहोत. लवकर मदत करा आजी सोबत आहेत. आजोबांना डायलिसिस हवे आहे.",
+   "truth": {
+    "family": "fam10",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [
+      "dialysis"
+     ],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 220
+  },
+  {
+   "time": "2026-07-15T00:53:00",
+   "phone": "+91 90000 10088",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "gali 1 mein paani ghutno tak aa gaya hai, hum 3 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam31",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 221
+  },
+  {
+   "time": "2026-07-15T00:53:00",
+   "phone": "+91 90000 10250",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "लाईट गेली आहे गल्ली 9 मध्ये",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 222
+  },
+  {
+   "time": "2026-07-15T00:54:00",
+   "phone": "+91 90000 10026",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Help! water is at waist level at Lane 3. We are 3 people. With a small child and my father in a wheelchair.",
+   "truth": {
+    "family": "fam06",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child",
+      "disabled"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 223
+  },
+  {
+   "time": "2026-07-15T00:55:00",
+   "phone": "+91 90000 10043",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "दुबे परिवार गली 7 मस्जिद के पास में फंसा है, पानी घुटनों तक आ गया है। 3 लोग हैं। छोटा बच्चा और गर्भवती बहू साथ में हैं। पिताजी को सांस लेने में तकलीफ है।",
+   "truth": {
+    "family": "fam14",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child",
+      "pregnant"
+     ],
+     "medical": [
+      "breathing"
+     ],
+     "water": "knee",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 224
+  },
+  {
+   "time": "2026-07-15T00:56:00",
+   "phone": "+91 90000 10057",
+   "sender": null,
+   "channel": "post",
+   "language": "mr",
+   "text": "Gawde कुटुंब गल्ली 6 मध्ये अडकले आहे, पाणी कंबरेपर्यंत आहे.",
+   "truth": {
+    "family": "fam18",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 225
+  },
+  {
+   "time": "2026-07-15T00:56:00",
+   "phone": "+91 90000 10063",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "any update? still waiting",
+   "truth": {
+    "family": "fam21",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 226
+  },
+  {
+   "time": "2026-07-15T00:57:00",
+   "phone": "+91 90000 10042",
+   "sender": null,
+   "channel": "call",
+   "language": "en",
+   "text": "The Dubey family is stuck at near the mosque on Lane 7, water is at knee level. With a small child and a pregnant woman. Father can't breathe properly.",
+   "truth": {
+    "family": "fam14",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child",
+      "pregnant"
+     ],
+     "medical": [
+      "breathing"
+     ],
+     "water": "knee",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 227
+  },
+  {
+   "time": "2026-07-15T00:57:00",
+   "phone": "+91 90000 10115",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "गल्ली 3 मध्ये आम्ही अडकलो आहोत. आम्ही 7 जण आहोत. लवकर मदत करा आजी सोबत आहेत.",
+   "truth": {
+    "family": "fam42",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 3"
+    }
+   },
+   "id": 228
+  },
+  {
+   "time": "2026-07-15T00:57:00",
+   "phone": "+91 90000 10165",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Kharat family gali 7 masjid ke paas mein phasi hai, paani ghutno tak aa gaya hai",
+   "truth": {
+    "family": "fam63",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 7"
+    }
+   },
+   "id": 229
+  },
+  {
+   "time": "2026-07-15T00:58:00",
+   "phone": "+91 90000 10143",
+   "sender": null,
+   "channel": "post",
+   "language": "hinglish",
+   "text": "Mishra family gali 8 tanki ke paas mein phasi hai, ghar mein paani aa gaya hai 2 log hain saath mein budhi dadi",
+   "truth": {
+    "family": "fam55",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 230
+  },
+  {
+   "time": "2026-07-15T00:59:00",
+   "phone": "+91 90000 10206",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "What is the helpline number for the control room?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 231
+  },
+  {
+   "time": "2026-07-15T01:01:00",
+   "phone": "+91 90000 10231",
+   "sender": null,
+   "channel": "call",
+   "language": "mr",
+   "text": "गल्ली 5 मध्ये रस्ता बंद आहे, पाणी भरले",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 5"
+    }
+   },
+   "id": 232
+  },
+  {
+   "time": "2026-07-15T01:01:00",
+   "phone": "+91 90000 10243",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "market road pe paani, raasta band",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Market Road"
+    }
+   },
+   "id": 233
+  },
+  {
+   "time": "2026-07-15T01:03:00",
+   "phone": "+91 90000 10093",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Help! water is at knee level at behind Hanuman temple, Lane 4. We are 2 people.",
+   "truth": {
+    "family": "fam33",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 234
+  },
+  {
+   "time": "2026-07-15T01:04:00",
+   "phone": "+91 90000 10139",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "gali 9 mein paani ghutno tak aa gaya hai, hum 2 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam54",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 235
+  },
+  {
+   "time": "2026-07-15T01:04:00",
+   "phone": "+91 90000 10145",
+   "sender": null,
+   "channel": "post",
+   "language": "mr",
+   "text": "मिश्रा कुटुंब गल्ली 8, पाण्याची टाकीजवळ मध्ये अडकले आहे, घरात पाणी आले आहे. 2 जण आहेत. आजी सोबत आहेत.",
+   "truth": {
+    "family": "fam55",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 236
+  },
+  {
+   "time": "2026-07-15T01:05:00",
+   "phone": "+91 90000 10213",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "घरात पाणी येत आहे, काय करू?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 237
+  },
+  {
+   "time": "2026-07-15T01:06:00",
+   "phone": "+91 90000 10161",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "गल्ली 2 मध्ये आम्ही छतावर आहोत. आम्ही 4 जण आहोत. लवकर मदत करा",
+   "truth": {
+    "family": "fam62",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 238
+  },
+  {
+   "time": "2026-07-15T01:07:00",
+   "phone": "+91 90000 10152",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Help! water is entering the house. We are 5 people. The child has fever.",
+   "truth": {
+    "family": "fam58",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [
+      "fever"
+     ],
+     "water": "entering",
+     "lane": null
+    }
+   },
+   "id": 239
+  },
+  {
+   "time": "2026-07-15T01:07:00",
+   "phone": "+91 90000 10216",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "gas ki smell aa rahi hai kitchen mein, kya karu?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 240
+  },
+  {
+   "time": "2026-07-15T01:08:00",
+   "phone": "+91 90000 10138",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "अजून कोणी आले नाही, कधी येणार?",
+   "truth": {
+    "family": "fam53",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 241
+  },
+  {
+   "time": "2026-07-15T01:09:00",
+   "phone": "+91 90000 10140",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "कुरैशी परिवार गली 9 में फंसा है, पानी घुटनों तक आ गया है।",
+   "truth": {
+    "family": "fam54",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 242
+  },
+  {
+   "time": "2026-07-15T01:09:00",
+   "phone": "+91 90000 10152",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Lane 6",
+   "truth": {
+    "family": "fam58",
+    "kind": "followup",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 6"
+    }
+   },
+   "id": 243
+  },
+  {
+   "time": "2026-07-15T01:10:00",
+   "phone": "+91 90000 10201",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "gas ki smell aa rahi hai kitchen mein, kya karu?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 244
+  },
+  {
+   "time": "2026-07-15T01:13:00",
+   "phone": "+91 90000 10089",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The D'Souza family is stuck at Lane 1, water is at knee level.",
+   "truth": {
+    "family": "fam31",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 245
+  },
+  {
+   "time": "2026-07-15T01:13:00",
+   "phone": "+91 90000 10238",
+   "sender": null,
+   "channel": "call",
+   "language": "en",
+   "text": "Lane 6 road blocked, water above waist near the market",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 6"
+    }
+   },
+   "id": 246
+  },
+  {
+   "time": "2026-07-15T01:15:00",
+   "phone": "+91 90000 10015",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "गल्ली 1 मध्ये पाणी कंबरेपर्यंत आहे. आम्ही 4 जण आहोत. लवकर मदत करा आजी आणि गरोदर सून सोबत आहेत.",
+   "truth": {
+    "family": "fam02",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [
+      "elderly",
+      "pregnant"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 247
+  },
+  {
+   "time": "2026-07-15T01:15:00",
+   "phone": "+91 90000 10094",
+   "sender": null,
+   "channel": "call",
+   "language": "hi",
+   "text": "जाधव परिवार गली 4 में फंसा है, पानी घुटनों तक आ गया है। 2 लोग हैं। गर्भवती बहू साथ में हैं।",
+   "truth": {
+    "family": "fam33",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "pregnant"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 248
+  },
+  {
+   "time": "2026-07-15T01:16:00",
+   "phone": "+91 90000 10144",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "मिश्रा परिवार गली 8 में फंसा है, घर में पानी आ गया है। 2 लोग हैं।",
+   "truth": {
+    "family": "fam55",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 249
+  },
+  {
+   "time": "2026-07-15T01:17:00",
+   "phone": "+91 90000 10085",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "The Pillai family is stuck at Lane 6, water is at knee level. 3 people inside. With a small child.",
+   "truth": {
+    "family": "fam29",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 3,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 250
+  },
+  {
+   "time": "2026-07-15T01:17:00",
+   "phone": "+91 90000 10198",
+   "sender": null,
+   "channel": "chat",
+   "language": "mr",
+   "text": "घरात पाणी येत आहे, काय करू?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 251
+  },
+  {
+   "time": "2026-07-15T01:18:00",
+   "phone": "+91 90000 10116",
+   "sender": null,
+   "channel": "call",
+   "language": "hinglish",
+   "text": "Malik family gali 3 mein phasi hai, woh chhat par hain saath mein budhi dadi",
+   "truth": {
+    "family": "fam42",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 252
+  },
+  {
+   "time": "2026-07-15T01:18:00",
+   "phone": "+91 90000 10191",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "3 दिन बिजली नहीं आएगी, सबको बताओ",
+   "truth": {
+    "family": "rumour_power_cut_days",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "power_cut_days"
+    }
+   },
+   "id": 253
+  },
+  {
+   "time": "2026-07-15T01:20:00",
+   "phone": "+91 90000 10010",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "Still no help for Pinto family lane 2?? forward this",
+   "truth": {
+    "family": "pinto",
+    "kind": "repost_safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 254
+  },
+  {
+   "time": "2026-07-15T01:22:00",
+   "phone": "+91 90000 10146",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "gali 4 mein paani ghutno tak aa gaya hai, hum 6 log hain, jaldi madad bhejo",
+   "truth": {
+    "family": "fam56",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 255
+  },
+  {
+   "time": "2026-07-15T01:22:00",
+   "phone": "+91 90000 10268",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "मशिदीजवळ गल्ली 7 मध्ये दूध आणि औषध पाहिजे",
+   "truth": {
+    "family": "sup_mosque",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 256
+  },
+  {
+   "time": "2026-07-15T01:23:00",
+   "phone": "+91 90000 10083",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "hum safe hain, camp pahunch gaye",
+   "truth": {
+    "family": "fam29",
+    "kind": "safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 257
+  },
+  {
+   "time": "2026-07-15T01:23:00",
+   "phone": "+91 90000 10245",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Lane 6 still blocked, water rising near the shops",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 6"
+    }
+   },
+   "id": 258
+  },
+  {
+   "time": "2026-07-15T01:24:00",
+   "phone": "+91 90000 10174",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Help! water is entering the house at behind Hanuman temple, Lane 4. We are 5 people.",
+   "truth": {
+    "family": "fam90",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 259
+  },
+  {
+   "time": "2026-07-15T01:25:00",
+   "phone": "+91 90000 10095",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Jadhav family gali 4 mandir ke peeche mein phasi hai, paani ghutno tak aa gaya hai 2 log hain",
+   "truth": {
+    "family": "fam33",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 260
+  },
+  {
+   "time": "2026-07-15T01:25:00",
+   "phone": "+91 90000 10228",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "गली 6 में पानी भरा है, रास्ता बंद है",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 6"
+    }
+   },
+   "id": 261
+  },
+  {
+   "time": "2026-07-15T01:26:00",
+   "phone": "+91 90000 10123",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "गली 6 में पानी घुटनों तक आ गया है। हम 2 लोग हैं। जल्दी मदद भेजिए बुज़ुर्ग दादी साथ में हैं।",
+   "truth": {
+    "family": "fam45",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 262
+  },
+  {
+   "time": "2026-07-15T01:27:00",
+   "phone": "+91 90000 10027",
+   "sender": null,
+   "channel": "post",
+   "language": "hinglish",
+   "text": "Bansode family gali 3 mein phasi hai, paani kamar tak hai saath mein chhota bachcha aur viklang papa",
+   "truth": {
+    "family": "fam06",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child",
+      "disabled"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 3"
+    }
+   },
+   "id": 263
+  },
+  {
+   "time": "2026-07-15T01:27:00",
+   "phone": "+91 90000 10080",
+   "sender": null,
+   "channel": "post",
+   "language": "en",
+   "text": "The Parab family is stuck at Lane 1, they are on the roof.",
+   "truth": {
+    "family": "fam28",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 264
+  },
+  {
+   "time": "2026-07-15T01:28:00",
+   "phone": "+91 90000 10148",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The Gaonkar family is stuck at behind Hanuman temple, Lane 4, water is at knee level. With my old grandmother.",
+   "truth": {
+    "family": "fam56",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 265
+  },
+  {
+   "time": "2026-07-15T01:28:00",
+   "phone": "+91 90000 10177",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "gali 4 mandir ke peeche mein paani kamar tak hai, hum 6 log hain, jaldi madad bhejo saath mein budhi dadi",
+   "truth": {
+    "family": "fam91",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 266
+  },
+  {
+   "time": "2026-07-15T01:29:00",
+   "phone": "+91 90000 10090",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "D'Souza कुटुंब गल्ली 1 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे.",
+   "truth": {
+    "family": "fam31",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 267
+  },
+  {
+   "time": "2026-07-15T01:29:00",
+   "phone": "+91 90000 10126",
+   "sender": null,
+   "channel": "voice",
+   "language": "en",
+   "text": "Help! we are stuck. We are 6 people.",
+   "truth": {
+    "family": "fam47",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": null
+    }
+   },
+   "id": 268
+  },
+  {
+   "time": "2026-07-15T01:29:00",
+   "phone": "+91 90000 10139",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "any update? still waiting",
+   "truth": {
+    "family": "fam54",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 269
+  },
+  {
+   "time": "2026-07-15T01:31:00",
+   "phone": "+91 90000 10126",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Lane 8",
+   "truth": {
+    "family": "fam47",
+    "kind": "followup",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 8"
+    }
+   },
+   "id": 270
+  },
+  {
+   "time": "2026-07-15T01:31:00",
+   "phone": "+91 90000 10149",
+   "sender": null,
+   "channel": "post",
+   "language": "mr",
+   "text": "Gaonkar कुटुंब गल्ली 4, हनुमान मंदिराच्या मागे मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे. 6 जण आहेत. आजी सोबत आहेत.",
+   "truth": {
+    "family": "fam56",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 271
+  },
+  {
+   "time": "2026-07-15T01:32:00",
+   "phone": "+91 90000 10162",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "The Kamble family is stuck at Lane 2. 4 people inside.",
+   "truth": {
+    "family": "fam62",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 2"
+    }
+   },
+   "id": 272
+  },
+  {
+   "time": "2026-07-15T01:32:00",
+   "phone": "+91 90000 10163",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "कांबळे परिवार गली 2 में फंसा है, वे छत पर हैं।",
+   "truth": {
+    "family": "fam62",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 2"
+    }
+   },
+   "id": 273
+  },
+  {
+   "time": "2026-07-15T01:32:00",
+   "phone": "+91 90000 10176",
+   "sender": null,
+   "channel": "call",
+   "language": "mr",
+   "text": "गुप्ता कुटुंब गल्ली 4, हनुमान मंदिराच्या मागे मध्ये अडकले आहे, घरात पाणी आले आहे. 5 जण आहेत. लहान बाळ सोबत आहेत.",
+   "truth": {
+    "family": "fam90",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 5,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 274
+  },
+  {
+   "time": "2026-07-15T01:33:00",
+   "phone": "+91 90000 10153",
+   "sender": null,
+   "channel": "post",
+   "language": "hinglish",
+   "text": "Thakur family gali 6 mein phasi hai, ghar mein paani aa gaya hai bachche ko bukhar hai",
+   "truth": {
+    "family": "fam58",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [
+      "fever"
+     ],
+     "water": "entering",
+     "lane": "Lane 6"
+    }
+   },
+   "id": 275
+  },
+  {
+   "time": "2026-07-15T01:33:00",
+   "phone": "+91 90000 10224",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Is it safe to walk to Station Road now?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 276
+  },
+  {
+   "time": "2026-07-15T01:33:00",
+   "phone": "+91 90000 10267",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Baby food and milk needed near the mosque on lane 7",
+   "truth": {
+    "family": "sup_mosque",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 277
+  },
+  {
+   "time": "2026-07-15T01:34:00",
+   "phone": "+91 90000 10081",
+   "sender": null,
+   "channel": "forward",
+   "language": "mr",
+   "text": "Parab कुटुंब गल्ली 1 मध्ये अडकले आहे, ते छतावर आहेत. 7 जण आहेत.",
+   "truth": {
+    "family": "fam28",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": 7,
+     "vulnerable": [],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 278
+  },
+  {
+   "time": "2026-07-15T01:43:00",
+   "phone": "+91 90000 10271",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Lane 8 near the water tank, need drinking water bottles for 15 people",
+   "truth": {
+    "family": "sup_tank",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 279
+  },
+  {
+   "time": "2026-07-15T01:44:00",
+   "phone": "+91 90000 10127",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "पवार परिवार गली 8 में फंसा है, घर में पानी आ गया है। 6 लोग हैं।",
+   "truth": {
+    "family": "fam47",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 8"
+    }
+   },
+   "id": 280
+  },
+  {
+   "time": "2026-07-15T01:47:00",
+   "phone": "+91 90000 10016",
+   "sender": null,
+   "channel": "call",
+   "language": "en",
+   "text": "The Sutar family is stuck at Lane 1, water is at waist level. With my old grandmother and a pregnant woman.",
+   "truth": {
+    "family": "fam02",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly",
+      "pregnant"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 281
+  },
+  {
+   "time": "2026-07-15T01:47:00",
+   "phone": "+91 90000 10147",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "Gaonkar परिवार गली 4, हनुमान मंदिर के पीछे में फंसा है। बुज़ुर्ग दादी साथ में हैं।",
+   "truth": {
+    "family": "fam56",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 4"
+    }
+   },
+   "id": 282
+  },
+  {
+   "time": "2026-07-15T01:48:00",
+   "phone": "+91 90000 10210",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Water is entering the house, what should I do?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 283
+  },
+  {
+   "time": "2026-07-15T01:48:00",
+   "phone": "+91 90000 10248",
+   "sender": null,
+   "channel": "sms",
+   "language": "hi",
+   "text": "गली 2 में बिजली नहीं है",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 284
+  },
+  {
+   "time": "2026-07-15T01:49:00",
+   "phone": "+91 90000 10093",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "कोई नहीं आया अभी तक, कब आएगा?",
+   "truth": {
+    "family": "fam33",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 285
+  },
+  {
+   "time": "2026-07-15T01:51:00",
+   "phone": "+91 90000 10184",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "Breaking: dam burst near Powai, 10 feet water everywhere in 1 hour",
+   "truth": {
+    "family": "rumour_dam_burst",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "dam_burst"
+    }
+   },
+   "id": 286
+  },
+  {
+   "time": "2026-07-15T01:51:00",
+   "phone": "+91 90000 10257",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Need blankets and ORS at Camp 3 school, many children",
+   "truth": {
+    "family": "sup_camp3",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 287
+  },
+  {
+   "time": "2026-07-15T01:53:00",
+   "phone": "+91 90000 10017",
+   "sender": null,
+   "channel": "forward",
+   "language": "hinglish",
+   "text": "Sutar family gali 1 mein phasi hai, paani kamar tak hai saath mein budhi dadi aur pregnant bahu",
+   "truth": {
+    "family": "fam02",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly",
+      "pregnant"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 288
+  },
+  {
+   "time": "2026-07-15T01:54:00",
+   "phone": "+91 90000 10141",
+   "sender": null,
+   "channel": "call",
+   "language": "mr",
+   "text": "कुरैशी कुटुंब गल्ली 9 मध्ये अडकले आहे, पाणी गुडघ्यापर्यंत आले आहे. 2 जण आहेत.",
+   "truth": {
+    "family": "fam54",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 2,
+     "vulnerable": [],
+     "medical": [],
+     "water": "knee",
+     "lane": "Lane 9"
+    }
+   },
+   "id": 289
+  },
+  {
+   "time": "2026-07-15T01:55:00",
+   "phone": "+91 90000 10180",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "Powai dam has burst!! whole Kurla will drown, forward to all",
+   "truth": {
+    "family": "rumour_dam_burst",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "dam_burst"
+    }
+   },
+   "id": 290
+  },
+  {
+   "time": "2026-07-15T01:56:00",
+   "phone": "+91 90000 10244",
+   "sender": null,
+   "channel": "sms",
+   "language": "mr",
+   "text": "गल्ली 5 मध्ये रस्ता बंद आहे, पाणी भरले",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Lane 5"
+    }
+   },
+   "id": 291
+  },
+  {
+   "time": "2026-07-15T01:57:00",
+   "phone": "+91 90000 10274",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Lane 9 roof pe log hain, unko khana chahiye",
+   "truth": {
+    "family": "sup_lane9",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 292
+  },
+  {
+   "time": "2026-07-15T01:58:00",
+   "phone": "+91 90000 10175",
+   "sender": null,
+   "channel": "post",
+   "language": "hi",
+   "text": "गुप्ता परिवार गली 4, हनुमान मंदिर के पीछे में फंसा है, घर में पानी आ गया है। छोटा बच्चा साथ में हैं।",
+   "truth": {
+    "family": "fam90",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "child"
+     ],
+     "medical": [],
+     "water": "entering",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 293
+  },
+  {
+   "time": "2026-07-15T01:59:00",
+   "phone": "+91 90000 10178",
+   "sender": null,
+   "channel": "forward",
+   "language": "hi",
+   "text": "यादव परिवार गली 4, हनुमान मंदिर के पीछे में फंसा है, पानी कमर तक है। बुज़ुर्ग दादी साथ में हैं।",
+   "truth": {
+    "family": "fam91",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 294
+  },
+  {
+   "time": "2026-07-15T01:59:00",
+   "phone": "+91 90000 10273",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Diabetic patient needs insulin, Lane 1, house 22",
+   "truth": {
+    "family": "sup_lane1",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 295
+  },
+  {
+   "time": "2026-07-15T02:01:00",
+   "phone": "+91 90000 10200",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "There is a spark near the meter box and water on the floor, what should I do?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 296
+  },
+  {
+   "time": "2026-07-15T02:01:00",
+   "phone": "+91 90000 10235",
+   "sender": null,
+   "channel": "chat",
+   "language": "hi",
+   "text": "गली 2 में बिजली नहीं है",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 297
+  },
+  {
+   "time": "2026-07-15T02:02:00",
+   "phone": "+91 90000 10179",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "The Yadav family is stuck at behind Hanuman temple, Lane 4, water is at waist level. 6 people inside. With my old grandmother.",
+   "truth": {
+    "family": "fam91",
+    "kind": "rescue",
+    "priority": "P2",
+    "rumour": false,
+    "fields": {
+     "people": 6,
+     "vulnerable": [
+      "elderly"
+     ],
+     "medical": [],
+     "water": "waist",
+     "lane": "Lane 4"
+    }
+   },
+   "id": 298
+  },
+  {
+   "time": "2026-07-15T02:02:00",
+   "phone": "+91 90000 10189",
+   "sender": null,
+   "channel": "forward",
+   "language": "en",
+   "text": "Electricity cut for 3 days in all of Kurla, charge your phones",
+   "truth": {
+    "family": "rumour_power_cut_days",
+    "kind": "rumour",
+    "priority": null,
+    "rumour": true,
+    "fields": {
+     "claim": "power_cut_days"
+    }
+   },
+   "id": 299
+  },
+  {
+   "time": "2026-07-15T02:07:00",
+   "phone": "+91 90000 10247",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "No electricity in Lane 8 since 10 pm",
+   "truth": {
+    "family": null,
+    "kind": "power",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": null
+    }
+   },
+   "id": 300
+  },
+  {
+   "time": "2026-07-15T02:08:00",
+   "phone": "+91 90000 10167",
+   "sender": null,
+   "channel": "post",
+   "language": "hi",
+   "text": "Kharat परिवार गली 7 मस्जिद के पास में फंसा है। 4 लोग हैं।",
+   "truth": {
+    "family": "fam63",
+    "kind": "rescue",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {
+     "people": 4,
+     "vulnerable": [],
+     "medical": [],
+     "water": null,
+     "lane": "Lane 7"
+    }
+   },
+   "id": 301
+  },
+  {
+   "time": "2026-07-15T02:08:00",
+   "phone": "+91 90000 10195",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "Water is entering the house, what should I do?",
+   "truth": {
+    "family": null,
+    "kind": "question",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 302
+  },
+  {
+   "time": "2026-07-15T02:08:00",
+   "phone": "+91 90000 10269",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Need blankets and ORS at Camp 3 school, many children",
+   "truth": {
+    "family": "sup_camp3",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 303
+  },
+  {
+   "time": "2026-07-15T02:11:00",
+   "phone": "+91 90000 10218",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "relief camp kahan hai? kahan jayein?",
+   "truth": {
+    "family": null,
+    "kind": "faq",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 304
+  },
+  {
+   "time": "2026-07-15T02:14:00",
+   "phone": "+91 90000 10123",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "any update? still waiting",
+   "truth": {
+    "family": "fam45",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 305
+  },
+  {
+   "time": "2026-07-15T02:15:00",
+   "phone": "+91 90000 10259",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Lane 8 near the water tank, need drinking water bottles for 15 people",
+   "truth": {
+    "family": "sup_tank",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 306
+  },
+  {
+   "time": "2026-07-15T02:16:00",
+   "phone": "+91 90000 10082",
+   "sender": null,
+   "channel": "sms",
+   "language": "hinglish",
+   "text": "Parab family gali 1 mein phasi hai, woh chhat par hain",
+   "truth": {
+    "family": "fam28",
+    "kind": "rescue",
+    "priority": "P1",
+    "rumour": false,
+    "fields": {
+     "people": null,
+     "vulnerable": [],
+     "medical": [],
+     "water": "roof",
+     "lane": "Lane 1"
+    }
+   },
+   "id": 307
+  },
+  {
+   "time": "2026-07-15T02:18:00",
+   "phone": "+91 90000 10263",
+   "sender": null,
+   "channel": "sms",
+   "language": "en",
+   "text": "Need drinking water and food for 30 people at Camp 5 community hall",
+   "truth": {
+    "family": "sup_camp5",
+    "kind": "supplies",
+    "priority": "P3",
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 308
+  },
+  {
+   "time": "2026-07-15T02:19:00",
+   "phone": "+91 90000 10230",
+   "sender": null,
+   "channel": "call",
+   "language": "hinglish",
+   "text": "market road pe paani, raasta band",
+   "truth": {
+    "family": null,
+    "kind": "road",
+    "priority": null,
+    "rumour": false,
+    "fields": {
+     "road": "Market Road"
+    }
+   },
+   "id": 309
+  },
+  {
+   "time": "2026-07-15T02:20:00",
+   "phone": "+91 90000 10126",
+   "sender": null,
+   "channel": "chat",
+   "language": "en",
+   "text": "any update? still waiting",
+   "truth": {
+    "family": "fam47",
+    "kind": "status",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 310
+  },
+  {
+   "time": "2026-07-15T02:49:00",
+   "phone": "+91 90000 10146",
+   "sender": null,
+   "channel": "chat",
+   "language": "hinglish",
+   "text": "hum safe hain, camp pahunch gaye",
+   "truth": {
+    "family": "fam56",
+    "kind": "safe",
+    "priority": null,
+    "rumour": false,
+    "fields": {}
+   },
+   "id": 311
+  }
+ ],
+ "events": [
+  {
+   "time": "2026-07-14T23:10:00",
+   "type": "volunteer",
+   "team": "boat2",
+   "action": "blocked",
+   "road": "Lane 6",
+   "note": "Lane 6 floods during the night"
+  }
+ ],
+ "families": {
+  "fam00": {
+   "surname": "Tambe",
+   "lane": 2,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [
+    "elderly",
+    "pregnant"
+   ],
+   "medical": [],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam01": {
+   "surname": "Desai",
+   "lane": 6,
+   "landmark": null,
+   "people": 7,
+   "vulnerable": [],
+   "medical": [],
+   "water": "roof",
+   "priority": "P1"
+  },
+  "fam02": {
+   "surname": "Sutar",
+   "lane": 1,
+   "landmark": null,
+   "people": 4,
+   "vulnerable": [
+    "elderly",
+    "pregnant"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P1"
+  },
+  "fam03": {
+   "surname": "Paradkar",
+   "lane": 3,
+   "landmark": null,
+   "people": 4,
+   "vulnerable": [],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam04": {
+   "surname": "Kulkarni",
+   "lane": 8,
+   "landmark": null,
+   "people": 6,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam05": {
+   "surname": "Ingle",
+   "lane": 6,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam06": {
+   "surname": "Bansode",
+   "lane": 3,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [
+    "child",
+    "disabled"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P1"
+  },
+  "fam07": {
+   "surname": "Mhatre",
+   "lane": 4,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam08": {
+   "surname": "Rane",
+   "lane": 8,
+   "landmark": null,
+   "people": 6,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam09": {
+   "surname": "Naik",
+   "lane": 8,
+   "landmark": null,
+   "people": 4,
+   "vulnerable": [
+    "disabled",
+    "elderly"
+   ],
+   "medical": [
+    "dialysis"
+   ],
+   "water": "entering",
+   "priority": "P1"
+  },
+  "fam10": {
+   "surname": "Sawant",
+   "lane": 2,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [
+    "dialysis"
+   ],
+   "water": "knee",
+   "priority": "P1"
+  },
+  "fam11": {
+   "surname": "Rathod",
+   "lane": 2,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [
+    "child",
+    "pregnant"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P1"
+  },
+  "fam12": {
+   "surname": "Salvi",
+   "lane": 7,
+   "landmark": "lane7_mosque",
+   "people": 3,
+   "vulnerable": [
+    "child",
+    "disabled"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P1"
+  },
+  "fam13": {
+   "surname": "Raut",
+   "lane": 8,
+   "landmark": null,
+   "people": 4,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam14": {
+   "surname": "Dubey",
+   "lane": 7,
+   "landmark": "lane7_mosque",
+   "people": 3,
+   "vulnerable": [
+    "child",
+    "pregnant"
+   ],
+   "medical": [
+    "breathing"
+   ],
+   "water": "knee",
+   "priority": "P1"
+  },
+  "fam15": {
+   "surname": "Shetty",
+   "lane": 9,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam16": {
+   "surname": "Waghmare",
+   "lane": 5,
+   "landmark": null,
+   "people": 7,
+   "vulnerable": [],
+   "medical": [],
+   "water": "knee",
+   "priority": "P3"
+  },
+  "fam17": {
+   "surname": "Bhosle",
+   "lane": 5,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [],
+   "medical": [
+    "dialysis"
+   ],
+   "water": "waist",
+   "priority": "P1"
+  },
+  "fam18": {
+   "surname": "Gawde",
+   "lane": 6,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam19": {
+   "surname": "Pandey",
+   "lane": 9,
+   "landmark": null,
+   "people": 6,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "chest",
+   "priority": "P1"
+  },
+  "fam20": {
+   "surname": "Iyer",
+   "lane": 8,
+   "landmark": "water_tank",
+   "people": 6,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam21": {
+   "surname": "Rao",
+   "lane": 6,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [],
+   "medical": [],
+   "water": "roof",
+   "priority": "P1"
+  },
+  "fam22": {
+   "surname": "Patil",
+   "lane": 6,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [],
+   "medical": [
+    "unconscious"
+   ],
+   "water": "knee",
+   "priority": "P1"
+  },
+  "fam23": {
+   "surname": "Hegde",
+   "lane": 3,
+   "landmark": null,
+   "people": 4,
+   "vulnerable": [],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam24": {
+   "surname": "Lobo",
+   "lane": 2,
+   "landmark": null,
+   "people": 4,
+   "vulnerable": [],
+   "medical": [],
+   "water": "knee",
+   "priority": "P3"
+  },
+  "fam25": {
+   "surname": "Wagh",
+   "lane": 9,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam26": {
+   "surname": "Pereira",
+   "lane": 6,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam27": {
+   "surname": "Menon",
+   "lane": 6,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam28": {
+   "surname": "Parab",
+   "lane": 1,
+   "landmark": null,
+   "people": 7,
+   "vulnerable": [],
+   "medical": [],
+   "water": "roof",
+   "priority": "P1"
+  },
+  "fam29": {
+   "surname": "Pillai",
+   "lane": 6,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam30": {
+   "surname": "Sheikh Ali",
+   "lane": 7,
+   "landmark": "lane7_mosque",
+   "people": 6,
+   "vulnerable": [
+    "child",
+    "elderly"
+   ],
+   "medical": [
+    "dialysis"
+   ],
+   "water": "knee",
+   "priority": "P1"
+  },
+  "fam31": {
+   "surname": "D'Souza",
+   "lane": 1,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [],
+   "medical": [],
+   "water": "knee",
+   "priority": "P3"
+  },
+  "fam32": {
+   "surname": "Kale",
+   "lane": 4,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam33": {
+   "surname": "Jadhav",
+   "lane": 4,
+   "landmark": "hanuman_temple",
+   "people": 2,
+   "vulnerable": [
+    "pregnant"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam34": {
+   "surname": "Kotian",
+   "lane": 1,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [],
+   "medical": [],
+   "water": "knee",
+   "priority": "P3"
+  },
+  "fam35": {
+   "surname": "More",
+   "lane": 7,
+   "landmark": null,
+   "people": 6,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "chest",
+   "priority": "P1"
+  },
+  "fam36": {
+   "surname": "Fernandes",
+   "lane": 7,
+   "landmark": "lane7_mosque",
+   "people": 6,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [
+    "dialysis"
+   ],
+   "water": "waist",
+   "priority": "P1"
+  },
+  "fam37": {
+   "surname": "Chougule",
+   "lane": 2,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [
+    "child",
+    "disabled"
+   ],
+   "medical": [],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam38": {
+   "surname": "Tiwari",
+   "lane": 1,
+   "landmark": null,
+   "people": 6,
+   "vulnerable": [
+    "pregnant"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam39": {
+   "surname": "Barve",
+   "lane": 9,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam40": {
+   "surname": "Ansari",
+   "lane": 1,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [
+    "child",
+    "elderly"
+   ],
+   "medical": [
+    "fever"
+   ],
+   "water": "knee",
+   "priority": "P1"
+  },
+  "fam41": {
+   "surname": "Gaikwad",
+   "lane": 2,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [
+    "child",
+    "elderly"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P1"
+  },
+  "fam42": {
+   "surname": "Malik",
+   "lane": 3,
+   "landmark": null,
+   "people": 7,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "roof",
+   "priority": "P1"
+  },
+  "fam43": {
+   "surname": "Khan",
+   "lane": 3,
+   "landmark": null,
+   "people": 6,
+   "vulnerable": [],
+   "medical": [],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam44": {
+   "surname": "Shirke",
+   "lane": 6,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam45": {
+   "surname": "Mistry",
+   "lane": 6,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam46": {
+   "surname": "Shaikh Noor",
+   "lane": 6,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [
+    "child",
+    "elderly"
+   ],
+   "medical": [],
+   "water": "roof",
+   "priority": "P1"
+  },
+  "fam47": {
+   "surname": "Pawar",
+   "lane": 8,
+   "landmark": null,
+   "people": 6,
+   "vulnerable": [],
+   "medical": [],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam48": {
+   "surname": "Dalvi",
+   "lane": 6,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam49": {
+   "surname": "Ghosh",
+   "lane": 4,
+   "landmark": "hanuman_temple",
+   "people": 4,
+   "vulnerable": [],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam50": {
+   "surname": "Solanki",
+   "lane": 6,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam51": {
+   "surname": "Sayyed",
+   "lane": 5,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam52": {
+   "surname": "Nair",
+   "lane": 6,
+   "landmark": null,
+   "people": 1,
+   "vulnerable": [],
+   "medical": [],
+   "water": "knee",
+   "priority": "P3"
+  },
+  "fam53": {
+   "surname": "Joshi",
+   "lane": 6,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam54": {
+   "surname": "Qureshi",
+   "lane": 9,
+   "landmark": null,
+   "people": 2,
+   "vulnerable": [],
+   "medical": [],
+   "water": "knee",
+   "priority": "P3"
+  },
+  "fam55": {
+   "surname": "Mishra",
+   "lane": 8,
+   "landmark": "water_tank",
+   "people": 2,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam56": {
+   "surname": "Gaonkar",
+   "lane": 4,
+   "landmark": "hanuman_temple",
+   "people": 6,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "knee",
+   "priority": "P2"
+  },
+  "fam57": {
+   "surname": "Mane",
+   "lane": 8,
+   "landmark": "water_tank",
+   "people": 7,
+   "vulnerable": [
+    "child",
+    "disabled"
+   ],
+   "medical": [],
+   "water": "roof",
+   "priority": "P1"
+  },
+  "fam58": {
+   "surname": "Thakur",
+   "lane": 6,
+   "landmark": null,
+   "people": 5,
+   "vulnerable": [
+    "child",
+    "elderly"
+   ],
+   "medical": [
+    "fever"
+   ],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam59": {
+   "surname": "Lokhande",
+   "lane": 8,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [],
+   "medical": [],
+   "water": "knee",
+   "priority": "P3"
+  },
+  "fam60": {
+   "surname": "Shinde",
+   "lane": 3,
+   "landmark": null,
+   "people": 7,
+   "vulnerable": [
+    "child",
+    "elderly"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P1"
+  },
+  "fam61": {
+   "surname": "Bhatt",
+   "lane": 8,
+   "landmark": "water_tank",
+   "people": 4,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "fam62": {
+   "surname": "Kamble",
+   "lane": 2,
+   "landmark": null,
+   "people": 4,
+   "vulnerable": [],
+   "medical": [],
+   "water": "roof",
+   "priority": "P1"
+  },
+  "fam63": {
+   "surname": "Kharat",
+   "lane": 7,
+   "landmark": "lane7_mosque",
+   "people": 4,
+   "vulnerable": [],
+   "medical": [],
+   "water": "knee",
+   "priority": "P3"
+  },
+  "fam64": {
+   "surname": "Kadam",
+   "lane": 9,
+   "landmark": null,
+   "people": 3,
+   "vulnerable": [],
+   "medical": [
+    "dialysis"
+   ],
+   "water": "waist",
+   "priority": "P1"
+  },
+  "fam65": {
+   "surname": "Siddiqui",
+   "lane": 5,
+   "landmark": null,
+   "people": 6,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [
+    "dialysis"
+   ],
+   "water": "knee",
+   "priority": "P1"
+  },
+  "fam90": {
+   "surname": "Gupta",
+   "lane": 4,
+   "landmark": "hanuman_temple",
+   "people": 5,
+   "vulnerable": [
+    "child"
+   ],
+   "medical": [],
+   "water": "entering",
+   "priority": "P2"
+  },
+  "fam91": {
+   "surname": "Yadav",
+   "lane": 4,
+   "landmark": "hanuman_temple",
+   "people": 6,
+   "vulnerable": [
+    "elderly"
+   ],
+   "medical": [],
+   "water": "waist",
+   "priority": "P2"
+  },
+  "kamla": {
+   "surname": "Kamla Devi",
+   "lane": 4,
+   "priority": "P1"
+  },
+  "joseph": {
+   "surname": "Joseph",
+   "lane": 9,
+   "priority": "P1"
+  },
+  "shaikh": {
+   "surname": "Shaikh",
+   "lane": 7,
+   "priority": "P1"
+  },
+  "pinto": {
+   "surname": "Pinto",
+   "lane": 2,
+   "priority": null,
+   "already_safe": true
+  },
+  "mohan": {
+   "surname": "Mohan",
+   "lane": "Sector 3",
+   "priority": "P2"
+  }
+ }
+}

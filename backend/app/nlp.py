@@ -53,7 +53,7 @@ DANGER = {
                    "ट्रान्सफॉर्मर", "बिजली का तार", "वीज"],
 }
 WATER_LEVELS = [
-    ("roof", ["roof", "terrace", "chhat", "chat par", "छत", "छतावर", "on top of the house"]),
+    ("roof", ["roof", "terrace", "chhat par", "chhat pe", "chat par", "छत", "छतावर", "on top of the house"]),
     ("neck", ["neck", "gale tak", "गले तक", "गळ्यापर्यंत"]),
     ("chest", ["chest", "seene", "chhati", "छाती", "सीने"]),
     ("waist", ["waist", "kamar", "कमर", "कंबर"]),
@@ -88,7 +88,8 @@ FAQ_MARKERS = {
 }
 SUPPLY_MARKERS = ["food", "khana", "khaana", "drinking water", "peene ka paani", "water bottle", "milk", "dudh", "doodh",
                   "ration", "medicine", "dawai", "davai", "blanket", "diapers", "baby food", "ors", "torch",
-                  "खाना", "दूध", "दवाई", "राशन", "कंबल", "अन्न", "जेवण", "दूध पाहिजे", "औषध", "पिण्याचे पाणी"]
+                  "खाना", "दूध", "दवाई", "राशन", "कंबल", "अन्न", "जेवण", "दूध पाहिजे", "औषध", "पिण्याचे पाणी",
+                  "पीने का पानी", "पानी की बोतल", "paani ki bottle"]
 ROAD_MARKERS = ["road blocked", "road band", "lane blocked", "rasta band", "raasta band", "road is closed",
                 "road flooded", "water logged", "waterlogged", "पानी भरा", "रास्ता बंद", "रस्ता बंद", "road pe paani",
                 "road par paani", "underpass", "subway flooded", "subway band", "tree fallen", "ped gir"]
@@ -176,10 +177,13 @@ def extract_name(text):
         for alias in h.get("aliases", []):
             if re.search(rf"(?<![\wऀ-ॿ]){re.escape(alias)}(?![a-z])", t):
                 return h["name"], h["id"]
-    m = re.search(r"([A-Z][a-z]{2,})\s+(?:family|parivar|परिवार)", text)
+    m = re.search(r"\b(?!The\s|A\s)([A-Z][A-Za-z']{2,}(?:\s[A-Z][a-z]+)?)\s+(?:family|parivar|परिवार|कुटुंब)", text)
     if m:
         return f"{m.group(1)} family", None
-    m = re.search(r"(?:my|meri|mere)\s+(?:mother|father|mom|dad|maa|papa|grandmother|uncle|aunt)\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)", text)
+    m = re.search(r"([ऀ-ॿ]{2,})\s+(?:परिवार|कुटुंब|परिवारा)", text)
+    if m and m.group(1) not in ("एक", "मेरा", "मेरे", "हमारा", "आमचे", "माझे"):
+        return f"{m.group(1)} family", None
+    m = re.search(r"\b(?:my|meri|mere)\s+(?:mother|father|mom|dad|maa|papa|grandmother|uncle|aunt)\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)", text)
     if m:
         return m.group(1), None
     return None, None
@@ -271,8 +275,27 @@ def extract(text):
         "first_person": bool(_has(" " + t + " ", FIRST_PERSON)),
         "road": _road_mentioned(text) if _has(t, ROAD_MARKERS) else None,
     })
+    fields["household_guess"] = None if household_id else guess_household(fields)
     fields["intent"] = classify(t, fields)
     return fields
+
+
+def guess_household(fields):
+    """Household memory: if a report without a name comes from a registered household's
+    landmark and describes the same kind of people, note it as a likely match."""
+    if not fields.get("landmark") or not fields.get("vulnerable"):
+        return None
+    matches = []
+    for h in scenario.households():
+        if h.get("landmark") != fields["landmark"] or h.get("status") == "safe":
+            continue
+        kinds = set()
+        for m in h["members"]:
+            note = (m.get("note") or "") + (" elderly" if m.get("age", 0) >= 60 else "") + (" child" if m.get("age", 99) <= 14 else "")
+            kinds |= {k for k in ("elderly", "child") if k in note}
+        if set(fields["vulnerable"]) <= kinds:
+            matches.append(h["id"])
+    return matches[0] if len(matches) == 1 else None
 
 
 def _road_mentioned(text):

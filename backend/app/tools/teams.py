@@ -27,7 +27,8 @@ def all_teams():
 
 
 def has_pending_proposal(team_id):
-    return db.one("SELECT 1 FROM approvals WHERE team_id = ? AND status = 'pending' AND kind IN ('dispatch','preposition')",
+    # A pending pre-position does not hold a team back from a real rescue.
+    return db.one("SELECT 1 FROM approvals WHERE team_id = ? AND status = 'pending' AND kind = 'dispatch'",
                   (team_id,)) is not None
 
 

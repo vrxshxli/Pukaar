@@ -121,6 +121,10 @@ def _apply(approval):
         _apply_dispatch(approval)
     elif kind == "preposition":
         team = teams.get(approval["team_id"])
+        if team["status"] != "free":
+            audit.log("Dispatch", f"{team['name']} is busy on a rescue, so the pre-position was not applied",
+                      approved_by=approval["decided_by"])
+            return
         route = geo.compute_route(team["node"], approval["payload"]["to_node"], kind=team["kind"])
         teams.save_route(team["id"], None, route, status="active")
         teams.set_status(team["id"], "repositioning", approval=approval)

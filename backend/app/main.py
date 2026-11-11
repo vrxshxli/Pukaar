@@ -290,6 +290,31 @@ def update_settings(body: SettingsIn):
     return {"automation": db.automation_on(), "llm": llm.status(), "auto_field": db.get_setting("auto_field")}
 
 
+class ReplayIn(BaseModel):
+    action: str
+    speed: float | None = None
+
+
+@app.post("/api/replay")
+def replay_control(body: ReplayIn):
+    from . import replay
+    speed = body.speed if body.speed in (1, 5, 10, 30) else None
+    if body.action == "start":
+        replay.start(speed or 10)
+    elif body.action == "pause":
+        replay.pause()
+    elif body.action == "resume":
+        replay.resume(speed)
+    elif body.action == "speed" and speed:
+        replay.set_speed(speed)
+    elif body.action == "reset":
+        replay.stop()
+        orchestrator.reset()
+    else:
+        raise HTTPException(400, "Unknown replay action")
+    return replay.status()
+
+
 @app.post("/api/reset")
 def reset():
     from . import replay

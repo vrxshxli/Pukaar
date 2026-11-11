@@ -70,6 +70,9 @@ class Dispatch(Agent):
                              payload=payload, reasons=why, agent=self.name)
         if approval is None:
             return None
+        for pre in db.query("SELECT id FROM approvals WHERE kind = 'preposition' AND status = 'pending' AND team_id = ?",
+                            (team["id"],)):
+            approvals.supersede(pre["id"], f"{team['name']} is needed for {ticket['id']}")
         if ticket["status"] == "open":
             tickets.touch(ticket["id"], status="proposed")
         self.log(f"Dispatch proposed {team['name']} for {ticket['id']} ({ticket['priority']}): " + "; ".join(why),

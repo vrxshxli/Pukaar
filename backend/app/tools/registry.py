@@ -4,6 +4,7 @@ Each tool is a plain function with a name, a description and a JSON schema
 for its arguments. Agents call tools through `call`, which also writes the
 audit log, so nothing an agent does goes unrecorded.
 """
+import inspect
 from dataclasses import dataclass
 from typing import Callable
 
@@ -30,10 +31,15 @@ def tool(name, description, parameters=None, model_safe=True):
     return register
 
 
-def call(name, agent, summary=None, ticket_id=None, **kwargs):
+def call(name, caller, args=None, summary=None, ticket_id=None):
     """Run a tool on behalf of an agent and record it in the audit log."""
-    result = TOOLS[name].fn(**kwargs)
-    audit.log(agent, summary or f"{agent} called {name}", tool=name, kind="tool",
+    kwargs = dict(args or {})
+    fn = TOOLS[name].fn
+    # ticket_id is used for the audit log, and also passed on if the tool wants it.
+    if ticket_id is not None and "ticket_id" in inspect.signature(fn).parameters:
+        kwargs["ticket_id"] = ticket_id
+    result = fn(**kwargs)
+    audit.log(caller, summary or f"{caller} called {name}", tool=name, kind="tool",
               input=kwargs, result=result, ticket_id=ticket_id or kwargs.get("ticket_id"))
     return result
 

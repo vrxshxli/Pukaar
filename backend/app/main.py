@@ -1,18 +1,316 @@
 """FastAPI app for Pukaar: API routes, the live event stream, and the built frontend."""
+import asyncio
+import json
+import logging
+import os
+import threading
+import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
-app = FastAPI(title="Pukaar")
+from . import db, events, llm, orchestrator, scenario
+from .tools import approvals, audit, geo, messaging, teams, tickets
+from .tools.approvals import ApprovalRequired
 
+log = logging.getLogger("pukaar")
 FRONTEND_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
+_stop = threading.Event()
+
+
+def _ticker():
+    # Moves the game forward: alerts, team movement, stale tickets.
+    while not _stop.is_set():
+        try:
+            orchestrator.tick()
+        except Exception:
+            log.exception("tick failed")
+        _stop.wait(1.0)
+
+
+@asynccontextmanager
+async def lifespan(app):
+    db.connect()
+    if os.environ.get("LLM_MODE"):
+        db.set_setting("llm_mode", os.environ["LLM_MODE"])
+    events.bind_loop(asyncio.get_running_loop())
+    if os.environ.get("PUKAAR_NO_TICKER") != "1":
+        threading.Thread(target=_ticker, daemon=True, name="ticker").start()
+    yield
+    _stop.set()
+
+
+app = FastAPI(title="Pukaar", lifespan=lifespan)
+
+
+class MessageIn(BaseModel):
+    phone: str
+    text: str
+    channel: str = "chat"
+    name: str | None = None
+    area: str | None = None
+
+
+class DecisionIn(BaseModel):
+    decision: str
+    officer: str = "Duty officer"
+    team_id: str | None = None
+
+
+class VolunteerIn(BaseModel):
+    action: str
+    road: str | None = None
+    otp: str | None = None
+
+
+class SettingsIn(BaseModel):
+    automation: bool | None = None
+    llm_mode: str | None = None
+    auto_field: bool | None = None
+
+
+class CloseIn(BaseModel):
+    officer: str = "Duty officer"
+
+
+@app.exception_handler(ApprovalRequired)
+async def approval_required(request: Request, exc: ApprovalRequired):
+    from fastapi.responses import JSONResponse
+    return JSONResponse(status_code=403, content={"detail": str(exc)})
 
 
 @app.get("/api/health")
 def health():
     return {"ok": True}
+
+
+@app.get("/api/state")
+def state():
+    """Everything the dashboard needs in one call."""
+    incident = db.one("SELECT * FROM incidents ORDER BY id LIMIT 1")
+    all_tickets = [t for t in tickets.all_tickets() if t["kind"] != "duplicate"]
+    blocked = geo.blocked_roads()
+    return {
+        "incident": incident,
+        "ward": {k: scenario.ward()[k] for k in ("name", "center", "river", "helplines", "incident_name")},
+        "clock": db.now_iso(),
+        "clock_speed": float(db.get_setting("clock_speed", "1")),
+        "automation": db.automation_on(),
+        "auto_field": db.get_setting("auto_field", "off") == "on",
+        "llm": llm.status(),
+        "replay": replay_status(),
+        "tickets": all_tickets,
+        "teams": teams.all_teams(),
+        "approvals": approvals.pending(),
+        "camps": [dict(c, needs=db.loads(c["needs"], [])) for c in db.query("SELECT * FROM camps")],
+        "blocked_roads": [{"road": r, "segments": geo.road_geometry(r)} for r in blocked],
+        "watch_zones": db.loads(db.get_setting("watch_zones"), []),
+        "bulletins": db.query("SELECT * FROM bulletins ORDER BY id DESC LIMIT 10"),
+        "metrics": metrics(all_tickets),
+    }
+
+
+def metrics(all_tickets):
+    rescue_kinds = ("rescue", "welfare", "supplies")
+    wasted = db.one("""SELECT COUNT(*) n FROM approvals a JOIN tickets t ON t.id = a.ticket_id
+                       WHERE a.kind = 'dispatch' AND a.status = 'approved'
+                       AND (t.kind IN ('duplicate', 'verify') OR a.decided_at > IFNULL(t.safe_at, '9999'))""")["n"]
+    return {
+        "reports_in": db.one("SELECT COUNT(*) n FROM messages WHERE direction = 'in'")["n"],
+        "tickets": sum(1 for t in all_tickets if t["kind"] in rescue_kinds and t["id"] != "P-0398"),
+        "open_p1": sum(1 for t in all_tickets if t["priority"] == "P1" and t["status"] not in ("safe", "closed")),
+        "waiting_approvals": db.one("SELECT COUNT(*) n FROM approvals WHERE status = 'pending'")["n"],
+        "wasted_trips": wasted,
+        "safe": sum(1 for t in all_tickets if t["status"] in ("safe", "closed") and t["id"] != "P-0398"),
+        "verify": sum(1 for t in all_tickets if t["status"] == "verify"),
+    }
+
+
+def replay_status():
+    from . import replay
+    return replay.status()
+
+
+@app.get("/api/tickets/{ticket_id}")
+def ticket_detail(ticket_id: str):
+    t = tickets.get(ticket_id)
+    if not t:
+        raise HTTPException(404, "No such ticket")
+    t["reports"] = db.query("""
+        SELECT tr.reason, tr.confidence, tr.created_at, m.text, m.channel, m.language, rp.phone, rp.name
+        FROM ticket_reports tr JOIN reports r ON r.id = tr.report_id
+        JOIN messages m ON m.id = r.message_id JOIN reporters rp ON rp.id = tr.reporter_id
+        WHERE tr.ticket_id = ? ORDER BY tr.created_at""", (ticket_id,))
+    t["history"] = audit_for(ticket_id)
+    return t
+
+
+def audit_for(ticket_id):
+    return db.query("SELECT * FROM audit_log WHERE ticket_id = ? AND kind != 'tool' ORDER BY id", (ticket_id,))
+
+
+@app.post("/api/tickets/{ticket_id}/close")
+def close_ticket(ticket_id: str, body: CloseIn):
+    """Closing without the family's reply: the officer's tap is the approval."""
+    if not tickets.get(ticket_id):
+        raise HTTPException(404, "No such ticket")
+    with orchestrator._lock:
+        approval = approvals.create_approval("close", f"Close {ticket_id} without the family's reply?",
+                                             ticket_id=ticket_id, agent="Officer")
+        if approval is None:
+            raise HTTPException(409, "Automation is off, so no approval could be created")
+    return orchestrator.handle_approval(approval["id"], "approve", body.officer)
+
+
+@app.get("/api/activity")
+def activity(limit: int = 80):
+    return db.query("SELECT * FROM audit_log WHERE kind != 'tool' ORDER BY id DESC LIMIT ?", (limit,))
+
+
+@app.get("/api/audit")
+def audit_log(limit: int = 300):
+    return audit.recent(limit)
+
+
+@app.post("/api/messages")
+def post_message(body: MessageIn):
+    if not body.text.strip():
+        raise HTTPException(400, "Message is empty")
+    return orchestrator.handle_message(body.phone, body.text.strip(), channel=body.channel, name=body.name, area=body.area)
+
+
+@app.get("/api/chat/{phone}")
+def chat_thread(phone: str):
+    r = db.one("SELECT * FROM reporters WHERE phone = ?", (phone,))
+    return messaging.thread(r["id"]) if r else []
+
+
+@app.post("/api/approvals/{approval_id}")
+def decide(approval_id: int, body: DecisionIn):
+    if body.decision not in ("approve", "reject"):
+        raise HTTPException(400, "Decision must be approve or reject")
+    try:
+        return orchestrator.handle_approval(approval_id, body.decision, body.officer, team_id=body.team_id)
+    except ValueError as e:
+        raise HTTPException(409, str(e))
+
+
+@app.get("/api/volunteer/{team_id}")
+def volunteer_view(team_id: str):
+    team = teams.get(team_id)
+    if not team:
+        raise HTTPException(404, "No such team")
+    task = None
+    if team["ticket_id"]:
+        t = tickets.get(team["ticket_id"])
+        # Volunteers need the place and the needs, but not reporters' phone numbers.
+        task = {k: t[k] for k in ("id", "title", "area", "landmark", "priority", "reasons", "people", "vulnerable",
+                                  "medical", "danger", "water_level", "status", "lat", "lng", "notes")}
+    route = teams.active_route(team_id)
+    return {"team": team, "task": task, "route": route, "messages": messaging.team_thread(team_id),
+            "blocked_roads": [{"road": r, "segments": geo.road_geometry(r)} for r in geo.blocked_roads()]}
+
+
+@app.post("/api/volunteer/{team_id}")
+def volunteer_action(team_id: str, body: VolunteerIn):
+    try:
+        return orchestrator.handle_volunteer(team_id, body.action, road=body.road, otp=body.otp)
+    except (ValueError, KeyError) as e:
+        raise HTTPException(409, str(e))
+
+
+@app.get("/api/family")
+def family_lookup(ticket: str | None = None, name: str | None = None, area: str | None = None):
+    """'Is my family safe?' Returns only status and camp, never an address or phone."""
+    matches = []
+    if ticket:
+        t = tickets.get(ticket.strip().upper())
+        if t and t["kind"] in ("rescue", "welfare"):
+            matches = [t]
+    elif name:
+        from rapidfuzz import fuzz
+        for t in tickets.all_tickets():
+            if t["kind"] not in ("rescue", "welfare"):
+                continue
+            name_ok = fuzz.partial_ratio(name.lower(), t["title"].lower()) >= 80
+            area_ok = not area or fuzz.partial_ratio(area.lower(), (t["area"] or "").lower()) >= 70
+            if name_ok and area_ok:
+                matches.append(t)
+    results = []
+    for t in matches[:5]:
+        db.insert("lookups", query=json.dumps({"ticket": ticket, "name": name, "area": area}),
+                  ticket_id=t["id"], created_at=db.now_iso())
+        results.append({**tickets.public_status(t), "title": t["title"]})
+    if results:
+        audit.log("Loop", f"Family lookup matched {', '.join(r['ticket_id'] for r in results)}",
+                  tool="family_lookup", kind="action", ticket_id=results[0]["ticket_id"])
+    return {"results": results}
+
+
+@app.post("/api/settings")
+def update_settings(body: SettingsIn):
+    if body.automation is not None:
+        db.set_setting("automation", "on" if body.automation else "off")
+        audit.log("Officer", f"Automation switched {'on' if body.automation else 'off'}", kind="human")
+    if body.llm_mode in ("rules", "ollama"):
+        db.set_setting("llm_mode", body.llm_mode)
+        audit.log("Officer", f"LLM mode set to {body.llm_mode}", kind="human")
+    if body.auto_field is not None:
+        db.set_setting("auto_field", "on" if body.auto_field else "off")
+    events.publish("changed", {"what": "settings"})
+    return {"automation": db.automation_on(), "llm": llm.status(), "auto_field": db.get_setting("auto_field")}
+
+
+@app.post("/api/reset")
+def reset():
+    from . import replay
+    replay.stop()
+    orchestrator.reset()
+    return {"ok": True}
+
+
+@app.get("/api/stream")
+async def stream(request: Request, phone: str | None = None, team: str | None = None):
+    reporter_id = None
+    if phone:
+        r = db.one("SELECT id FROM reporters WHERE phone = ?", (phone,))
+        reporter_id = r["id"] if r else None
+
+    def accept(kind, data):
+        if kind == "message":
+            nonlocal reporter_id
+            if phone and reporter_id is None:
+                r = db.one("SELECT id FROM reporters WHERE phone = ?", (phone,))
+                reporter_id = r["id"] if r else None
+            return phone is not None and data.get("reporter_id") == reporter_id
+        if kind == "team_message":
+            return team is not None and data.get("team_id") == team
+        return phone is None or kind == "changed"
+
+    queue = events.subscribe(accept)
+
+    async def gen():
+        try:
+            yield "retry: 2000\n\n"
+            last_ping = time.time()
+            while not await request.is_disconnected():
+                try:
+                    payload = await asyncio.wait_for(queue.get(), timeout=10)
+                    yield f"data: {payload}\n\n"
+                except asyncio.TimeoutError:
+                    pass
+                if time.time() - last_ping > 10:
+                    yield ": ping\n\n"
+                    last_ping = time.time()
+        finally:
+            events.unsubscribe(queue)
+
+    return StreamingResponse(gen(), media_type="text/event-stream",
+                             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
 
 
 # When the frontend has been built, serve it from the same port so a single

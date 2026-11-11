@@ -49,7 +49,7 @@ CREATE TABLE tickets (
   title TEXT, area TEXT, landmark TEXT, lat REAL, lng REAL,
   kind TEXT, priority TEXT, priority_score INTEGER, reasons TEXT, status TEXT,
   people INTEGER, vulnerable TEXT, medical TEXT, water_level TEXT, danger TEXT,
-  battery INTEGER, verify_reason TEXT, household_id TEXT,
+  battery INTEGER, rising INTEGER, verify_reason TEXT, household_id TEXT,
   safe_camp TEXT, safe_at TEXT, otp TEXT, team_id TEXT,
   created_at TEXT, updated_at TEXT, last_update_at TEXT, notes TEXT
 );

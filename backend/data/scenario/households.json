@@ -6,12 +6,31 @@
     "area": "Lane 4, Shanti Nagar",
     "lane": "Lane 4",
     "landmark": "hanuman_temple",
-    "lat": 19.0762, "lng": 72.8761, "node": "L4_mid",
+    "lat": 19.0762,
+    "lng": 72.8761,
+    "node": "L4_mid",
     "people": 2,
-    "members": [{"name": "Kamla Devi", "age": 68, "note": "elderly"}, {"name": "Raju", "age": 9, "note": "grandson, fever"}],
+    "members": [
+      {
+        "name": "Kamla Devi",
+        "age": 68,
+        "note": "elderly"
+      },
+      {
+        "name": "Raju",
+        "age": 9,
+        "note": "grandson, fever"
+      }
+    ],
     "phone": "+91 90000 00412",
     "language": "hi",
-    "status": "at_risk"
+    "status": "at_risk",
+    "aliases": [
+      "kamla devi",
+      "kamla",
+      "कमला देवी",
+      "कमला"
+    ]
   },
   {
     "id": "joseph",
@@ -20,12 +39,41 @@
     "area": "Lane 9, Shanti Nagar",
     "lane": "Lane 9",
     "landmark": null,
-    "lat": 19.0749, "lng": 72.8810, "node": "L9_bot",
+    "lat": 19.0749,
+    "lng": 72.881,
+    "node": "L9_bot",
     "people": 5,
-    "members": [{"name": "Thomas Joseph", "age": 41}, {"name": "Mary Joseph", "age": 38}, {"name": "Anna Joseph", "age": 72, "note": "elderly"}, {"name": "Rohan Joseph", "age": 12}, {"name": "Elsa Joseph", "age": 3, "note": "small child"}],
+    "members": [
+      {
+        "name": "Thomas Joseph",
+        "age": 41
+      },
+      {
+        "name": "Mary Joseph",
+        "age": 38
+      },
+      {
+        "name": "Anna Joseph",
+        "age": 72,
+        "note": "elderly"
+      },
+      {
+        "name": "Rohan Joseph",
+        "age": 12
+      },
+      {
+        "name": "Elsa Joseph",
+        "age": 3,
+        "note": "small child"
+      }
+    ],
     "phone": "+91 90000 00909",
     "language": "en",
-    "status": "at_risk"
+    "status": "at_risk",
+    "aliases": [
+      "joseph",
+      "जोसेफ"
+    ]
   },
   {
     "id": "shaikh",
@@ -34,12 +82,36 @@
     "area": "Gali 7, Shanti Nagar",
     "lane": "Lane 7",
     "landmark": "lane7_mosque",
-    "lat": 19.0767, "lng": 72.8791, "node": "L7_mid",
+    "lat": 19.0767,
+    "lng": 72.8791,
+    "node": "L7_mid",
     "people": 4,
-    "members": [{"name": "Imran Shaikh", "age": 45}, {"name": "Rukhsar Shaikh", "age": 40}, {"name": "Ayaan Shaikh", "age": 15}, {"name": "Zoya Shaikh", "age": 11}],
+    "members": [
+      {
+        "name": "Imran Shaikh",
+        "age": 45
+      },
+      {
+        "name": "Rukhsar Shaikh",
+        "age": 40
+      },
+      {
+        "name": "Ayaan Shaikh",
+        "age": 15
+      },
+      {
+        "name": "Zoya Shaikh",
+        "age": 11
+      }
+    ],
     "phone": "+91 90000 00707",
     "language": "hi",
-    "status": "at_risk"
+    "status": "at_risk",
+    "aliases": [
+      "shaikh",
+      "sheikh",
+      "शेख"
+    ]
   },
   {
     "id": "pinto",
@@ -48,14 +120,38 @@
     "area": "Lane 2, Shanti Nagar",
     "lane": "Lane 2",
     "landmark": null,
-    "lat": 19.0748, "lng": 72.8741, "node": "L2_bot",
+    "lat": 19.0748,
+    "lng": 72.8741,
+    "node": "L2_bot",
     "people": 4,
-    "members": [{"name": "Francis Pinto", "age": 52}, {"name": "Lydia Pinto", "age": 49}, {"name": "Neil Pinto", "age": 20}, {"name": "Grace Pinto", "age": 78, "note": "elderly"}],
+    "members": [
+      {
+        "name": "Francis Pinto",
+        "age": 52
+      },
+      {
+        "name": "Lydia Pinto",
+        "age": 49
+      },
+      {
+        "name": "Neil Pinto",
+        "age": 20
+      },
+      {
+        "name": "Grace Pinto",
+        "age": 78,
+        "note": "elderly"
+      }
+    ],
     "phone": "+91 90000 00202",
     "language": "en",
     "status": "safe",
     "safe_at": "20:12",
-    "safe_camp": "camp3"
+    "safe_camp": "camp3",
+    "aliases": [
+      "pinto",
+      "पिंटो"
+    ]
   },
   {
     "id": "mohan",
@@ -64,11 +160,23 @@
     "area": "Sector 3, Shanti Nagar",
     "lane": "Sector 3",
     "landmark": "sector3",
-    "lat": 19.0758, "lng": 72.8836, "node": "sector3",
+    "lat": 19.0758,
+    "lng": 72.8836,
+    "node": "sector3",
     "people": 1,
-    "members": [{"name": "Mohan Kulkarni", "age": 74, "note": "lives alone"}],
+    "members": [
+      {
+        "name": "Mohan Kulkarni",
+        "age": 74,
+        "note": "lives alone"
+      }
+    ],
     "phone": "+91 90000 00303",
     "language": "mr",
-    "status": "unknown"
+    "status": "unknown",
+    "aliases": [
+      "mohan",
+      "मोहन"
+    ]
   }
 ]

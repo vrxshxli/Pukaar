@@ -79,6 +79,8 @@ class SettingsIn(BaseModel):
     llm_mode: str | None = None
     auto_field: bool | None = None
     planner_scope: str | None = None
+    listen_llm: bool | None = None
+    ollama_model: str | None = None
 
 
 class CloseIn(BaseModel):
@@ -358,6 +360,10 @@ def update_settings(body: SettingsIn, officer=Depends(require_officer)):
         if body.llm_mode == "ollama":
             llm.warm_up()
         audit.log("Officer", f"LLM mode set to {body.llm_mode}", kind="human", approved_by=officer["display_name"])
+    if body.listen_llm is not None:
+        db.set_setting("listen_llm", "on" if body.listen_llm else "off")
+    if body.ollama_model is not None and body.ollama_model.replace(":", "").replace(".", "").replace("-", "").isalnum():
+        db.set_setting("ollama_model", body.ollama_model)
     if body.planner_scope in ("off", "judgment", "all"):
         db.set_setting("planner_scope", body.planner_scope)
         audit.log("Officer", f"Planner scope set to {body.planner_scope}", kind="human", approved_by=officer["display_name"])

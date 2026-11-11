@@ -164,10 +164,10 @@ function camAt(keys, t) {
 }
 
 // ---------- scene timing from the voiceover ----------
-const ORDER = ['cold', 'problem', 'title', 'agents', 'login', 'rescue', 'signals', 'family', 'replay', 'safety', 'tech', 'results', 'beyond', 'outro']
-const CHAPTER = { problem: ['01', 'The problem'], agents: ['02', 'Meet the agents'], login: ['03', 'Live: the real app'], rescue: ['03', 'Live: one rescue'],
+const ORDER = ['cold', 'problem', 'title', 'design', 'live', 'approve', 'results', 'outro']
+const CHAPTER = { design: ['02', 'How the agent thinks'], live: ['03', 'Live: the agent at work'], approve: ['04', 'The human decides'], problem: ['01', 'The problem'], agents: ['02', 'Meet the agents'], login: ['03', 'Live: the real app'], rescue: ['03', 'Live: one rescue'],
   signals: ['03', 'Live: hard cases'], family: ['03', 'Live: family lookup'], replay: ['03', 'Live: a whole night'], safety: ['04', 'Safety'],
-  tech: ['05', 'Under the hood'], results: ['06', 'Results'], beyond: ['07', 'Beyond floods'] }
+  tech: ['05', 'Under the hood'], results: ['05', 'Results'], beyond: ['07', 'Beyond floods'] }
 const SC = {}
 ORDER.forEach((id, i) => {
   const ls = LINES.filter((l) => l.scene === id)
@@ -213,7 +213,8 @@ builders.cold = (root, sc) => {
   const bars = Array.from({ length: 56 }, () => h('i', '', null, wave))
   bars.forEach((b) => css(b, { width: '7px', borderRadius: '4px', background: '#2f5d58', display: 'block' }))
   return (t) => {
-    const l0 = L(sc, 0), l1 = L(sc, 1), l2 = L(sc, 2)
+    const w0 = L(sc, 0), mid0 = w0.a + (w0.e - w0.a) * 0.42
+    const l0 = { a: w0.a, e: mid0, b: mid0 + 0.2 }, l1 = { a: mid0 + 0.2, e: w0.e, b: w0.b }, l2 = L(sc, 1)
     const lvl = E.io(prog(t, 0, sc.end - sc.start))
     const amp = 18, base = 600 - 120 - lvl * 230
     const path = (ph, off) => {
@@ -280,7 +281,9 @@ builders.problem = (root, sc) => {
   css(big, { textAlign: 'center' })
   big.innerHTML = '<div class="serif" style="font-size:300px;font-weight:700;color:var(--brick);line-height:1">463<span style="font-size:110px"> min</span></div><div style="font-size:34px;color:var(--muted);margin-top:10px">median wait for the most urgent families, first come, first served</div>'
   return (t) => {
-    const l3 = L(sc, 0), l4 = L(sc, 1), l5 = L(sc, 2), l6 = L(sc, 3)
+    const q0 = L(sc, 0), q1 = L(sc, 1), cut = q1.a + (q1.e - q1.a) * 0.62
+    const l3 = { a: q0.a, e: q0.a + 1.2, b: q0.a + 1.7 }, l4 = { a: q0.a + 1.5, e: q0.e, b: q0.b }
+    const l5 = { a: q1.a, e: cut, b: cut + 0.15 }, l6 = { a: cut + 0.15, e: q1.e, b: q1.b }
     const hp = prog(t, l3.a - 0.2, l3.a + 1.4)
     staggerWords(hw, hp, { y: -120, r: -12, spread: 0.5 })
     const shrink = E.io(prog(t, l3.b - 0.4, l3.b + 0.2))
@@ -321,12 +324,12 @@ builders.title = (root, sc) => {
   const letters = 'Pukaar'.split('').map((ch) => `<span class="word">${ch}</span>`).join('')
   name.innerHTML = letters + '<span class="word" style="color:var(--coral)">·</span> <span class="word" style="color:var(--muted);font-weight:400;font-size:90px">पुकार</span>'
   const ls = [...name.querySelectorAll('.word')]
-  const tag = h('div', 'abs', 'Every call heard. Every family reached.', root)
+  const tag = h('div', 'abs', 'An agent for the ward duty officer', root)
   css(tag, { left: '50%', top: '850px', transform: 'translateX(-50%)', fontSize: '40px', color: 'var(--teal)', whiteSpace: 'nowrap' })
   const team = h('div', 'abs caps', '<span>Built by</span> <b style="color:var(--coral);font-size:46px;letter-spacing:.3em">Team Seekers</b>', root)
   css(team, { left: '50%', top: '120px', transform: 'translateX(-50%)', fontSize: '20px', color: 'var(--muted)', whiteSpace: 'nowrap', textAlign: 'center' })
   return (t) => {
-    const l7 = L(sc, 0), l8 = L(sc, 1)
+    const l7 = L(sc, 0), l8 = { a: l7.a + (l7.e - l7.a) * 0.68 }
     const lp = E.elastic(prog(t, 0, 1.2))
     const lift = E.io(prog(t, 1.0, 1.8))
     logo.style.transform = `translate(-50%, calc(-50% - ${lift * 170}px)) scale(${lerp(0, 1, lp) * lerp(1, 0.7, lift)}) rotate(${(1 - clamp(lp)) * -90}deg)`
@@ -727,7 +730,8 @@ builders.results = (root, sc) => {
   css(note, { left: '120px', top: '930px', fontSize: '22px', color: 'var(--muted)', width: '1500px' })
   return (t) => {
     show(head, E.out(prog(t, 0, 0.7)), { y: -40 })
-    const starts = [L(sc, 1).a, L(sc, 2).a, L(sc, 2).a + (L(sc, 2).e - L(sc, 2).a) * 0.6]
+    const r0 = L(sc, 0), span = r0.e - r0.a
+    const starts = [r0.a + 0.3, r0.a + span * 0.55, r0.a + span * 0.78]
     rows.forEach((el, k) => {
       const r = el._r, a0 = starts[k]
       show(el, E.out(prog(t, a0 - 0.4, a0)), { x: -100, y: 0 })
@@ -798,9 +802,123 @@ builders.outro = (root, sc) => {
     rings.forEach((r, i) => { const p = ((t - i * 0.5) % 2 + 2) % 2 / 2, size = 180 + p * 1100; css(r, { left: 960 - size / 2 + 'px', top: 390 - size / 2 + 'px', width: size + 'px', height: size + 'px', opacity: (1 - p) * 0.5 }) })
     show(line, E.out(prog(t, 0.6, 1.5)), { y: 40 })
     line.style.transform += ' translateX(-50%)'; line.style.left = '50%'
-    const tq = E.out(prog(t, L(sc, 1).a - 0.2, L(sc, 1).a + 0.6))
+    const o0 = L(sc, 0), tq = E.out(prog(t, o0.a + (o0.e - o0.a) * 0.72, o0.a + (o0.e - o0.a) * 0.72 + 0.8))
     team.style.opacity = tq
     team.style.letterSpacing = lerp(1.2, 0.3, tq) + 'em'
+  }
+}
+
+
+// ---------- How the agent thinks: plan, one tool, observe, replan; memory; the human gate ----------
+builders.design = (root, sc) => {
+  const head = h('div', 'abs serif', 'Not a chatbot. <span style="color:var(--coral)">An agent that plans.</span>', root)
+  css(head, { left: '120px', top: '110px', fontSize: '58px', fontWeight: 600 })
+  const node = (x, y, w, label, sub, main) => {
+    const el = h('div', 'abs card', `<div class="serif" style="font-size:30px;font-weight:600">${label}</div><div style="font-size:21px;color:var(--muted);margin-top:4px">${sub}</div>`, root)
+    css(el, { left: x + 'px', top: y + 'px', width: w + 'px', padding: '22px 26px', textAlign: 'center' })
+    if (main) css(el, { background: 'var(--ink)', color: '#fff' })
+    if (main) el.querySelector('div:last-child').style.color = '#cfe3dc'
+    return el
+  }
+  const ev1 = node(120, 300, 300, 'Event', 'a rescue report, a rumour, a blocked lane')
+  const pl = node(560, 280, 380, 'LLM Planner', 'makes a plan of tool calls', true)
+  const tool = node(1080, 300, 300, 'One tool', 'from the registry only')
+  const obs = node(820, 500, 300, 'Observe', 'reads the result, replans')
+  const loopSvg = h('div', 'abs', `<svg width="1400" height="700" viewBox="0 0 1400 700" fill="none"><path class="a1" d="M420 360 H556" stroke="#2f5d58" stroke-width="5" stroke-dasharray="12 10"/><path class="a2" d="M940 360 H1076" stroke="#2f5d58" stroke-width="5" stroke-dasharray="12 10"/><path class="a3" d="M1230 420 V520 H1124" stroke="#d4705f" stroke-width="5" stroke-dasharray="12 10"/><path class="a4" d="M816 560 H750 V444" stroke="#d4705f" stroke-width="5" stroke-dasharray="12 10"/></svg>`, root)
+  css(loopSvg, { left: '0px', top: '0px' })
+  const paths = [...loopSvg.querySelectorAll('path')]
+  const mem = ['Short-term · this family\u2019s messages', 'Long-term · blocked lanes, households, camps', 'Episodic · what it decided earlier tonight'].map((txt, i) => {
+    const el = h('div', 'abs chip', esc(txt), root)
+    css(el, { left: '120px', top: 690 + i * 64 + 'px', background: 'rgba(91,127,166,.14)', color: '#3f6283', fontSize: '24px' })
+    return el
+  })
+  const gate = h('div', 'abs card', `<div style="display:flex;gap:18px;align-items:center"><div style="width:78px;height:78px;border-radius:22px;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center">${icon('lock', 44, 2, '#fff')}</div><div><div class="serif" style="font-size:30px;font-weight:600">Officer approves</div><div style="font-size:21px;color:var(--muted)">every boat, bulletin and override</div></div></div>`, root)
+  css(gate, { left: '1180px', top: '700px', width: '600px', padding: '22px 26px' })
+  return (t) => {
+    const d0 = L(sc, 0), d1 = L(sc, 1)
+    show(head, E.out(prog(t, 0, 0.7)), { y: -40, blur: 10 })
+    const seq = [ev1, pl, tool, obs]
+    seq.forEach((el, i) => {
+      const a = d0.a + (d0.e - d0.a) * [0.05, 0.25, 0.55, 0.75][i]
+      const q = E.back(prog(t, a - 0.2, a + 0.45))
+      el.style.opacity = clamp(q)
+      el.style.transform = `scale(${lerp(0.5, 1, clamp(q))}) rotate(${(1 - clamp(q)) * (i % 2 ? 8 : -8)}deg)`
+    })
+    paths.forEach((pth, i) => {
+      const a = d0.a + (d0.e - d0.a) * [0.2, 0.5, 0.7, 0.88][i]
+      pth.style.opacity = clamp(prog(t, a - 0.1, a + 0.3))
+      pth.style.strokeDashoffset = -t * 90
+    })
+    // the active node pulses round the loop
+    const k = Math.floor(t * 1.6) % 3
+    ;[pl, tool, obs].forEach((el, i) => { if (t > d0.e) el.style.boxShadow = i === k ? '0 0 0 6px rgba(212,112,95,.35), 0 24px 60px rgba(29,51,48,.16)' : '' })
+    mem.forEach((el, i) => {
+      const a = d1.a + (d1.e - d1.a) * (0.05 + i * 0.15)
+      show(el, E.out(prog(t, a - 0.2, a + 0.4)), { x: -140, y: 0 })
+    })
+    const gq = E.elastic(prog(t, d1.a + (d1.e - d1.a) * 0.62, d1.a + (d1.e - d1.a) * 0.62 + 1.0))
+    gate.style.opacity = clamp(prog(t, d1.a + (d1.e - d1.a) * 0.6, d1.a + (d1.e - d1.a) * 0.66))
+    gate.style.transform = `scale(${clamp(gq, 0, 1.3)})`
+  }
+}
+
+// ---------- Live: Kamla's report and the Agent reasoning panel ----------
+builders.live = (root, sc) => {
+  const E1 = (l) => ev('agent', l).c
+  const lap = Device(root, 'laptop', 'agent', 'dash', { x: 60, y: 200, scale: 0.72, label: 'Control room · officer' })
+  const kam = Device(root, 'phone', 'agent', 'phone', { x: 1330, y: 175, scale: 0.78, label: 'Kamla\u2019s phone' })
+  const live = h('div', 'live', '<i></i> LIVE · LLM PLANNER RUNNING', root)
+  css(live, { left: '620px', top: '96px' })
+  const tag = h('div', 'abs chip', 'plan \u2192 tool \u2192 observe \u2192 replan', root)
+  css(tag, { left: '470px', top: '880px', background: 'var(--ink)', color: '#fff', fontSize: '22px' })
+  const ranges = {
+    send: [E1('Kamla sends') - 2.5, E1('Kamla sends') + 2.5],
+    plan: [E1('Kamla sends') + 2.5, E1('Agent reasoning') + 3.5],
+    merge: [E1('daughter writes') - 0.5, E1('planner merged') + 4],
+    panel: [E1('planner merged') + 4, E1('reasoning scrolled') + 1.5],
+  }
+  const beats = ['send', 'plan', 'merge', 'panel']
+  const segs = beats.map((b, i) => { const w = L(sc, i); return [w.a, w.b, ranges[b][0], ranges[b][1]] })
+  const k = (i, f) => L(sc, i).a + (L(sc, i).b - L(sc, i).a) * f
+  const cam = [[0, 1, 800, 450], [k(1, 0.2), 1, 800, 450], [k(1, 0.55), 1.75, 690, 690], [k(2, 0), 1.75, 690, 690],
+    [k(2, 0.3), 1.2, 520, 520], [k(2, 0.7), 1.75, 690, 690], [k(3, 0.2), 1.9, 690, 700], [k(3, 1), 1.9, 690, 700]]
+  return (t) => {
+    const c = segClock(segs, t)
+    lap.set(c, camAt(cam, t)); kam.set(c)
+    const enter = E.out(prog(t, -0.3, 0.8))
+    lap.root.style.transform = `translateX(${(1 - enter) * -900}px)`
+    kam.root.style.transform = `translateY(${(1 - enter) * 900}px)`
+    const onPhone = t < L(sc, 0).b
+    kam.root.style.filter = onPhone ? 'drop-shadow(0 0 30px rgba(212,112,95,.55))' : ''
+    lap.root.style.filter = !onPhone ? 'drop-shadow(0 0 30px rgba(212,112,95,.4))' : ''
+    live.style.opacity = clamp(prog(t, 0, 0.8))
+    show(tag, E.back(prog(t, L(sc, 1).a, L(sc, 1).a + 0.6)), { y: 40 })
+  }
+}
+
+// ---------- The human decides: approve, accept, OTP, safe ----------
+builders.approve = (root, sc) => {
+  const E1 = (l) => ev('agent', l).c
+  const lap = Device(root, 'laptop', 'agent', 'dash', { x: 60, y: 200, scale: 0.66, label: 'Control room · officer' })
+  const kam = Device(root, 'phone', 'agent', 'phone', { x: 1215, y: 175, scale: 0.76, label: 'Kamla\u2019s phone' })
+  const crew = Device(root, 'phone', 'agent', 'crew', { x: 1565, y: 175, scale: 0.76, label: 'Boat 1 crew' })
+  const stamp = h('div', 'stamp', 'SAFE \u2713', root)
+  css(stamp, { left: '420px', top: '460px', color: 'var(--green)', borderColor: 'var(--green)' })
+  const segs = [[-0.5, L(sc, 0).b, E1('route preview') - 0.3, E1('Approve Boat 1') + 1.8],
+    [L(sc, 1).a, L(sc, 1).b, E1('Crew accepts') - 1.0, E1('Family confirmed') + 3.0]]
+  const k = (f) => L(sc, 0).a + (L(sc, 0).b - L(sc, 0).a) * f
+  const cam = [[0, 1.8, 1390, 170], [k(0.6), 1.8, 1330, 200], [k(0.95), 1, 800, 450], [99, 1, 800, 450]]
+  return (t) => {
+    const c = segClock(segs, t)
+    lap.set(c, camAt(cam, t)); kam.set(c); crew.set(c)
+    const enter = E.out(prog(t, -0.3, 0.8))
+    crew.root.style.transform = `translateY(${(1 - enter) * 1100}px)`
+    lap.root.style.filter = t < L(sc, 1).a ? 'drop-shadow(0 0 30px rgba(212,112,95,.45))' : ''
+    crew.root.style.filter = t >= L(sc, 1).a ? 'drop-shadow(0 0 30px rgba(212,112,95,.55))' : ''
+    const conf = E1('Family confirmed') + 0.5
+    const sq = E.elastic(prog(c, conf, conf + 0.9))
+    stamp.style.opacity = t >= L(sc, 1).a ? clamp(prog(c, conf - 0.05, conf + 0.2)) : 0
+    stamp.style.transform = `rotate(-8deg) scale(${lerp(3, 1, clamp(sq))})`
   }
 }
 
@@ -809,7 +927,13 @@ const RUN = ORDER.map((id) => {
   const sc = SC[id]
   const root = h('div', 'scene', null, scenesEl)
   root.style.display = 'none'
-  sc.update = builders[id](root, sc)
+  try {
+    sc.update = builders[id](root, sc)
+  } catch (e) {
+    // A clip not recorded yet: show a placeholder rather than breaking the whole film.
+    h('div', 'center serif', `Recording for “${id}” not ready`, root).style.fontSize = '48px'
+    sc.update = () => {}
+  }
   sc.root = root
   return sc
 })
@@ -860,7 +984,8 @@ function seek(t) {
     sc.root.style.filter = pin < 1 || pout > 0 ? `blur(${(1 - pin) * 14 + pout * 14}px)` : ''
   }
   // Flash on the two big moments.
-  const hits = [LINES.find((l) => l.caption.includes('eight hours')).start + 0.45, SC.title.start + 0.3]
+  const eight = LINES.find((l) => l.caption.includes('eight hours'))
+  const hits = [eight.start + (eight.end - eight.start) * 0.62 + 0.5, SC.title.start + 0.3]
   flash.style.opacity = Math.max(...hits.map((x) => (t > x && t < x + 0.35 ? 0.55 * (1 - prog(t, x, x + 0.35)) : 0)))
   // Chrome.
   const cur = RUN.find((s) => t >= s.start && t < s.end) || RUN[RUN.length - 1]

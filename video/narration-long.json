@@ -1,0 +1,63 @@
+{
+  "narrator": "af_heart",
+  "hindi_voice": "hf_alpha",
+  "lines": [
+    {"scene": "cold", "speed": 0.82, "pause": 0.5, "text": "Ten o'clock at night. Shanti Nagar, Mumbai."},
+    {"scene": "cold", "speed": 0.86, "pause": 0.4, "text": "The river is rising. And every phone in the ward is calling for help."},
+    {"scene": "cold", "voice": "hindi", "speed": 0.9, "pause": 0.7, "text": "पानी घुटनों तक आ गया है, पोते को बुखार है… गली चार, हनुमान मंदिर के पीछे", "caption": "“The water is up to our knees, my grandson has a fever… Lane 4, behind the Hanuman temple.”"},
+
+    {"scene": "problem", "speed": 0.95, "pause": 0.25, "text": "Here is the problem, in two sentences."},
+    {"scene": "problem", "speed": 0.98, "pause": 0.35, "text": "In a flood, a control room gets hundreds of messages at once: the same family three times, rumours, and voice notes in three languages."},
+    {"scene": "problem", "speed": 0.95, "pause": 0.35, "text": "So boats go out in the order calls arrive, and the families in the most danger wait the longest."},
+    {"scene": "problem", "speed": 0.88, "pause": 0.6, "text": "On our test night, that was almost eight hours.", "caption": "On our test night, that was almost eight hours. (463 minutes)"},
+
+    {"scene": "title", "speed": 0.85, "pause": 0.3, "text": "This is Pukaar. Every call heard. Every family reached."},
+    {"scene": "title", "speed": 0.9, "pause": 0.6, "text": "Built by Team Seekers."},
+
+    {"scene": "agents", "speed": 1.0, "pause": 0.3, "text": "Pukaar works like a team of seven small helpers. Each one does one job, and none of them can send a boat on its own."},
+    {"scene": "agents", "speed": 1.02, "pause": 0.25, "agent": "Listen", "text": "Listen reads every message, even a voice note in Hindi, and pulls out what matters: who is there, how deep the water is, and who is sick."},
+    {"scene": "agents", "speed": 1.02, "pause": 0.25, "agent": "Triage", "text": "Triage sees that three messages are about the same house, merges them into one ticket, and ranks it by need, with the reasons written out."},
+    {"scene": "agents", "speed": 1.02, "pause": 0.25, "agent": "Dispatch", "text": "Dispatch picks the nearest boat with a medic, and plans a route around blocked roads."},
+    {"scene": "agents", "speed": 0.92, "pause": 0.35, "agent": "Officer", "text": "Then a person decides. The duty officer. One tap: approve."},
+    {"scene": "agents", "speed": 1.02, "pause": 0.25, "agent": "Loop", "text": "Loop tells the family, in their own language, that help is coming, with a code so the crew knows they reached the right door."},
+    {"scene": "agents", "speed": 1.05, "pause": 0.6, "agent": "Others", "text": "Saathi answers safety questions, Watch reads weather alerts, and Planner keeps every step on record."},
+
+    {"scene": "login", "speed": 1.0, "pause": 0.3, "text": "Let's watch it work, live. The officer signs in to the control room."},
+    {"scene": "rescue", "speed": 0.98, "pause": 0.3, "beat": "send", "text": "Kamla's grandson has a fever. She sends a message from her phone, in Hindi."},
+    {"scene": "rescue", "speed": 1.0, "pause": 0.3, "beat": "merge", "text": "Within seconds it's on the control room screen. Then her daughter writes from Pune, and a neighbour writes too. Pukaar folds all three into one ticket."},
+    {"scene": "rescue", "speed": 1.0, "pause": 0.3, "beat": "detail", "text": "Priority one, with the reasons spelled out, and the raw messages one tap away."},
+    {"scene": "rescue", "speed": 0.95, "pause": 0.35, "beat": "approve", "text": "Boat 1 has a medic and is eleven minutes away. The officer checks the route, and approves."},
+    {"scene": "rescue", "speed": 1.0, "pause": 0.3, "beat": "accept", "text": "The crew accepts on their phone, and at that same moment, Kamla's phone lights up: the boat is coming, and here is your code."},
+    {"scene": "rescue", "speed": 0.95, "pause": 0.6, "beat": "safe", "text": "At the door, the family reads out the code. Confirmed. Safe."},
+
+    {"scene": "signals", "speed": 1.05, "pause": 0.25, "beat": "rumour", "text": "A forwarded message says a dam has burst? It goes to Verify, not to a boat."},
+    {"scene": "signals", "speed": 1.05, "pause": 0.25, "beat": "gas", "text": "Someone smells gas? Saathi replies with the emergency number first, one nine zero six, and safe steps.", "caption": "Someone smells gas? Saathi replies with the emergency number first, 1906, and safe steps."},
+    {"scene": "signals", "speed": 1.05, "pause": 0.25, "beat": "road", "text": "A crew reports a flooded lane, and every boat routed through it is sent another way."},
+    {"scene": "signals", "speed": 1.05, "pause": 0.5, "beat": "popup", "text": "The officer can open the family chat or the lookup right inside the control room."},
+    {"scene": "family", "speed": 0.98, "pause": 0.6, "text": "And a worried relative can check on a family, and see only one thing: rescued, and safe at Camp 3. Never an address. Never a phone number."},
+
+    {"scene": "replay", "speed": 1.02, "pause": 0.3, "text": "Here's a whole flood night, playing at ten times speed. Three hundred and eleven messages."},
+    {"scene": "replay", "speed": 1.02, "pause": 0.6, "text": "The queue ranks itself, the map fills in, and the officer only sees what needs a human decision."},
+
+    {"scene": "safety", "speed": 0.95, "pause": 0.3, "text": "Safety is built in, not bolted on."},
+    {"scene": "safety", "speed": 1.0, "pause": 0.6, "text": "Agents can raise a priority, but never lower it. No boat and no public bulletin goes out without approval. Every action is logged with a name. And one switch stops all automation, instantly."},
+
+    {"scene": "tech", "speed": 1.05, "pause": 0.25, "text": "Under the hood, it's simple on purpose."},
+    {"scene": "tech", "speed": 1.06, "pause": 0.25, "beat": "tree", "text": "Every agent lives in its own file. Agents never touch the world directly; they call small tools, and the tools enforce the rules."},
+    {"scene": "tech", "speed": 1.06, "pause": 0.25, "beat": "stack", "text": "A Python FastAPI backend with SQLite, and a live event stream to every screen. A React, Tailwind and Leaflet frontend: one app for the control room, the family's phone, and the boat crew."},
+    {"scene": "tech", "speed": 1.04, "pause": 0.25, "beat": "local", "text": "It runs on a single laptop. With no AI model at all, or a local model through Ollama, so messages never leave the ward."},
+    {"scene": "tech", "speed": 1.0, "pause": 0.25, "beat": "code", "text": "Here is the rule that matters most, in real code. An agent asks for approval, and the system refuses to act until a person says yes."},
+    {"scene": "tech", "speed": 1.04, "pause": 0.6, "beat": "tests", "text": "Every safety rule has a test. All sixty seven pass."},
+
+    {"scene": "results", "speed": 0.98, "pause": 0.25, "text": "We replayed that full flood night against the usual way: first come, first served."},
+    {"scene": "results", "speed": 0.92, "pause": 0.3, "text": "Time to send a boat to the most urgent families fell from four hundred and sixty three minutes, to twenty."},
+    {"scene": "results", "speed": 0.98, "pause": 0.6, "text": "Wasted trips fell from one hundred and thirty one to fifteen. And every one of the fifteen rumours was caught."},
+
+    {"scene": "beyond", "speed": 0.98, "pause": 0.25, "text": "And floods are just the start."},
+    {"scene": "beyond", "speed": 1.02, "pause": 0.25, "text": "Swap the map and the playbooks, and the same agents can handle other disasters."},
+    {"scene": "beyond", "speed": 1.04, "pause": 0.6, "text": "A cyclone: Watch moves boats before landfall. An earthquake: Triage ranks people trapped under rubble. A heatwave: Saathi sends people to the nearest cooling centre. A fire: Dispatch routes around the smoke."},
+
+    {"scene": "outro", "speed": 0.85, "pause": 0.35, "text": "Pukaar means, a call for help. We make sure every one is answered."},
+    {"scene": "outro", "speed": 0.85, "pause": 1.5, "text": "Team Seekers."}
+  ]
+}

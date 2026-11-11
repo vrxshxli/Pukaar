@@ -49,6 +49,9 @@ def total_ram_gb():
 
 def chat_model():
     """qwen2.5:7b with 16 GB of RAM or more, otherwise qwen2.5:3b."""
+    picked = db.get_setting("ollama_model", "") if db._conn is not None else ""
+    if picked:
+        return picked
     if os.environ.get("OLLAMA_MODEL"):
         return os.environ["OLLAMA_MODEL"]
     return "qwen2.5:7b" if total_ram_gb() >= 16 else "qwen2.5:3b"

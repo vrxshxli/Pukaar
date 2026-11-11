@@ -477,7 +477,9 @@ def public_status(ticket):
 
 @tool("escalate_danger",
       "Raise a ticket's priority because of a danger (gas, fire, electrical, unconscious person) and note it for the rescue team.",
-      {"type": "object", "properties": {"ticket_id": {"type": "string"}, "danger": {"type": "string"}},
+      {"type": "object", "properties": {"ticket_id": {"type": "string"},
+                                        "danger": {"type": "string", "enum": ["gas", "fire", "electrical", "unconscious",
+                                                                              "breathing", "needs medic"]}},
        "required": ["ticket_id", "danger"]})
 def escalate_danger(ticket_id, danger):
     t = get(ticket_id)

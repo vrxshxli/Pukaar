@@ -22,7 +22,8 @@ echo "Building the frontend..."
 
 echo ""
 echo "Pukaar is starting on http://localhost:$PORT (LLM_MODE=${LLM_MODE:-rules})"
-echo "Officer dashboard:  http://localhost:$PORT/"
+echo "Landing page:       http://localhost:$PORT/"
+echo "Officer dashboard:  http://localhost:$PORT/control"
 echo "Citizen chat:       http://localhost:$PORT/chat"
 echo ""
 cd backend

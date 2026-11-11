@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Pukaar film</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Serif:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&family=Noto+Sans+Mono:wght@400;600&display=block" rel="stylesheet" />
+  <link rel="stylesheet" href="compose.css" />
+</head>
+<body>
+  <div id="stage">
+    <div id="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grid"></div></div>
+    <canvas id="fx" width="1920" height="1080"></canvas>
+    <div id="scenes"></div>
+    <div id="chrome">
+      <div class="brand"><span class="logo-sm"></span><b>Pukaar</b><span>· Team Seekers</span></div>
+      <div class="chapter"></div>
+      <div class="progress"><i></i></div>
+    </div>
+    <div id="cap"><div class="cap-in"></div></div>
+    <div id="flash"></div>
+  </div>
+  <script src="../build/data.js"></script>
+  <script src="compose.js"></script>
+</body>
+</html>

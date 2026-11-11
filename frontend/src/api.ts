@@ -135,7 +135,40 @@ export interface State {
   metrics: { reports_in: number; tickets: number; open_p1: number; waiting_approvals: number; wasted_trips: number; safe: number; verify: number }
 }
 
-export class ApiError extends Error {}
+export class ApiError extends Error {
+  status: number
+  constructor(message: string, status = 0) {
+    super(message)
+    this.status = status
+  }
+}
+
+// Officer and volunteer pages call this when the server says nobody is signed in.
+export function goToLogin() {
+  if (window.location.pathname === '/login') return
+  const next = window.location.pathname + window.location.search
+  window.location.assign(`/login?next=${encodeURIComponent(next)}`)
+}
+
+export interface User {
+  username: string
+  name: string
+  role: 'officer' | 'volunteer'
+  team_id: string | null
+}
+
+// Who is signed in. Sends the browser to the sign-in page if nobody is.
+export function useMe() {
+  const [user, setUser] = useState<User | null>(null)
+  useEffect(() => {
+    api<{ user: User }>('/api/auth/me').then((r) => setUser(r.user)).catch(() => { /* api() already redirected */ })
+  }, [])
+  return user
+}
+
+export async function logout() {
+  try { await api('/api/auth/logout', {}) } finally { window.location.assign('/login') }
+}
 
 export async function api<T = unknown>(path: string, body?: unknown): Promise<T> {
   let res: Response
@@ -154,7 +187,8 @@ export async function api<T = unknown>(path: string, body?: unknown): Promise<T>
       const data = await res.json()
       if (data.detail) detail = typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail)
     } catch { /* keep the generic message */ }
-    throw new ApiError(detail)
+    if (res.status === 401 && !path.startsWith('/api/auth/login')) goToLogin()
+    throw new ApiError(detail, res.status)
   }
   return res.json() as Promise<T>
 }

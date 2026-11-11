@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Icon } from './components/ui'
 
 type Theme = 'light' | 'dark' | 'system'
 
@@ -15,13 +16,13 @@ function apply(theme: Theme) {
 function stored(): Theme {
   try {
     const t = localStorage.getItem('pukaar-theme')
-    return t === 'light' || t === 'dark' ? t : 'system'
+    return t === 'light' || t === 'dark' ? t : 'light'
   } catch {
-    return 'system'
+    return 'light'
   }
 }
 
-// Follows the system setting until the person picks light or dark.
+// Starts light (calm and readable in a lit control room) until the person picks dark.
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(stored)
   useEffect(() => {
@@ -45,11 +46,13 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
   return (
     <button onClick={toggle} aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Light mode' : 'Dark mode'}
-      className={`rounded px-2 py-1 text-sm ${className}`}>
-      {isDark ? '☀' : '☾'}
+      className={`inline-flex items-center justify-center rounded-xl p-1.5 text-sm ${className}`}>
+      <Icon name={isDark ? 'sun' : 'moon'} size={18} />
     </button>
   )
 }
 
 // Set the theme before React draws, so there is no flash of the wrong colours.
 apply(stored())
+// Keep popups and other tabs on the same theme when it is switched.
+window.addEventListener('storage', (e) => { if (e.key === 'pukaar-theme') apply(stored()) })

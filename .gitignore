@@ -7,3 +7,11 @@ backend/pukaar.db-*
 frontend/node_modules/
 frontend/dist/
 .env
+
+# Demo film: tools, models and generated media
+video/.venv/
+video/models/
+video/recordings/
+video/build/
+video/out/
+tunnel.log

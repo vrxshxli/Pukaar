@@ -23,7 +23,7 @@ function describe(r: Result) {
 
 const TONES: Record<string, string> = {
   safe: 'border-safe bg-safe/10',
-  teal: 'border-teal bg-teal/10',
+  teal: 'border-accent bg-accent/10',
   marigold: 'border-marigold bg-marigold/10',
 }
 
@@ -56,7 +56,7 @@ export default function Family() {
   return (
     <div className="mx-auto max-w-md p-4">
       <div className="mb-1 flex items-center gap-2">
-        <Logo /><h1 className="text-xl font-extrabold">Is my family safe?</h1>
+        <Logo /><h1 className="text-xl font-semibold">Is my family safe?</h1>
         <ThemeToggle className="ml-auto bg-soft text-fg" />
       </div>
       <p className="mb-4 text-sm text-muted">

@@ -2,42 +2,161 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+  One design system for every view: misty sage paper, deep teal ink, thin rules,
+  serif headings and numbers (Noto Serif) over a clean sans (Noto Sans), each with
+  its Devanagari partner so Hindi and Marathi match.
+  Colour still means something: brick P1, ochre P2, slate P3, grey Verify, green Safe.
+  Teal ink is for buttons and selection; coral only marks flood water on the landing map.
+*/
 :root {
-  --surface: #f2f6f6;
-  --card: #ffffff;
-  --text: #0e2a2b;
-  --muted: #587072;
-  --line: #d6e2e2;
-  --soft: #e7f1f1;
+  --surface: #e5ebe8;
+  --panel: #f1f4f2;
+  --card: #fbfcfb;
+  --text: #1d3330;
+  --muted: #677c77;
+  --line: #d2dcd7;
+  --soft: #e9eeeb;
+  --glass: #fbfcfb;
+  --accent: #2f5d58;
+  --accent-fg: #ffffff;
+  --accent-soft: rgba(47, 93, 88, 0.1);
+  --coral: #d4705f;
+  --shadow: 0 1px 2px rgba(29, 51, 48, 0.05), 0 8px 22px rgba(29, 51, 48, 0.07);
 }
 
 .dark {
-  --surface: #07191a;
-  --card: #0e2a2b;
-  --text: #e4efef;
-  --muted: #92adae;
-  --line: #1f4547;
-  --soft: #133638;
+  --surface: #121a19;
+  --panel: #162120;
+  --card: #1b2725;
+  --text: #e0e8e5;
+  --muted: #93a6a0;
+  --line: #2b3a37;
+  --soft: #213230;
+  --glass: #1b2725;
+  --accent: #8cc7bd;
+  --accent-fg: #0d1f1c;
+  --accent-soft: rgba(140, 199, 189, 0.13);
+  --coral: #e08877;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 22px rgba(0, 0, 0, 0.25);
 }
 
 @theme inline {
-  --color-teal: #0f7173;
-  --color-marigold: #e0a21c;
-  --color-urgent: #b3284f;
-  --color-safe: #5a8a23;
-  --color-ink: #0e2a2b;
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-coral: var(--coral);
+  --color-marigold: #c68a2e;
+  --color-urgent: #c8443c;
+  --color-safe: #4f8a4c;
+  --color-ink: #1f3d39;
   --color-surface: var(--surface);
+  --color-panel: var(--panel);
   --color-card: var(--card);
   --color-fg: var(--text);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-soft: var(--soft);
-  --font-sans: system-ui, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", "Nirmala UI", sans-serif;
+  --font-sans: "Noto Sans", "Noto Sans Devanagari", system-ui, "Segoe UI", "Nirmala UI", sans-serif;
+  --font-serif: "Noto Serif", "Noto Serif Devanagari", Georgia, "Nirmala UI", serif;
+  --font-mono: "Noto Sans", "Noto Sans Devanagari", system-ui, sans-serif;
+}
+
+/* Headings everywhere are serif; everything else is sans. */
+@layer base {
+  h1, h2 { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.005em; }
+}
+
+/* Panels that float over the map: solid, a thin border and a soft shadow. */
+@utility glass {
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
 }
 
 html, body, #root { height: 100%; }
-body { background: var(--surface); color: var(--text); margin: 0; }
+body { margin: 0; color: var(--text); background: var(--surface); }
 
+* { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+
+/* Map. */
 .leaflet-container { background: var(--soft); font-family: inherit; }
-.dark .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
+.basemap-streets { filter: sepia(0.3) hue-rotate(95deg) saturate(0.6) contrast(0.95); }
+.dark .basemap-streets, .dark .basemap-terrain {
+  filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.88) saturate(0.45);
+}
+.basemap-satellite { filter: saturate(0.8) brightness(0.92); }
 .team-icon { background: transparent; border: none; }
+
+.leaflet-tooltip {
+  background: var(--glass);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  font: 600 11.5px/1.35 var(--font-sans);
+  padding: 4px 8px;
+}
+.leaflet-tooltip-top::before, .leaflet-tooltip-bottom::before,
+.leaflet-tooltip-left::before, .leaflet-tooltip-right::before { display: none; }
+.leaflet-tooltip.pin-label { padding: 2px 7px; }
+
+.leaflet-control-attribution {
+  background: var(--glass) !important;
+  color: var(--muted) !important;
+  border-radius: 6px 0 0 0;
+  font-size: 9px;
+}
+.leaflet-control-attribution a { color: var(--muted) !important; }
+
+/* Landing page motion: gentle, and off for anyone who asks for less motion. */
+@keyframes pin-pulse { 0% { transform: scale(1); opacity: .55; } 100% { transform: scale(2.6); opacity: 0; } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes dash-move { to { stroke-dashoffset: -28; } }
+.pin-pulse { animation: pin-pulse 2.2s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+.rise-in { animation: rise-in .6s ease-out both; }
+.dash-move { animation: dash-move 1.4s linear infinite; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  .pin-pulse, .rise-in, .dash-move { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Landing page: a full-bleed aerial view with a HUD, in the sage, teal-ink and coral palette. */
+.landing {
+  --hud: #2f5d58;
+  --hud-line: rgba(31, 61, 57, 0.18);
+  --ink: #1f3d39;
+  --coral: #d4705f;
+  background: #e3eae6;
+  color: var(--ink);
+}
+.landing .leaflet-container { background: #dfe8e3; }
+/* Satellite washed to a misty sage print. */
+.landing-sat { filter: grayscale(0.55) sepia(0.2) hue-rotate(70deg) saturate(0.7) brightness(1.22) contrast(0.82); }
+.landing .leaflet-control-attribution { background: rgba(241, 244, 242, 0.8) !important; color: #677c77 !important; }
+.landing .leaflet-control-attribution a { color: #677c77 !important; }
+.hud-panel {
+  position: relative;
+  background: rgba(246, 249, 247, 0.84);
+  border: 1px solid var(--hud-line);
+  box-shadow: 0 10px 30px rgba(29, 51, 48, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+/* Corner ticks, like a survey drawing. */
+.hud-panel::before, .hud-panel::after {
+  content: ""; position: absolute; width: 10px; height: 10px; border-color: var(--coral); opacity: 0.9; pointer-events: none;
+}
+.hud-panel::before { top: -1px; left: -1px; border-top: 1.5px solid; border-left: 1.5px solid; }
+.hud-panel::after { bottom: -1px; right: -1px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+.hud-grid {
+  background-image:
+    linear-gradient(rgba(31, 61, 57, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31, 61, 57, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+@keyframes scan { from { transform: translateY(-100%); } to { transform: translateY(100vh); } }
+.hud-scan { animation: scan 9s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .hud-scan { animation: none; display: none; } }

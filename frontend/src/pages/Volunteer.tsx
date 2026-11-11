@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
-import { api, clock, useStream, type Route, type Team } from '../api'
+import { api, clock, logout, useMe, useStream, type Route, type Team } from '../api'
 import WardMap from '../components/WardMap'
-import { Button, Chip, Empty, ErrorNote, Logo, PriorityBadge, Spinner } from '../components/ui'
+import { Button, Chip, Empty, ErrorNote, Icon, Logo, PriorityBadge, Spinner } from '../components/ui'
 import { ThemeToggle } from '../theme'
 
 interface Task {
@@ -54,7 +54,10 @@ function useTeam() {
 }
 
 export default function Volunteer() {
-  const [teamId, setTeamId] = useTeam()
+  const me = useMe()
+  const [pickedTeam, setTeamId] = useTeam()
+  // A volunteer account is tied to one team; officers can open any team's desk.
+  const teamId = !me ? '' : me.role === 'volunteer' ? me.team_id ?? '' : pickedTeam
   const [view, setView] = useState<View | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
@@ -102,15 +105,19 @@ export default function Volunteer() {
     }
   }
 
+  if (!me) {
+    return <div className="flex h-full items-center justify-center"><Spinner label="Checking your sign-in" /></div>
+  }
+
   if (!teamId) {
     return (
       <div className="mx-auto max-w-md p-4">
-        <div className="mb-4 flex items-center gap-2"><Logo /><h1 className="text-lg font-extrabold">Pukaar volunteer desk</h1></div>
+        <div className="mb-4 flex items-center gap-2"><Logo /><h1 className="text-lg font-semibold">Pukaar volunteer desk</h1></div>
         <p className="mb-2 text-sm">Pick your team:</p>
         <div className="grid grid-cols-2 gap-2">
           {TEAMS.map((t) => (
             <button key={t.id} onClick={() => setTeamId(t.id)}
-              className="rounded-xl border border-line bg-card p-4 text-left font-bold hover:border-teal">{t.label}</button>
+              className="rounded-xl border border-line bg-card p-4 text-left font-bold hover:border-accent">{t.label}</button>
           ))}
         </div>
       </div>
@@ -124,11 +131,15 @@ export default function Volunteer() {
       <div className="flex items-center gap-2 bg-ink px-3 py-2 text-white">
         <Logo size={30} />
         <div className="flex-1 leading-tight">
-          <b className="block text-sm">Volunteer desk · {team?.name ?? teamId}</b>
+          <b className="block font-serif text-sm font-semibold">Volunteer desk · {team?.name ?? teamId}</b>
           <span className="text-[11px] opacity-75">{team ? STATUS[team.status] ?? team.status : 'Loading'}</span>
         </div>
-        <button onClick={() => setTeamId('')} className="rounded bg-white/15 px-2 py-1 text-[11px]">Switch team</button>
+        {me.role === 'officer' && (
+          <button onClick={() => setTeamId('')} className="rounded bg-white/15 px-2 py-1 text-[11px]">Switch team</button>
+        )}
         <ThemeToggle className="bg-white/10 text-white" />
+        <button onClick={logout} aria-label="Sign out" title={`Signed in as ${me.name}. Sign out`}
+          className="flex h-7 w-7 items-center justify-center rounded bg-white/10"><Icon name="logout" size={15} /></button>
       </div>
       <div className="flex-1 space-y-3 p-3">
         {error && <ErrorNote>{error}</ErrorNote>}
@@ -143,7 +154,7 @@ export default function Volunteer() {
               <PriorityBadge ticket={{ priority: task.priority, status: task.status, kind: 'rescue' }} />
               <span className="text-xs font-semibold text-muted">{task.id}</span>
             </div>
-            <h2 className="mt-1 text-base font-extrabold">{task.title}</h2>
+            <h2 className="mt-1 text-base font-semibold">{task.title}</h2>
             <p className="text-sm text-muted">{task.area}{task.people ? ` · ${task.people} people` : ''}{task.water_level ? ` · water ${task.water_level}` : ''}</p>
             <div className="mt-1.5 flex flex-wrap gap-1">{task.reasons.map((r) => <Chip key={r}>{r}</Chip>)}</div>
             {task.danger.length > 0 && <p className="mt-1.5 rounded bg-urgent px-2 py-1 text-sm font-bold text-white">Danger: {task.danger.join(', ')}</p>}
@@ -181,7 +192,7 @@ export default function Volunteer() {
           </div>
         )}
         {mode === 'otp' && (
-          <form className="flex gap-2 rounded-xl border border-teal/40 bg-card p-3" onSubmit={(e) => { e.preventDefault(); act('otp', { otp }) }}>
+          <form className="flex gap-2 rounded-xl border border-accent/40 bg-card p-3" onSubmit={(e) => { e.preventDefault(); act('otp', { otp }) }}>
             <input value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 4))} inputMode="numeric"
               placeholder="4-digit OTP" aria-label="Family OTP" autoFocus
               className="flex-1 rounded-lg border border-line bg-surface px-3 py-2 text-lg tracking-widest" />

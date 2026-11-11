@@ -2,10 +2,10 @@
 
 **Before you start (2 minutes, off stage)**
 
-1. Run `./start.sh` (or `.\start.ps1` on Windows) and open `http://localhost:8000` on the laptop.
+1. Set your own passwords (see *Signing in* in the README), run `./start.sh` (or `.\start.ps1` on Windows), open `http://localhost:8000/control` on the laptop and sign in as `rao`. (`http://localhost:8000` is the public landing page.)
 2. In a second terminal run `cloudflared tunnel --url http://localhost:8000` and note the `https://….trycloudflare.com` address. Open that address once, so the dashboard's QR code shows the public link.
-3. In a second browser window open `/volunteer` and pick **Boat 1 (medic)**. In a third, open `/chat` and pick **Kamla Devi**.
-4. In the dashboard header, set the replay speed to **10×** but don't start it. Officer name: your own.
+3. In a second browser window (a private window, so it has its own sign-in) open `/volunteer` and sign in as `boat1`. In a third, open `/chat` and pick **Kamla Devi**.
+4. In the toolbar along the top of the map, set the replay speed to **10×** but don't start it.
 
 The replay plays the flood night from 9:30 PM. At 10× a game minute takes 6 seconds. Pause whenever you need to talk.
 
@@ -19,7 +19,7 @@ Press **▶ Start**.
 
 **0:20 to 0:45. A red alert arrives (game time 9:35 PM)**
 
-- The header turns to **Red alert**. In the activity feed, Watch reads the CAP alert, checks Open-Meteo, marks two watch zones on the map and proposes pre-positioning Boats 2 and 3. Loop drafts Marathi and Hindi bulletins.
+- The incident card in the left sidebar turns to **Red alert**. In the activity feed, Watch reads the CAP alert, checks Open-Meteo, marks two watch zones on the map and proposes pre-positioning Boats 2 and 3. Loop drafts Marathi and Hindi bulletins.
 - Approve **Pre-position Boat 2**. Point out: *"Nothing moves without this tap. That's enforced in the backend, and there are tests for it."*
 
 **0:45 to 1:15. Three messages, one family (9:38 to 9:44 PM)**
@@ -36,7 +36,7 @@ Press **▶ Start**.
 
 **1:35 to 2:00. A judge messages live**
 
-- Show the QR code in the header. A judge scans it, picks "I'm a new person" and sends anything: a rescue request in their own words, or "Where is the nearest relief camp?"
+- Show the QR code in the map toolbar. A judge scans it, picks "I'm a new person" and sends anything: a rescue request in their own words, or "Where is the nearest relief camp?"
 - Their message appears in the activity feed within a second, and they get a reply in their language.
 
 **2:00 to 2:20. Saathi on a gas leak**
@@ -60,6 +60,6 @@ Press **▶ Start**.
 
 **If something goes wrong**
 
-- Ollama is slow or stopped: the header shows *Ollama unavailable · using rules* and everything keeps working.
-- Something looks stuck: **Reset** in the header restarts the night. Automation off (the red switch) shows that agents keep logging while sending nothing.
+- Ollama is slow or stopped: the LLM chip in the map toolbar shows *unavailable · rules* and everything keeps working.
+- Something looks stuck: **Reset** (the circular arrow in the map toolbar) restarts the night. Automation off (the red switch) shows that agents keep logging while sending nothing.
 - No internet: the map tiles go blank but everything else works. Rainfall falls back to the scenario's figures.

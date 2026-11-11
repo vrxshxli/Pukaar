@@ -25,7 +25,8 @@ if ($LASTEXITCODE -ne 0) { throw "Frontend build failed" }
 $env:LLM_MODE = $Mode
 Write-Host ""
 Write-Host "Pukaar is starting on http://localhost:$Port (LLM_MODE=$Mode)"
-Write-Host "Officer dashboard:  http://localhost:$Port/"
+Write-Host "Landing page:       http://localhost:$Port/"
+Write-Host "Officer dashboard:  http://localhost:$Port/control"
 Write-Host "Citizen chat:       http://localhost:$Port/chat"
 Write-Host ""
 Set-Location backend

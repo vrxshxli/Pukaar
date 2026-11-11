@@ -8,12 +8,13 @@ import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import db, events, llm, orchestrator, scenario
+from . import auth, db, events, llm, orchestrator, scenario
+from .auth import require_officer
 from .tools import approvals, audit, geo, messaging, teams, tickets
 from .tools.approvals import ApprovalRequired
 
@@ -35,6 +36,10 @@ def _ticker():
 @asynccontextmanager
 async def lifespan(app):
     db.connect()
+    auth.ensure_accounts()
+    if auth.using_default_passwords():
+        log.warning("Using the demo passwords. Set PUKAAR_OFFICER_PASSWORD and PUKAAR_VOLUNTEER_PASSWORD "
+                    "before sharing a public link.")
     if os.environ.get("LLM_MODE"):
         db.set_setting("llm_mode", os.environ["LLM_MODE"])
     events.bind_loop(asyncio.get_running_loop())
@@ -90,8 +95,36 @@ def health():
     return {"ok": True}
 
 
+class LoginIn(BaseModel):
+    username: str
+    password: str
+
+
+@app.post("/api/auth/login")
+def login(body: LoginIn, request: Request, response: Response):
+    token, user = auth.login(body.username, body.password)
+    # Behind the Cloudflare tunnel the browser talks HTTPS even though we see HTTP.
+    https = request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https"
+    response.set_cookie(auth.COOKIE, token, max_age=auth.SESSION_SECONDS, httponly=True, samesite="lax", secure=https)
+    audit.log("Officer" if user["role"] == "officer" else "Loop", f"{user['display_name']} signed in", kind="human",
+              approved_by=user["display_name"])
+    return {"user": auth.public_user(user)}
+
+
+@app.post("/api/auth/logout")
+def logout(request: Request, response: Response):
+    auth.logout(request.cookies.get(auth.COOKIE))
+    response.delete_cookie(auth.COOKIE)
+    return {"ok": True}
+
+
+@app.get("/api/auth/me")
+def me(request: Request):
+    return {"user": auth.public_user(auth.require_user(request))}
+
+
 @app.get("/api/state")
-def state():
+def state(officer=Depends(require_officer)):
     """Everything the dashboard needs in one call."""
     incident = db.one("SELECT * FROM incidents ORDER BY id LIMIT 1")
     all_tickets = [t for t in tickets.all_tickets() if t["kind"] != "duplicate"]
@@ -113,6 +146,34 @@ def state():
         "watch_zones": db.loads(db.get_setting("watch_zones"), []),
         "bulletins": db.query("SELECT * FROM bulletins ORDER BY id DESC LIMIT 10"),
         "metrics": metrics(all_tickets),
+    }
+
+
+@app.get("/api/public/overview")
+def public_overview():
+    """What the public landing page may show: the ward map and night totals.
+    No family, ticket, message, phone number or boat position."""
+    w = scenario.ward()
+    incident = db.one("SELECT level, status FROM incidents ORDER BY id LIMIT 1") or {"level": "none", "status": ""}
+    all_tickets = [t for t in tickets.all_tickets() if t["kind"] != "duplicate"]
+    camps = db.query("SELECT name, lat, lng, capacity, occupancy FROM camps")
+    road_names = sorted({e["name"] for e in geo.edges()})
+    return {
+        "ward": {k: w[k] for k in ("name", "city", "incident_name", "center", "river")},
+        "incident": {"level": incident["level"], "status": incident["status"]},
+        "clock": db.now_iso(),
+        "roads": [{"road": r, "segments": geo.road_geometry(r)} for r in road_names],
+        "blocked_roads": [{"road": r, "segments": geo.road_geometry(r)} for r in geo.blocked_roads()],
+        "watch_zones": db.loads(db.get_setting("watch_zones"), []),
+        "camps": camps,
+        "landmarks": [{"name": lm["name"], "lat": lm["lat"], "lng": lm["lng"]} for lm in scenario.landmarks()],
+        "totals": {
+            "reports_in": db.one("SELECT COUNT(*) n FROM messages WHERE direction = 'in'")["n"],
+            "families_safe": metrics(all_tickets)["safe"],
+            "boats_out": sum(1 for t in teams.all_teams() if t["status"] != "free"),
+            "boats": len(teams.all_teams()),
+            "people_in_camps": sum(c["occupancy"] for c in camps),
+        },
     }
 
 
@@ -138,7 +199,7 @@ def replay_status():
 
 
 @app.get("/api/tickets/{ticket_id}")
-def ticket_detail(ticket_id: str):
+def ticket_detail(ticket_id: str, officer=Depends(require_officer)):
     t = tickets.get(ticket_id)
     if not t:
         raise HTTPException(404, "No such ticket")
@@ -156,7 +217,7 @@ def audit_for(ticket_id):
 
 
 @app.post("/api/tickets/{ticket_id}/close")
-def close_ticket(ticket_id: str, body: CloseIn):
+def close_ticket(ticket_id: str, body: CloseIn, officer=Depends(require_officer)):
     """Closing without the family's reply: the officer's tap is the approval."""
     if not tickets.get(ticket_id):
         raise HTTPException(404, "No such ticket")
@@ -165,7 +226,7 @@ def close_ticket(ticket_id: str, body: CloseIn):
                                              ticket_id=ticket_id, agent="Officer")
         if approval is None:
             raise HTTPException(409, "Automation is off, so no approval could be created")
-    return orchestrator.handle_approval(approval["id"], "approve", body.officer)
+    return orchestrator.handle_approval(approval["id"], "approve", officer["display_name"])
 
 
 class DowngradeIn(BaseModel):
@@ -174,7 +235,7 @@ class DowngradeIn(BaseModel):
 
 
 @app.post("/api/tickets/{ticket_id}/downgrade")
-def downgrade_ticket(ticket_id: str, body: DowngradeIn):
+def downgrade_ticket(ticket_id: str, body: DowngradeIn, officer=Depends(require_officer)):
     """Agents can never lower a P1. The officer can, and the tap is recorded as an approval."""
     t = tickets.get(ticket_id)
     if not t:
@@ -186,16 +247,16 @@ def downgrade_ticket(ticket_id: str, body: DowngradeIn):
                                              ticket_id=ticket_id, payload={"priority": body.priority}, agent="Officer")
         if approval is None:
             raise HTTPException(409, "Automation is off, so no approval could be created")
-    return orchestrator.handle_approval(approval["id"], "approve", body.officer)
+    return orchestrator.handle_approval(approval["id"], "approve", officer["display_name"])
 
 
 @app.get("/api/activity")
-def activity(limit: int = 80):
+def activity(limit: int = 80, officer=Depends(require_officer)):
     return db.query("SELECT * FROM audit_log WHERE kind != 'tool' ORDER BY id DESC LIMIT ?", (limit,))
 
 
 @app.get("/api/audit")
-def audit_log(limit: int = 300):
+def audit_log(limit: int = 300, officer=Depends(require_officer)):
     return audit.recent(limit)
 
 
@@ -213,17 +274,18 @@ def chat_thread(phone: str):
 
 
 @app.post("/api/approvals/{approval_id}")
-def decide(approval_id: int, body: DecisionIn):
+def decide(approval_id: int, body: DecisionIn, officer=Depends(require_officer)):
     if body.decision not in ("approve", "reject"):
         raise HTTPException(400, "Decision must be approve or reject")
     try:
-        return orchestrator.handle_approval(approval_id, body.decision, body.officer, team_id=body.team_id)
+        return orchestrator.handle_approval(approval_id, body.decision, officer["display_name"], team_id=body.team_id)
     except ValueError as e:
         raise HTTPException(409, str(e))
 
 
 @app.get("/api/volunteer/{team_id}")
-def volunteer_view(team_id: str):
+def volunteer_view(team_id: str, request: Request):
+    auth.require_team(request, team_id)
     team = teams.get(team_id)
     if not team:
         raise HTTPException(404, "No such team")
@@ -239,7 +301,8 @@ def volunteer_view(team_id: str):
 
 
 @app.post("/api/volunteer/{team_id}")
-def volunteer_action(team_id: str, body: VolunteerIn):
+def volunteer_action(team_id: str, body: VolunteerIn, request: Request):
+    auth.require_team(request, team_id)
     try:
         return orchestrator.handle_volunteer(team_id, body.action, road=body.road, otp=body.otp)
     except (ValueError, KeyError) as e:
@@ -275,15 +338,16 @@ def family_lookup(ticket: str | None = None, name: str | None = None, area: str 
 
 
 @app.post("/api/settings")
-def update_settings(body: SettingsIn):
+def update_settings(body: SettingsIn, officer=Depends(require_officer)):
     if body.automation is not None:
         db.set_setting("automation", "on" if body.automation else "off")
-        audit.log("Officer", f"Automation switched {'on' if body.automation else 'off'}", kind="human")
+        audit.log("Officer", f"Automation switched {'on' if body.automation else 'off'}", kind="human",
+                  approved_by=officer["display_name"])
     if body.llm_mode in ("rules", "ollama"):
         db.set_setting("llm_mode", body.llm_mode)
         if body.llm_mode == "ollama":
             llm.warm_up()
-        audit.log("Officer", f"LLM mode set to {body.llm_mode}", kind="human")
+        audit.log("Officer", f"LLM mode set to {body.llm_mode}", kind="human", approved_by=officer["display_name"])
     if body.auto_field is not None:
         db.set_setting("auto_field", "on" if body.auto_field else "off")
     events.publish("changed", {"what": "settings"})
@@ -296,7 +360,7 @@ class ReplayIn(BaseModel):
 
 
 @app.post("/api/replay")
-def replay_control(body: ReplayIn):
+def replay_control(body: ReplayIn, officer=Depends(require_officer)):
     from . import replay
     speed = body.speed if body.speed in (1, 5, 10, 30) else None
     if body.action == "start":
@@ -316,7 +380,7 @@ def replay_control(body: ReplayIn):
 
 
 @app.post("/api/reset")
-def reset():
+def reset(officer=Depends(require_officer)):
     from . import replay
     replay.stop()
     orchestrator.reset()
@@ -325,6 +389,10 @@ def reset():
 
 @app.get("/api/stream")
 async def stream(request: Request, phone: str | None = None, team: str | None = None):
+    if team:
+        auth.require_team(request, team)
+    elif not phone:
+        auth.require_officer(request)
     reporter_id = None
     if phone:
         r = db.one("SELECT id FROM reporters WHERE phone = ?", (phone,))
@@ -339,7 +407,8 @@ async def stream(request: Request, phone: str | None = None, team: str | None = 
             return phone is not None and data.get("reporter_id") == reporter_id
         if kind == "team_message":
             return team is not None and data.get("team_id") == team
-        return phone is None or kind == "changed"
+        # Only the officer's full stream carries agent activity; citizens and teams just hear "something changed".
+        return (phone is None and team is None) or kind == "changed"
 
     queue = events.subscribe(accept)
 

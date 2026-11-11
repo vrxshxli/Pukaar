@@ -78,20 +78,20 @@ function Picker({ onPick }: { onPick: (id: Identity) => void }) {
   return (
     <div className="mx-auto flex h-full max-w-md flex-col bg-surface">
       <div className="bg-ink px-4 py-4 text-white">
-        <div className="flex items-center gap-2"><Logo /><b className="text-lg">Pukaar Ward 12 Helpline</b></div>
+        <div className="flex items-center gap-2"><Logo /><b className="font-serif text-lg font-semibold">Pukaar Ward 12 Helpline</b></div>
         <p className="mt-1 text-xs opacity-80">Demo: messages go to the Pukaar control-room simulation. Use made-up details only.</p>
       </div>
       <div className="flex-1 space-y-2 overflow-y-auto p-4">
         <p className="text-sm font-semibold">Who are you in this demo?</p>
         {PRESETS.map((p) => (
           <button key={p.phone} onClick={() => onPick(p)}
-            className="block w-full rounded-xl border border-line bg-card p-3 text-left hover:border-teal">
+            className="block w-full rounded-xl border border-line bg-card p-3 text-left hover:border-accent">
             <b>{p.name}</b>
             <div className="text-xs text-muted">{p.area} · {p.phone}</div>
           </button>
         ))}
         <button onClick={() => onPick(newIdentity())}
-          className="block w-full rounded-xl border-2 border-dashed border-teal p-3 text-left font-semibold text-teal">
+          className="block w-full rounded-xl border-2 border-dashed border-accent p-3 text-left font-semibold text-accent">
           I'm a new person (random demo number)
         </button>
       </div>
@@ -175,14 +175,14 @@ export default function Chat() {
       <div className="flex items-center gap-2 bg-ink px-3 py-2 text-white">
         <Logo size={32} />
         <div className="min-w-0 flex-1 leading-tight">
-          <b className="block text-sm">Pukaar Ward 12 Helpline</b>
+          <b className="block font-serif text-sm font-semibold">Pukaar Ward 12 Helpline</b>
           <span className="block truncate text-[11px] opacity-75">You are {identity.name} · {identity.phone}</span>
         </div>
         <button onClick={() => { try { localStorage.removeItem('pukaar-identity') } catch { /* ignore */ } setIdentity(null); setMessages([]) }}
           className="rounded bg-white/15 px-2 py-1 text-[11px]">Switch</button>
         <ThemeToggle className="bg-white/10 text-white" />
       </div>
-      <div className="bg-marigold/20 px-3 py-1 text-center text-[11px] font-semibold text-[#6b4b00] dark:text-marigold">
+      <div className="bg-marigold/20 px-3 py-1 text-center text-[11px] font-semibold text-[#7a5410] dark:text-marigold">
         Demo: messages go to the Pukaar control-room simulation
       </div>
       <div className="flex-1 space-y-2 overflow-y-auto px-3 py-3">
@@ -194,18 +194,18 @@ export default function Chat() {
             <p className="text-center text-[11px] font-semibold text-muted">Or try a sample message:</p>
             {SAMPLES.map((s) => (
               <button key={s} onClick={() => setText(s)}
-                className="block w-full rounded-lg border border-line bg-card px-3 py-2 text-left text-xs hover:border-teal">{s}</button>
+                className="block w-full rounded-lg border border-line bg-card px-3 py-2 text-left text-xs hover:border-accent">{s}</button>
             ))}
           </div>
         )}
         {messages.map((m) => (
           <div key={m.id} className={`flex ${m.direction === 'in' ? 'justify-end' : 'justify-start'}`}>
             <div className={`max-w-[85%] whitespace-pre-line rounded-xl px-3 py-2 text-sm shadow-sm ${m.direction === 'in'
-              ? 'rounded-tr-sm bg-[#d9f2d0] text-ink dark:bg-[#1f4a2a] dark:text-white'
+              ? 'rounded-tr-sm bg-[#d5e6e0] text-ink dark:bg-[#24423d] dark:text-white'
               : m.kind === 'saathi' ? 'rounded-tl-sm border-l-4 border-urgent bg-card' : 'rounded-tl-sm bg-card'}`}>
               {m.direction === 'in' && m.channel === 'voice' && <span className="mb-0.5 block text-[10px] font-bold text-safe">🎤 Voice note (transcribed)</span>}
               {m.kind === 'saathi' && <span className="mb-0.5 block text-[10px] font-bold text-urgent">Saathi · safety steps</span>}
-              {m.kind === 'bulletin' && <span className="mb-0.5 block text-[10px] font-bold text-teal">Ward bulletin</span>}
+              {m.kind === 'bulletin' && <span className="mb-0.5 block text-[10px] font-bold text-accent">Ward bulletin</span>}
               {m.text}
               <span className="mt-0.5 block text-right text-[10px] text-muted">{clock(m.created_at)}</span>
             </div>
@@ -219,7 +219,7 @@ export default function Chat() {
           <button type="button" onClick={toggleVoice} disabled={!voiceSupported}
             title={voiceSupported ? 'Speak a voice note' : 'Voice notes need Chrome, Edge or Safari'}
             aria-label={listening ? 'Stop listening' : 'Record a voice note'}
-            className={`h-11 w-11 rounded-full text-lg text-white ${listening ? 'animate-pulse bg-urgent' : 'bg-teal'} disabled:opacity-40`}>
+            className={`h-11 w-11 rounded-full text-lg text-white ${listening ? 'animate-pulse bg-urgent' : 'bg-accent'} disabled:opacity-40`}>
             🎤
           </button>
           <select value={voiceLang} onChange={(e) => setVoiceLang(e.target.value)} aria-label="Voice language"

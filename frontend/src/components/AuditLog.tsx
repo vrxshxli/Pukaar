@@ -20,12 +20,12 @@ export default function AuditLog() {
     <div className="flex h-full min-h-0 flex-col">
       <div className="mb-2 flex gap-2">
         <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Filter by agent, tool or ticket"
-          className="w-full rounded-lg border border-line bg-card px-2 py-1 text-xs" aria-label="Filter the audit log" />
+          className="w-full rounded-xl border border-line bg-soft px-2.5 py-1.5 text-xs outline-none focus:border-accent" aria-label="Filter the audit log" />
         <Button small onClick={load}>Refresh</Button>
       </div>
-      <div className="min-h-0 flex-1 overflow-auto rounded-lg border border-line">
+      <div className="min-h-0 flex-1 overflow-auto rounded-xl border border-line">
         <table className="w-full text-left text-[11px]">
-          <thead className="sticky top-0 bg-ink text-white">
+          <thead className="sticky top-0 bg-soft text-muted">
             <tr>
               <th className="px-2 py-1">Time</th><th className="px-2 py-1">Agent</th><th className="px-2 py-1">Tool</th>
               <th className="px-2 py-1">What happened</th><th className="px-2 py-1">Input</th>

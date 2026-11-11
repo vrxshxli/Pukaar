@@ -110,7 +110,7 @@ At 0.6 or more the report merges on its own; between 0.35 and 0.6 the officer de
 
 - `LLM_MODE=rules` (default): keyword and pattern extraction in four languages, rapidfuzz matching, and template replies. No model needed.
 - `LLM_MODE=ollama`: the agents send the message and their tool schemas to a local model (`qwen2.5:3b` on this machine, which reports 15.6 GB of RAM; `qwen2.5:7b` on 16 GB or more) and run the tool calls it returns. Embeddings come from `nomic-embed-text` when it is pulled.
-- If Ollama is unreachable or a call takes longer than the timeout (4 seconds by default), that call falls back to rules and the dashboard header shows the fallback.
+- If Ollama is unreachable or a call takes longer than the timeout (4 seconds by default), that call falls back to rules and the LLM chip in the dashboard's map toolbar shows the fallback.
 - The model never gets to bypass the approval gate: tools that change team status or send bulletins are not exposed to the model at all.
 
 ## Where this differs from the deck

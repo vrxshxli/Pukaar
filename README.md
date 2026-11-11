@@ -1,39 +1,145 @@
-# Pukaar पुकार
+<div align="center">
 
-**AgentX Hackathon 2026 · PS-03: Multi-agent disaster response coordinator**
+# Pukaar · पुकार
 
-India can send a flood alert to every phone, but the calls for help that come back arrive as chaos: the same family reported five times in three languages, rumours, reposts about people rescued hours ago, and boats sent to the wrong lane. Pukaar is a team of six AI agents that turns every call for help into **one ticket**, ranks it with written reasons, proposes the right rescue team, **waits for a human officer to approve**, keeps every reporter informed in their own language, and **closes the ticket** only when the family is confirmed safe. Agents do the paperwork. Humans send the boats.
+**Every call heard. Every family reached.**
 
-![Officer dashboard](docs/screenshots/dashboard.png)
+A multi-agent flood-response coordinator for ward control rooms. It turns a night of duplicate, multilingual and sometimes false calls for help into one ranked queue, proposes the right boat, and lets a human officer decide.
 
-| Citizen chat (Hindi) | Volunteer view | Is my family safe? |
+![Python](https://img.shields.io/badge/Python-3.11%2B-2f5d58?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-2f5d58?logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-18-2f5d58?logo=react&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-4.1-2f5d58?logo=tailwindcss&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-WAL-2f5d58?logo=sqlite&logoColor=white)
+![Tests](https://img.shields.io/badge/tests-67%20passing-4f8a4c)
+![Offline](https://img.shields.io/badge/runs-on%20one%20laptop-d4705f)
+
+**AgentX Hackathon 2026 · PS-03 · Team Seekers**
+
+![Pukaar landing page](docs/screenshots/landing.jpg)
+
+</div>
+
+---
+
+## The problem, in two sentences
+
+In a flood, a ward control room gets hundreds of messages at once: the same family three times, rumours, and voice notes in three languages. Boats then go out in the order calls arrive, so the families in the most danger wait the longest (on our test night, a median of **463 minutes**).
+
+## What Pukaar does about it
+
+Six specialist agents and a planner read every message, merge repeats into **one ticket per family**, rank it with **written reasons**, propose the nearest suitable crew with a route around flooded lanes, and **stop**: nothing moves until a signed-in duty officer approves. Families hear back in their own language, with an OTP so the crew knows they reached the right door. On the same night, the median wait for the most urgent families drops to **20 minutes**.
+
+> Agents do the paperwork. Humans send the boats.
+
+## Contents
+
+- [Screens](#screens)
+- [One rescue, end to end](#one-rescue-end-to-end)
+- [Architecture](#architecture)
+- [The agents](#the-agents)
+- [Safety invariants](#safety-invariants)
+- [How triage decides](#how-triage-decides)
+- [Real-time model](#real-time-model)
+- [Security and access](#security-and-access)
+- [API](#api)
+- [Tech stack](#tech-stack)
+- [Project structure](#project-structure)
+- [Run it](#run-it)
+- [Evaluation](#evaluation)
+- [Tests](#tests)
+- [Demo film](#demo-film)
+- [What is simulated](#what-is-simulated)
+- [Beyond floods](#beyond-floods)
+
+---
+
+## Screens
+
+All screenshots are of the running app, captured by [`video/screens.py`](video/screens.py).
+
+### Control room (`/control`)
+
+The officer's view: tonight's counts, a ranked queue with reason chips, a live map with boats and routes, the selected ticket as a floating card, approval cards, and the agents' activity feed.
+
+![Control room with Kamla Devi's P1 ticket open and Boat 1 waiting for approval](docs/screenshots/dashboard.jpg)
+
+| A busy night at 10× replay | Dark mode |
+| --- | --- |
+| ![Dashboard during the replay](docs/screenshots/dashboard-night.jpg) | ![Dashboard in dark mode](docs/screenshots/dashboard-dark.jpg) |
+
+| The approval card: one tap sends a boat | The ticket: raw messages beside the extraction |
+| --- | --- |
+| ![Dispatch approval card](docs/screenshots/approval-card.png) | ![Ticket detail with three merged reports](docs/screenshots/ticket-detail.png) |
+
+Chat, the volunteer desk and the family lookup open as a card inside the control room, so the officer never leaves the map:
+
+![Citizen chat opened as a card over the dashboard](docs/screenshots/dashboard-popup.jpg)
+
+### Phones
+
+| Citizen helpline (`/chat`) | Boat crew desk (`/volunteer`) | Is my family safe? (`/family`) |
 | --- | --- | --- |
-| ![Kamla's chat](docs/screenshots/chat-kamla.png) | ![Volunteer](docs/screenshots/volunteer.png) | ![Family lookup](docs/screenshots/family.png) |
+| <img src="docs/screenshots/chat-kamla.png" width="260" alt="Kamla's Hindi chat with updates and an OTP"> | <img src="docs/screenshots/volunteer.png" width="260" alt="Boat 1's task with route and OTP entry"> | <img src="docs/screenshots/family.png" width="260" alt="Family lookup showing Rescued, safe at Camp 3"> |
+| Kamla writes in Hindi. Every reply comes back in Hindi: ticket opened, three reports linked, Boat 1 on the way, the OTP. | The crew sees who is waiting and what they need, the route, and can report a blocked lane. No reporter phone numbers. | Status and camp only. Never an address, never a phone number. |
 
-## What it does
+### Public site and sign-in
 
-- **One family, one ticket.** A Hindi voice note, an English post from a daughter in Pune and a Hinglish SMS from a neighbour become one P1 ticket, with the reason for each merge written out. Uncertain matches are never merged automatically; they go to the officer as "Possible duplicate: merge?".
-- **Explainable priority.** An additive rule set, shown as chips: *water at knee height, water rising, elder 68, child with fever, phone at 14%*.
-- **Human gates, enforced in the backend.** No agent can dispatch a team, send a public bulletin, downgrade a P1, close a ticket without the family, or apply an uncertain merge. Each needs an officer's approval, and `backend/tests/test_safety.py` proves it.
-- **Closes the loop.** Every linked reporter gets updates in their language. Closing needs the volunteer to enter the family's OTP. Later reposts about a rescued family get "Rescued at 8:12 PM, safe at Camp 3" automatically.
-- **Verify lane.** "The dam has burst" is checked against the river gauge and alert feed, and parked for verification instead of becoming a rescue call.
-- **Learns the streets.** A volunteer's "Lane 6 blocked" goes into area memory (it fades unless confirmed again) and every affected route is replanned.
-- **Saathi, the safety companion.** Answers "what do I do now?" only from approved playbooks in English, Hindi and Marathi. For gas, fire, live wires or someone unconscious, the first line is always the emergency number.
-- **Kill switch.** Automation off: agents keep logging and ticketing, but nothing is sent and nothing new is proposed.
+| How it works, with snapshots of the real app | Sign-in for officers and crews |
+| --- | --- |
+| ![Landing page: how it works](docs/screenshots/landing-how.jpg) | ![Sign-in page](docs/screenshots/login.jpg) |
+
+---
+
+## One rescue, end to end
+
+Kamla Devi, 68, is on Lane 4 with her grandson, who has a fever. Three people write about her in three languages within a minute.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant K as Kamla (Hindi voice note)
+    participant P as Planner
+    participant L as Listen
+    participant T as Triage
+    participant D as Dispatch
+    participant O as Officer
+    participant C as Boat 1 crew
+    participant LP as Loop
+    K->>P: पानी घुटनों तक… गली चार, हनुमान मंदिर के पीछे
+    P->>L: route: rescue message
+    L->>L: language hi, water knee, child + elderly, fever, landmark Hanuman temple → Lane 4
+    L->>T: structured report
+    T->>T: no match → open P-0401, score 72 → P1
+    Note over T: daughter (English) and neighbour (Hinglish) arrive:<br/>same family name across scripts, same landmark,<br/>household registry match → merged, 3 reporters
+    T->>D: P1 needs a boat
+    D->>D: free team with medic, Dijkstra around blocked roads
+    D->>O: approval card: Send Boat 1? 0.8 km, about 11 min
+    O->>D: Approve (signed in as Officer Rao)
+    D->>C: new task, route
+    C->>LP: accepted
+    LP->>K: Boat 1 आपकी ओर आ रही है… OTP 9055
+    C->>T: family reads out 9055 → confirmed safe
+    LP->>K: rescued, safe at Camp 3
+```
+
+Every arrow is written to the audit log, and every screen updates live over server-sent events.
+
+---
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-  subgraph In["What comes in"]
+  subgraph In["Inputs"]
     C[Citizen chat<br/>text and voice]
-    R[Flood-night replay]
-    V[Volunteer replies<br/>reached, blocked, OTP]
-    A[Mock CAP alerts]
+    R[Flood-night replay<br/>311 messages]
+    V[Crew replies<br/>reached · blocked · OTP]
+    A[CAP alerts<br/>mock SACHET feed]
     W[Open-Meteo rainfall]
   end
-  O{{Orchestrator<br/>planner}}
-  subgraph Agents
+  O{{Planner<br/>orchestrator.py}}
+  subgraph Agents["Agents · backend/app/agents"]
     L[Listen]
     S[Saathi]
     T[Triage]
@@ -41,157 +147,343 @@ flowchart LR
     LP[Loop]
     WA[Watch]
   end
-  AP[Approval cards<br/>officer decides]
-  DB[(SQLite)]
-  C --> O
-  R --> O
-  V --> O
-  A --> WA
-  W --> WA
+  subgraph Tools["Tools · backend/app/tools"]
+    TR[registry + audit]
+    G{{approvals.require_approved}}
+  end
+  DB[(SQLite · WAL)]
+  OF[Officer<br/>signed in]
+  C & R & V --> O
+  A & W --> WA
   O --> L --> T --> D
   O --> S
   T --> LP
-  D -->|proposal| AP
-  WA -->|pre-position| AP
-  LP -->|bulletin draft| AP
-  AP -->|approved| DB
-  L & T & D & LP & S & WA --> DB
-  DB -->|server-sent events| Dash[Dashboard, chat, volunteer]
+  L & T & D & LP & S & WA --> TR --> DB
+  D & WA & LP -->|proposal| OF
+  OF -->|approve| G --> DB
+  DB -->|SSE /api/stream| UI[Control room · phones · crew desks]
 ```
 
-| Agent | Job | Tools |
+| Layer | Where | Responsibility |
 | --- | --- | --- |
-| **Listen** | Detects Hindi, Marathi, Hinglish or English; extracts people, vulnerable members, medical need, water level, landmark, battery and danger words; asks one follow-up if the location or head count is missing. | `extract_report`, `geocode_landmark`, `ask_followup` |
-| **Triage** | Matches reports to existing tickets (sender, family name across scripts, household registry, landmark, details, embeddings), scores priority, sends contradicted claims to Verify, recognises reposts about families already safe. | `find_similar_tickets`, `create_ticket`, `merge_into_ticket`, `score_priority`, `flag_for_verification` |
-| **Dispatch** | Picks the best free team by skill (medic for medical needs), road distance and hours on duty; routes around blocked roads; replans; proposes, never sends. Supplies go to the van. | `list_free_teams`, `compute_route`, `create_approval`, `replan_routes` |
-| **Loop** | Status updates to every linked reporter, auto-replies to reposts, FAQ answers, stale-ticket re-pings, bulletin drafts. | `send_message`, `draft_bulletin`, `answer_faq` |
-| **Saathi** | Safety steps from the playbooks only; emergency number first for danger; escalates the ticket. | `search_playbook`, `escalate_danger` |
-| **Watch** | Reads the CAP feed and Open-Meteo, marks watch zones, keeps area memory, proposes pre-positioning. | `read_alerts`, `get_rainfall`, `mark_road_blocked`, `propose_preposition` |
+| Planner | `backend/app/orchestrator.py` | Receives every event (message, alert, crew action, approval, timer tick), decides which agents run in which order, writes each plan step to the audit log. Events are handled one at a time under a lock, so the replay, the chat and the officer never race. |
+| Agents | `backend/app/agents/*.py` | One file per agent, each with a `run(event)` method. Agents never touch the database directly; they call tools. |
+| Tools | `backend/app/tools/*.py` | Plain Python functions registered with a name, description and JSON schema. The same registry feeds Ollama tool calling and rules mode. Every call is audited. |
+| Human gate | `backend/app/tools/approvals.py` | The only code path that can move a team to `en_route`, mark a bulletin sent, downgrade a P1 or close a ticket without the family. |
+| Auth | `backend/app/auth.py` | Accounts, sessions, role checks used as FastAPI dependencies. |
+| API and stream | `backend/app/main.py` | REST routes, server-sent events, the built frontend on the same port. |
+| Frontend | `frontend/src` | One React app with five surfaces: landing, control room, helpline chat, crew desk, family lookup. |
 
-The planner logs every routing decision ("Planner: routed message #12 (rescue) to Listen, then Triage, then Loop, then Dispatch") and every tool call goes into the audit log. More detail is in [docs/architecture.md](docs/architecture.md).
+The gate, in real code (`backend/app/tools/approvals.py`):
 
-## Setup
-
-You need **Python 3.11 or newer** and **Node.js 18 or newer**. Nothing else is required for rules mode.
-
-```bash
-# macOS or Linux
-./start.sh
-
-# Windows (PowerShell)
-.\start.ps1
+```python
+def require_approved(approval, kind, ticket_id=None, team_id=None):
+    """Raise unless this approval is approved and covers exactly this action."""
+    if isinstance(approval, int):
+        approval = get(approval)
+    if not approval or approval.get("status") != "approved" or approval.get("kind") != kind:
+        raise ApprovalRequired(f"'{kind}' needs an approved officer approval")
+    if not approval.get("decided_by"):
+        raise ApprovalRequired("approval has no deciding officer")
+    if ticket_id is not None and approval.get("ticket_id") != ticket_id:
+        raise ApprovalRequired("approval is for a different ticket")
+    if team_id is not None and approval.get("team_id") != team_id:
+        raise ApprovalRequired("approval is for a different team")
+    return approval
 ```
 
-The script creates a Python virtual environment, installs the packages, builds the frontend and serves everything on **http://localhost:8000**:
+`teams.set_status` calls it before any team can leave, so there is no way around it from an agent, a tool or the model. More detail: [docs/architecture.md](docs/architecture.md).
 
-| Page | URL |
+---
+
+## The agents
+
+| Agent | Job | Tools it may call |
+| --- | --- | --- |
+| **Planner** | Routes each event to the right agents in order and logs the plan ("routed message #7 (rescue) to Listen, then Triage, then Loop"). | (orchestration only) |
+| **Listen** | Detects Hindi, Marathi, Hinglish or English; extracts people, vulnerable members, medical need, water level, landmark, battery and danger words; asks one follow-up if location or head count is missing. | `extract_report`, `geocode_landmark`, `ask_followup` |
+| **Triage** | Matches reports to existing tickets, scores priority with written reasons, sends contradicted claims to Verify, recognises reposts about families already safe. | `find_similar_tickets`, `create_ticket`, `merge_into_ticket`, `score_priority`, `flag_for_verification` |
+| **Dispatch** | Picks the best free team by skill (a medic for medical needs), road distance and hours on duty; routes around blocked roads; replans; proposes, never sends. Supplies go to the van. | `list_free_teams`, `compute_route`, `create_approval`, `replan_routes` |
+| **Loop** | Updates every linked reporter in their language, auto-replies to reposts, answers FAQs, re-pings stale tickets, drafts bulletins. | `send_message`, `draft_bulletin`, `answer_faq` |
+| **Saathi** | Safety steps from vetted playbooks only; for gas, fire, live wires or someone unconscious the first line is always the emergency number. | `search_playbook`, `escalate_danger` |
+| **Watch** | Reads the CAP feed and rainfall, marks watch zones, keeps area memory of blocked roads (it fades unless confirmed), proposes pre-positioning. | `read_alerts`, `get_rainfall`, `mark_road_blocked`, `propose_preposition` |
+
+The model is never offered a tool that acts on the world: in Ollama mode it can extract fields and pick a playbook, nothing more.
+
+---
+
+## Safety invariants
+
+Each rule is enforced in the backend, not the UI, and has a test.
+
+| Invariant | Enforced in | Proven by |
+| --- | --- | --- |
+| No team goes `en_route` without an approved approval for exactly that team and ticket | `approvals.require_approved` via `teams.set_status` | `tests/test_safety.py` |
+| No public bulletin is marked sent without approval | `orchestrator` → `require_approved(…, "bulletin")` | `tests/test_safety.py` |
+| Agents may raise a P1 but never lower it; only an officer can downgrade | `tickets.score_priority`, `tickets.downgrade` → `require_approved(…, "downgrade")` | `tests/test_safety.py` |
+| A ticket cannot close without the family's OTP unless an officer approves | `tickets.set_status` → `require_approved(…, "close")` | `tests/test_safety.py` |
+| The kill switch stops every outgoing message and every new proposal | `approvals.create_approval`, `messaging` | `tests/test_safety.py` |
+| Uncertain or conflicting duplicates are never merged automatically | `Triage` thresholds + identity evidence | `tests/test_safety.py` |
+| A new family near a rescued one is never told "already rescued" | identity evidence required for repost matches | `tests/test_safety.py` |
+| Saathi's danger replies start with an emergency number and use playbook text only | `Saathi`, `playbooks` | `tests/test_safety.py` (EN, HI, MR) |
+| Family lookup never returns an address or phone | `tickets.public_status` | `tests/test_safety.py` |
+| Control-room actions need a signed-in officer; approvals are attributed to the session, not a typed name | `auth.require_officer` | `tests/test_auth.py` |
+
+---
+
+## How triage decides
+
+**Priority** is an additive rule set (`tickets.priority_rules`), shown to the officer as chips. P1 at 50 points, P2 at 30.
+
+| Kamla Devi, P-0401 | Points |
+| --- | ---: |
+| Base | 10 |
+| Water at knee height | 12 |
+| Water rising | 8 |
+| Elder, 68 (from the household registry) | 15 |
+| Child | 12 |
+| Child with fever | 10 |
+| 3 separate reporters | 5 |
+| **Total → P1** | **72** |
+
+Other weights include neck-deep water 35, someone unconscious 40, breathing trouble 35, gas leak, fire or live wire 30, dialysis 25, on the roof 25, a phone at 20% battery or less 8, and five or more people 8. Supplies requests are capped below P2 and go to the van.
+
+**Duplicate matching** combines sender, family name across Devanagari and Latin (a consonant skeleton, so पाटिल and Patil match), the household registry, landmark, lane, distance, time and details (people, vulnerable members, medical need, water level), plus embeddings in Ollama mode.
+
+| Match score | What happens |
 | --- | --- |
-| Officer dashboard | http://localhost:8000/ |
-| Citizen chat | http://localhost:8000/chat |
-| Volunteer view | http://localhost:8000/volunteer |
-| Is my family safe? | http://localhost:8000/family |
+| ≥ 0.60 with identity evidence | Merged automatically, reason written on the ticket |
+| 0.35 to 0.60 | "Possible duplicate: merge?" card for the officer |
+| ≥ 0.50 to a family already safe, with identity evidence | Treated as a repost: "Rescued at 8:12 PM, safe at Camp 3" |
+| Below | New ticket |
 
-Press **▶ Start** in the dashboard header to replay the flood night at 1×, 5× or 10×.
+**Verify lane.** A claim such as "Powai dam has burst" is checked against the river gauge and the alert feed. Contradicted claims are parked in Verify instead of becoming a rescue call, and repeats of the same rumour join one Verify ticket.
 
-### LLM modes
+---
 
-Pukaar runs fully without any model. The mode is shown in the dashboard header and can be switched there.
+## Real-time model
 
-**Rules mode (default).** Deterministic extraction in four languages, fuzzy matching and template replies. Nothing to install.
+There is one event stream, `GET /api/stream` (server-sent events), filtered per audience on the server:
 
-**Ollama mode.** Listen extracts reports through a tool call to a local model, Saathi lets the model choose the playbook (the reply text still comes only from the playbook), and Triage uses embeddings to compare messages.
+| Subscriber | Receives | Needs |
+| --- | --- | --- |
+| Control room | Every agent activity entry and every change | Officer session |
+| Crew desk (`?team=boat1`) | Messages for that team and "something changed" pings | That crew's session, or an officer |
+| Citizen chat (`?phone=…`) | Only that reporter's own messages | Nothing |
 
-1. Install Ollama from https://ollama.com.
-2. Pull the models. Pukaar picks `qwen2.5:7b` on machines with 16 GB of RAM or more and `qwen2.5:3b` otherwise:
-   ```bash
-   ollama pull qwen2.5:3b          # or qwen2.5:7b with 16 GB+ RAM
-   ollama pull nomic-embed-text    # optional, for duplicate matching
-   ```
-3. Start Pukaar in Ollama mode: `LLM_MODE=ollama ./start.sh` or `.\start.ps1 -Mode ollama`.
+Each screen refetches its view on a ping and keeps a slow three-second heartbeat, so the officer, the family and the crew see the same moment at the same time. A ticker thread advances the game clock, moves boats along the road graph and re-pings stale tickets.
 
-Every model call has a timeout (`LLM_TIMEOUT`, default 6 seconds). If Ollama is stopped, slow or missing the model, that call falls back to rules and the header says so. Set `OLLAMA_MODEL` to use a different model, and `OLLAMA_HOST` if Ollama is not on `localhost:11434`. The model is never offered tools that act: it cannot send messages, create approvals or move teams.
+---
 
-### Public demo link
+## Security and access
 
-To let judges open the citizen chat on their phones, expose the app with a free Cloudflare quick tunnel (no account needed):
+- **Roles.** Duty officers (`rao`, `desai`) run the control room. Each crew account (`boat1`, `boat2`, `boat3`, `van1`) sees only its own desk. Citizens and families need no account.
+- **Storage.** Passwords are salted PBKDF2-SHA256 (200,000 rounds); session tokens are stored as SHA-256 hashes, so a copy of the database cannot be used to sign in.
+- **Sessions.** An HttpOnly, SameSite=Lax cookie that lasts one 12-hour shift, marked Secure automatically behind an HTTPS tunnel.
+- **Brute force.** Five wrong passwords lock that username for a minute. Unknown users and wrong passwords get the same answer and timing.
+- **Attribution.** Approvals, downgrades, closures and setting changes are recorded under the signed-in officer's name; a name typed into a request body is ignored.
+- **Public data.** `/api/public/overview` (used by the landing page) returns the map and night totals only: no family, ticket, message, phone or boat position. A test checks it.
+
+Demo passwords are `pukaar-officer` and `pukaar-volunteer`. **Set your own before sharing a public link:**
 
 ```bash
-cloudflared tunnel --url http://localhost:8000
+PUKAAR_OFFICER_PASSWORD='…' PUKAAR_VOLUNTEER_PASSWORD='…' ./start.sh
+# Windows: $env:PUKAAR_OFFICER_PASSWORD='…'; $env:PUKAAR_VOLUNTEER_PASSWORD='…'; .\start.ps1
 ```
 
-Open the `https://….trycloudflare.com` address it prints. The QR code in the dashboard header then points at that public `/chat` page. Install `cloudflared` from https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/.
+---
+
+## API
+
+| Method and path | Who | Purpose |
+| --- | --- | --- |
+| `POST /api/auth/login` · `POST /api/auth/logout` · `GET /api/auth/me` | anyone | Sessions |
+| `GET /api/public/overview` | anyone | Map and totals for the landing page |
+| `POST /api/messages` | anyone | A citizen message (text or transcribed voice) |
+| `GET /api/chat/{phone}` | anyone | That reporter's thread |
+| `GET /api/family?name=&area=&ticket=` | anyone | Status and camp only |
+| `GET /api/state` | officer | Everything the control room shows, in one call |
+| `GET /api/tickets/{id}` | officer | Ticket with raw reports and history |
+| `POST /api/approvals/{id}` | officer | Approve or reject, optionally with another team |
+| `POST /api/tickets/{id}/downgrade` · `/close` | officer | The two officer-only overrides |
+| `GET /api/activity` · `GET /api/audit` | officer | Agent activity and the full audit log |
+| `POST /api/settings` | officer | Kill switch, LLM mode |
+| `POST /api/replay` · `POST /api/reset` | officer | Replay the night at 1×, 5×, 10× |
+| `GET` · `POST /api/volunteer/{team}` | that crew or officer | Task view; accept, reached, blocked lane, OTP |
+| `GET /api/stream` | see [Real-time model](#real-time-model) | Server-sent events |
+
+---
+
+## Tech stack
+
+| Area | Choice | Why |
+| --- | --- | --- |
+| Backend | Python 3.11+, FastAPI 0.115, Uvicorn | Small, typed, async streaming for SSE |
+| Storage | SQLite in WAL mode, one guarded connection | Zero setup, survives a laptop restart |
+| Matching | RapidFuzz, Devanagari-to-Latin consonant skeletons | Fast fuzzy names across scripts |
+| Models | Rules mode by default; optional Ollama (`qwen2.5:3b` or `7b`, `nomic-embed-text`) | Works with no model; nothing leaves the laptop |
+| Routing | Dijkstra over the ward road graph | Reroutes instantly when a lane is blocked |
+| Weather and alerts | Open-Meteo, mock CAP (SACHET format) | Real rainfall, safe alert data |
+| Frontend | React 18, TypeScript 5.6, Vite 6, Tailwind CSS 4.1 | One app, five surfaces |
+| Maps | Leaflet 1.9 with OpenStreetMap, OpenTopoMap and Esri imagery | Free tiles, three basemaps |
+| Type | Noto Serif and Noto Sans, each with its Devanagari partner | Hindi and Marathi match the English |
+| Demo film | Playwright, Kokoro TTS (offline), ffmpeg | Rendered from code, see [video/](video/) |
+
+---
+
+## Project structure
+
+```
+pukaar/
+├─ backend/
+│  ├─ app/
+│  │  ├─ main.py            FastAPI routes, SSE stream, serves the built frontend
+│  │  ├─ orchestrator.py    the planner: routes every event, one at a time
+│  │  ├─ auth.py            accounts, sessions, role checks
+│  │  ├─ llm.py             rules / Ollama switch, timeouts, fallback
+│  │  ├─ nlp.py · i18n.py   extraction and replies in four languages
+│  │  ├─ agents/            listen · triage · dispatch · loop · saathi · watch
+│  │  └─ tools/             approvals (the gate) · tickets · teams · geo · messaging · audit · alerts · weather · playbooks
+│  ├─ data/                 scenario (ward, roads, households, camps, the 311-message night), playbooks, alerts
+│  ├─ scripts/              generate_flood_night.py · evaluate.py
+│  └─ tests/                67 tests: safety, auth, pipeline, API, scenario, LLM fallback
+├─ frontend/src/
+│  ├─ pages/                Landing · Dashboard · Chat · Volunteer · Family · Login
+│  └─ components/           WardMap · TicketQueue · TicketDetail · ApprovalCard · MapToolbar · LandingMap …
+├─ video/                   the demo film: recorder, narration, mix, composition, renderer
+├─ docs/                    architecture · eval report · demo script · screenshots
+├─ start.sh · start.ps1     install, build, serve on :8000
+└─ go-live.bat              server + public Cloudflare link in two windows (Windows)
+```
+
+---
+
+## Run it
+
+You need **Python 3.11+** and **Node.js 18+**. Nothing else for rules mode.
+
+```bash
+./start.sh          # macOS or Linux
+.\start.ps1         # Windows PowerShell
+```
+
+The script creates a virtual environment, installs packages, builds the frontend and serves everything on **http://localhost:8000**.
+
+| Surface | URL | Sign-in |
+| --- | --- | --- |
+| Landing page | `/` | none |
+| Control room | `/control` | `rao` / `pukaar-officer` |
+| Crew desk | `/volunteer` | `boat1` / `pukaar-volunteer` |
+| Citizen helpline | `/chat` | none |
+| Family lookup | `/family` | none |
+
+In the control room, press **Start** in the map toolbar to replay the flood night at 1×, 5× or 10×.
+
+### Ollama mode (optional)
+
+```bash
+ollama pull qwen2.5:3b          # or qwen2.5:7b with 16 GB+ RAM (picked automatically)
+ollama pull nomic-embed-text    # optional, for duplicate matching
+LLM_MODE=ollama ./start.sh      # or: .\start.ps1 -Mode ollama
+```
+
+Every model call has a timeout (`LLM_TIMEOUT`, default 6 s). If Ollama is stopped, slow or missing the model, that call falls back to rules and the toolbar says so. `OLLAMA_MODEL` and `OLLAMA_HOST` override the defaults.
+
+### Public link
+
+On Windows, double-click **`go-live.bat`**: it starts the server and a free Cloudflare quick tunnel in two windows and prints a `https://….trycloudflare.com` address. Elsewhere: `cloudflared tunnel --url http://localhost:8000`. The QR code in the control room then points phones at the public helpline. Quick-tunnel addresses change on every restart.
 
 ### Development
 
 ```bash
 cd backend && .venv/bin/python -m uvicorn app.main:app --reload   # API on :8000 (.venv\Scripts on Windows)
 cd frontend && npm run dev                                          # Vite on :5173, proxies /api
-cd backend && .venv/bin/python -m pytest                            # tests
+cd backend && .venv/bin/python -m pytest -q                         # 67 tests
 cd backend && .venv/bin/python scripts/generate_flood_night.py     # regenerate the night
 cd backend && .venv/bin/python scripts/evaluate.py --modes rules ollama
 ```
 
+---
+
 ## Evaluation
 
-`backend/scripts/evaluate.py` replays the 311-message synthetic night (Hindi, Marathi, Hinglish and English, with hidden ground truth) through the real pipeline and through a first-come-first-served baseline, where every request is a new job and three boats take jobs in arrival order. Full results and method: [docs/eval-report.md](docs/eval-report.md).
+`backend/scripts/evaluate.py` replays the 311-message synthetic night (Hindi, Marathi, Hinglish and English, with hidden ground truth) through the real pipeline and through a first-come-first-served baseline, where every request is a new job and three boats take jobs in arrival order. Full method and results: [docs/eval-report.md](docs/eval-report.md).
 
-| Measure | First-come-first-served | Pukaar (rules) | Pukaar (Ollama, llama3.2:1b) |
-| --- | --- | --- | --- |
-| Requests turned into jobs or tickets | 210 | 101 | 108 |
-| Duplicate-merge F1 (after officer review) | 0 (no merging) | 0.79 | 0.71 |
-| Median time to assign a P1 family | 463 min | 20 min | 16 min |
-| 90th percentile time to assign a P1 family | 1253 min | 172 min | 200 min |
-| P1 families assigned by the end | 28/28 | 25/28 | 24/28 |
-| Boat or van trips | 210 | 56 | 54 |
-| Wasted trips (already rescued, rumour or duplicate) | 131 | 15 | 15 |
-| Supplies requests sent on rescue boats | 24 | 0 (van only) | 0 (van only) |
-| Rumours caught in the Verify lane | 0/15 | 15/15 | 15/15 |
+| Measure | First come, first served | Pukaar (rules) | Pukaar (Ollama, qwen2.5:3b) |
+| --- | ---: | ---: | ---: |
+| Requests turned into jobs or tickets | 210 | 101 | 107 |
+| Duplicate-merge F1 (after officer review) | 0 | 0.79 | 0.68 |
+| **Median time to assign a P1 family** | **463 min** | **20 min** | 28 min |
+| 90th percentile time to assign a P1 family | 1253 min | 172 min | 154 min |
+| P1 families assigned by the end | 28/28 | 25/28 | 23/28 |
+| Boat or van trips | 210 | 56 | 53 |
+| **Wasted trips** (already rescued, rumour or duplicate) | **131** | **15** | 17 |
+| Supplies requests sent on rescue boats | 24 | 0 | 0 |
+| **Rumours caught in Verify** | **0/15** | **15/15** | 15/15 |
 
-Notes on reading this table:
+How to read it honestly:
 
-- The Ollama column used `llama3.2:1b`, the only model pulled on the build machine; 169 of its 317 model calls timed out or returned unusable output and fell back to rules. The recommended `qwen2.5:3b` or `qwen2.5:7b` has not been evaluated yet: pull it and run `scripts/evaluate.py --modes rules ollama` to get its numbers.
-- The baseline eventually reaches every P1 family only because it keeps running long after the night ends (its 90th percentile is about 21 hours). Pukaar is scored up to 90 minutes after the last message; the P1 families it had not reached by then are counted as not assigned.
-- Merge F1 is after a simulated officer reviews the 'possible duplicate' cards; automatic merges alone score lower (0.57 in rules mode). See the report for both rows.
+- These are real numbers from a **synthetic** night, not field results. The rules extractor and the message generator share vocabulary, so rules-mode field accuracy (98.2%) is an upper bound.
+- The baseline reaches all 28 P1 families only because it keeps running about 21 hours past the night; Pukaar is scored up to 90 minutes after the last message.
+- Merge F1 is after a simulated officer reviews "possible duplicate" cards; automatic merges alone score 0.57 in rules mode.
+- The Ollama column used `qwen2.5:3b` (10 of 317 calls fell back to rules). It trails rules mode here mainly on people counts (71.7% against 99.4%); a whole-night run took about 28 minutes against 16 seconds.
 
-These are real numbers from a synthetic night, not field results. Two cautions from the report: the rules extractor and the message generator share vocabulary, so rules-mode field accuracy is an upper bound; and the baseline gets no typing time and ignores rumours, which flatters it.
+---
 
-## Safety tests
+## Tests
 
-`cd backend && .venv/bin/python -m pytest` runs 44 tests, including `tests/test_safety.py`, which proves that:
+```bash
+cd backend && .venv/bin/python -m pytest -q      # 67 passed
+```
 
-- no team can go `en_route` without an approved approval for exactly that team and ticket;
-- public bulletins are never marked sent without approval;
-- the kill switch stops every outgoing message and every new proposal;
-- Saathi's gas-leak reply starts with an emergency number and contains only playbook steps and fixed templates (in English, Hindi and Marathi);
-- family lookup never returns an address or phone number;
-- low-confidence or conflicting duplicates are never merged automatically, and a new family near a rescued one is never told it was rescued;
-- the full flow works in rules mode with Ollama stopped;
-- a P1 cannot be downgraded, and a ticket cannot be closed without the family, unless an officer approves.
+| File | Tests | Covers |
+| --- | ---: | --- |
+| `test_auth.py` | 23 | Every officer route refuses anonymous and crew sessions, crew isolation, attribution, lockout, hashed storage, public overview has no personal data |
+| `test_safety.py` | 21 | Every invariant in [Safety invariants](#safety-invariants) |
+| `test_pipeline.py` | 10 | Kamla's three messages to one P1, replies per language, medic boat waits for the officer, full rescue with Lane 6 blocked and OTP, Pinto repost, dam rumour, follow-up questions, red alert, gas leak |
+| `test_scenario.py` | 8 | Seed data, geocoding Hindi landmarks, lane parsing across scripts, routing around Lane 6, fading road memory, alert clock, playbook search |
+| `test_llm.py` | 3 | Ollama timeouts and fallback to rules |
+| `test_api.py` | 2 | Messages to approval to crew view to family lookup over HTTP |
 
-## What's simulated
+---
 
-Be clear about this when you demo:
+## Demo film
 
-- **Ward 12, Shanti Nagar is fictional.** It is placed on the Kurla stretch of the Mithi river in Mumbai, but its nine lanes, landmarks and road graph are a simplified invention that does not match the real streets on the map. Every household, name and message is made up, and every phone number uses the fake pattern `+91 90000 xxxxx`.
-- **Channels.** WhatsApp, SMS, posts and calls are represented by a web chat and by labels on replayed messages. No real messaging service is connected.
+A 4:41 film, rendered entirely from code in [`video/`](video/): real screen recordings of the control room and two phones in sync, motion graphics, an offline voiceover (Kokoro, with Kamla's line in Hindi) and burned-in captions. The rendered MP4 is not committed; rebuild it with the steps in [video/README.md](video/README.md). A three-minute live walkthrough is in [docs/demo-script.md](docs/demo-script.md).
+
+---
+
+## What is simulated
+
+- **Ward 12, Shanti Nagar is fictional.** It is placed on the Kurla stretch of the Mithi river in Mumbai, but its lanes, landmarks and road graph are invented and do not match the streets under the map. Every household, name and message is made up; every phone number uses the fake pattern `+91 90000 xxxxx`.
+- **Channels.** WhatsApp, SMS and calls are represented by a web chat and by labels on replayed messages. No real messaging service is connected.
 - **Voice notes** use the browser's own speech recognition (Chrome, Edge or Safari). The replay contains already-transcribed text.
-- **Alerts and sensors.** The CAP alerts are mock files in SACHET's format, and the river gauge is a mock file. Rainfall is real, from Open-Meteo, but it is today's weather at the ward's coordinates, not a flood; it falls back to mock figures when offline.
-- **Teams** move along the road graph on a game clock. In the replay, volunteers accept tasks and enter OTPs on their own unless you do it in the volunteer view.
-- **Routing** is Dijkstra over the ward graph, and geocoding is a landmark list with Hindi, Marathi and Hinglish spellings. No routing or geocoding service is used.
-- **Translations.** The Hindi and Marathi playbooks and reply templates were written for the demo from standard public guidance (NDMA, oil company LPG guidance, fire services) and **should be checked by a native speaker** before any real use.
-- **Heatwave mode** from the deck is not built; Saathi has a heat playbook only.
+- **Alerts and sensors.** CAP alerts and the river gauge are mock files in real formats. Rainfall is live from Open-Meteo, falling back to mock figures offline.
+- **Teams** move along the road graph on a game clock.
+- **Translations.** The Hindi and Marathi playbooks and templates were written from standard public guidance (NDMA, LPG and fire-service advice) and **should be checked by a native speaker** before real use.
+- **Heatwave mode** is not built; Saathi has a heat playbook only.
 
-Allowed network calls are OpenStreetMap tiles, Open-Meteo and a local Ollama server. Nothing else leaves the machine.
+Network calls: map tiles (OpenStreetMap, OpenTopoMap, Esri), Google Fonts, Open-Meteo and a local Ollama server. No message, ticket or personal data leaves the machine.
 
-## Demo script
+---
 
-A 3-minute walkthrough is in [docs/demo-script.md](docs/demo-script.md): a red alert, Kamla's three messages merging, approving Boat 1, a judge messaging live from their phone, Saathi's gas-leak answer, Lane 6 blocking and replanning, the ticket closing with an OTP, and the family lookup.
+## Beyond floods
 
-## Repository layout
+The agents are disaster-agnostic; the ward map, the playbooks and the scoring weights are data. Swap them and the same pipeline could serve:
 
-```
-backend/   FastAPI app, agents, tools, scenario data, scripts, tests
-frontend/  React + Vite + TypeScript + Tailwind + Leaflet
-docs/      idea deck, architecture, evaluation report, demo script, screenshots
-start.sh   start.ps1
-```
+| Disaster | What changes |
+| --- | --- |
+| Cyclone | Watch pre-positions boats before landfall from the alert feed |
+| Earthquake | Triage weights trapped people and injuries; Dispatch routes around collapsed roads |
+| Heatwave | Saathi points people to the nearest cooling centre; Loop sends welfare checks to the elderly |
+| Urban fire | Dispatch routes crews around smoke and blocked lanes; Saathi gives evacuation steps |
+
+---
+
+<div align="center">
+
+Built by **Team Seekers** for AgentX Hackathon 2026.
+
+*Pukaar means "a call for help". We make sure every one is answered.*
+
+</div>

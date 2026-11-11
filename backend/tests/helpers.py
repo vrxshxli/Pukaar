@@ -17,3 +17,13 @@ def outgoing(phone):
     r = db.one("SELECT id FROM reporters WHERE phone = ?", (phone,))
     return [m["text"] for m in db.query(
         "SELECT text FROM messages WHERE reporter_id = ? AND direction = 'out' AND status = 'sent' ORDER BY id", (r["id"],))]
+
+
+def login(client, username="rao", password=None):
+    """Sign a TestClient in; officers by default."""
+    from app import auth
+    if password is None:
+        password = auth.DEFAULT_OFFICER_PASSWORD if username in ("rao", "desai") else auth.DEFAULT_VOLUNTEER_PASSWORD
+    r = client.post("/api/auth/login", json={"username": username, "password": password})
+    assert r.status_code == 200, r.text
+    return r.json()["user"]

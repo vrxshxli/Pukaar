@@ -2,7 +2,7 @@ import os
 
 from fastapi.testclient import TestClient
 
-from .helpers import DAUGHTER_PHONE, KAMLA_DAUGHTER, KAMLA_NEIGHBOUR, KAMLA_PHONE, KAMLA_VOICE, NEIGHBOUR_PHONE, at
+from .helpers import DAUGHTER_PHONE, KAMLA_DAUGHTER, KAMLA_NEIGHBOUR, KAMLA_PHONE, KAMLA_VOICE, NEIGHBOUR_PHONE, at, login
 
 
 def client():
@@ -13,6 +13,7 @@ def client():
 
 def test_api_flow_from_messages_to_approval_and_lookup():
     with client() as c:
+        login(c)
         at("21:40")
         for phone, text in [(KAMLA_PHONE, KAMLA_VOICE), (DAUGHTER_PHONE, KAMLA_DAUGHTER), (NEIGHBOUR_PHONE, KAMLA_NEIGHBOUR)]:
             assert c.post("/api/messages", json={"phone": phone, "text": text}).status_code == 200

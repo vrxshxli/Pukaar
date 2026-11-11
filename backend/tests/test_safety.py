@@ -15,7 +15,7 @@ from app.agents.saathi import Saathi
 from app.tools import approvals, playbooks, teams, tickets
 from app.tools.approvals import ApprovalRequired
 
-from .helpers import DAUGHTER_PHONE, KAMLA_DAUGHTER, KAMLA_NEIGHBOUR, KAMLA_PHONE, KAMLA_VOICE, NEIGHBOUR_PHONE, at
+from .helpers import DAUGHTER_PHONE, KAMLA_DAUGHTER, KAMLA_NEIGHBOUR, KAMLA_PHONE, KAMLA_VOICE, NEIGHBOUR_PHONE, at, login
 
 
 def kamla_ticket():
@@ -147,6 +147,7 @@ def test_kill_switch_via_api_and_close_endpoint_refuses_when_off():
     os.environ["PUKAAR_NO_TICKER"] = "1"
     from app.main import app
     with TestClient(app) as c:
+        login(c)
         assert c.post("/api/settings", json={"automation": False}).json()["automation"] is False
         at("21:40")
         c.post("/api/messages", json={"phone": KAMLA_PHONE, "text": KAMLA_VOICE})

@@ -73,14 +73,15 @@ Links: live app https://pukaar.onrender.com · video (under 3 min).
 
 **Title:** Same 311-message night, first come vs Pukaar.
 
-| Measure | First come | Pukaar (rules) |
-| --- | --- | --- |
-| Median time to assign a P1 family | 463 min | 20 min |
-| Wasted trips | 131 | 15 |
-| Rumours caught | 0/15 | 15/15 |
-| Boat or van trips | 210 | 56 |
+| Measure | First come | Pukaar (rules) | Pukaar (LLM Planner) |
+| --- | --- | --- | --- |
+| Median time to assign a P1 family | 463 min | 20 min | 20 min |
+| Wasted trips | 131 | 15 | 15 |
+| Rumours caught | 0/15 | 15/15 | 15/15 |
+| Boat or van trips | 210 | 56 | 55 |
+| Duplicate-merge F1 | 0 | 0.79 | 0.76 |
 
-LLM Planner column: see `docs/eval-report.md` (run locally with Ollama; the free hosted tier cannot run all 311 messages in a day).
+The LLM Planner matches rules on outcomes; merge F1 0.76 vs 0.79. Of 200 runs, 72 finished on the model's own plan; 126 steps were rejected by the guardrails (48 weak merges, 19 rescue calls sent to Verify, 12 merges into a safe family, 2 rumours as rescue tickets, 45 invalid values) and the rules finished those events. Evaluated with a free local model, because a full night exceeds any free hosted tier.
 
 **Honest limits:**
 - A synthetic night, not field data; rules-mode field accuracy is an upper bound.

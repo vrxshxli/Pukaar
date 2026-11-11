@@ -73,7 +73,8 @@ async def new_page(browser, clip, name, size, login=None, scale=1, mobile=False)
 
 
 async def api(ctx, path, body=None):
-    r = await (ctx.request.post(f"{BASE}{path}", data=body) if body is not None else ctx.request.get(f"{BASE}{path}"))
+    r = await (ctx.request.post(f"{BASE}{path}", data=body, timeout=300000) if body is not None
+               else ctx.request.get(f"{BASE}{path}", timeout=300000))
     return await r.json()
 
 

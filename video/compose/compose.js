@@ -873,15 +873,15 @@ builders.live = (root, sc) => {
   css(tag, { left: '470px', top: '880px', background: 'var(--ink)', color: '#fff', fontSize: '22px' })
   const ranges = {
     send: [E1('Kamla sends') - 2.5, E1('Kamla sends') + 2.5],
-    plan: [E1('Kamla sends') + 2.5, E1('Agent reasoning') + 3.5],
-    merge: [E1('daughter writes') - 0.5, E1('planner merged') + 4],
-    panel: [E1('planner merged') + 4, E1('reasoning scrolled') + 1.5],
+    plan: [E1('planner opened the ticket') - 0.5, E1('Agent reasoning') + 6],
+    merge: [E1('Agent reasoning') + 6, E1('planner merged') + 2.5],
+    panel: [E1('planner merged') + 2.5, E1('reasoning scrolled') + 1.5],
   }
   const beats = ['send', 'plan', 'merge', 'panel']
   const segs = beats.map((b, i) => { const w = L(sc, i); return [w.a, w.b, ranges[b][0], ranges[b][1]] })
   const k = (i, f) => L(sc, i).a + (L(sc, i).b - L(sc, i).a) * f
   const cam = [[0, 1, 800, 450], [k(1, 0.2), 1, 800, 450], [k(1, 0.55), 1.75, 690, 690], [k(2, 0), 1.75, 690, 690],
-    [k(2, 0.3), 1.2, 520, 520], [k(2, 0.7), 1.75, 690, 690], [k(3, 0.2), 1.9, 690, 700], [k(3, 1), 1.9, 690, 700]]
+    [k(2, 0.3), 1.8, 690, 700], [k(2, 0.7), 1.8, 690, 700], [k(3, 0.2), 1.9, 690, 700], [k(3, 1), 1.9, 690, 700]]
   return (t) => {
     const c = segClock(segs, t)
     lap.set(c, camAt(cam, t)); kam.set(c)

@@ -13,7 +13,7 @@
 
 **AgentX Hackathon 2026 · PS-03 · Team Seekers**
 
-### 🌐 [Live app: pukaar.onrender.com](https://pukaar.onrender.com) · ▶ [Demo video](https://youtu.be/TGQ5zi1kfI8)
+### 🌐 [Live app: pukaar.onrender.com](https://pukaar.onrender.com) · ▶ [Demo video (1:57)](https://youtu.be/TGQ5zi1kfI8)
 
 </div>
 
@@ -39,6 +39,8 @@ event ─► LLM Planner ──plan──► one tool call ──► observe res
 - **Memory.** Read-only tools: **short-term** (this family's ticket, reports and conversation), **long-term** (blocked lanes, watch zones, household registry, camps), **episodic** (past decisions and outcomes, e.g. "a boat was rerouted around Lane 6").
 - **Human approval.** No tool the Planner can reach dispatches a boat, closes or downgrades a ticket, or sends a bulletin. Those still pass `approvals.require_approved`, which only an officer's tap satisfies. A merge is only accepted if the matcher's own score clears 0.6, and a P1 is never lowered.
 - **Reliability.** Every model call has a timeout and retries with backoff on rate limits. A timeout, a rate limit, bad JSON or a rejected step hands the event to the rules, and the fallback is logged. Every plan, step, reason and result is in the audit log and in the **Agent reasoning** tab of each ticket.
+
+<p align="center"><img src="docs/screenshots/agent-reasoning.png" width="560" alt="Agent reasoning tab: find_similar_tickets finds P-0401 at score 1.05, merge_into_ticket, score_priority gives P1"><br><em>The Agent reasoning tab during the live demo: the planner's steps for Kamla's daughter's message, each with its reason and result.</em></p>
 
 ### Run it locally, free
 
@@ -435,24 +437,26 @@ cd backend && .venv/bin/python scripts/evaluate.py --modes rules ollama
 
 `backend/scripts/evaluate.py` replays the 311-message synthetic night (Hindi, Marathi, Hinglish and English, with hidden ground truth) through the real pipeline and through a first-come-first-served baseline, where every request is a new job and three boats take jobs in arrival order. Full method and results: [docs/eval-report.md](docs/eval-report.md).
 
-| Measure | First come, first served | Pukaar (rules) | Pukaar (Ollama, qwen2.5:3b) |
-| --- | ---: | ---: | ---: |
-| Requests turned into jobs or tickets | 210 | 101 | 107 |
-| Duplicate-merge F1 (after officer review) | 0 | 0.79 | 0.68 |
-| **Median time to assign a P1 family** | **463 min** | **20 min** | 28 min |
-| 90th percentile time to assign a P1 family | 1253 min | 172 min | 154 min |
-| P1 families assigned by the end | 28/28 | 25/28 | 23/28 |
-| Boat or van trips | 210 | 56 | 53 |
-| **Wasted trips** (already rescued, rumour or duplicate) | **131** | **15** | 17 |
-| Supplies requests sent on rescue boats | 24 | 0 | 0 |
-| **Rumours caught in Verify** | **0/15** | **15/15** | 15/15 |
+| Measure | First come, first served | Pukaar (rules) | Pukaar (LLM Planner, qwen2.5:7b) | Pukaar (Ollama reading, qwen2.5:3b) |
+| --- | ---: | ---: | ---: | ---: |
+| Requests turned into jobs or tickets | 210 | 101 | 99 | 107 |
+| Duplicate-merge F1 (after officer review) | 0 | 0.79 | 0.76 | 0.68 |
+| **Median time to assign a P1 family** | **463 min** | **20 min** | **20 min** | 28 min |
+| 90th percentile time to assign a P1 family | 1253 min | 172 min | 200 min | 154 min |
+| P1 families assigned by the end | 28/28 | 25/28 | 25/28 | 23/28 |
+| Boat or van trips | 210 | 56 | 55 | 53 |
+| **Wasted trips** (already rescued, rumour or duplicate) | **131** | **15** | **15** | 17 |
+| Supplies requests sent on rescue boats | 24 | 0 | 0 | 0 |
+| **Rumours caught in Verify** | **0/15** | **15/15** | **15/15** | 15/15 |
 
 How to read it honestly:
 
 - These are real numbers from a **synthetic** night, not field results. The rules extractor and the message generator share vocabulary, so rules-mode field accuracy (98.2%) is an upper bound.
 - The baseline reaches all 28 P1 families only because it keeps running about 21 hours past the night; Pukaar is scored up to 90 minutes after the last message.
 - Merge F1 is after a simulated officer reviews "possible duplicate" cards; automatic merges alone score 0.57 in rules mode.
-- The Ollama column used `qwen2.5:3b` (10 of 317 calls fell back to rules). It trails rules mode here mainly on people counts (71.7% against 99.4%); a whole-night run took about 28 minutes against 16 seconds.
+- **The LLM Planner column** ran every judgment event of the night through the planner loop with a free local model (`qwen2.5:7b` on Ollama; Listen kept on rules so the planner is the only difference). It **matches rules mode on outcomes** (median wait, wasted trips, rumours, P1 families reached) and is slightly worse on merge F1 (0.76 against 0.79) and the 90th-percentile wait. Of 200 planner runs, **72 finished on the model's own plan** and **128 were handed to the rules**: 2 timeouts and 126 rejected steps. The rejections are the guardrails working: 48 merges below the 0.6 match bar, 19 attempts to park a real rescue call in Verify, 12 merges into a family already safe, 2 rumours opened as rescue tickets, and 45 invalid argument values (the allowed values are now listed in the tool schemas, after this run). Average 2.1 tool steps per run; 4.5 hours for the night on a laptop CPU.
+- **Why Ollama for the evaluation:** a full night is about 630 model calls and far more tokens than any free hosted tier allows in a day, so the evaluation uses a free local model and the live app uses Groq's free tier for the planner.
+- The Ollama-reading column used `qwen2.5:3b` (10 of 317 calls fell back to rules). It trails rules mode here mainly on people counts (71.7% against 99.4%); a whole-night run took about 28 minutes against 16 seconds.
 
 ---
 
@@ -478,7 +482,7 @@ cd backend && .venv/bin/python -m pytest -q      # 86 passed
 
 **Watch it: https://youtu.be/TGQ5zi1kfI8**
 
-A 4:41 film, rendered entirely from code in [`video/`](video/): real screen recordings of the control room and two phones in sync, motion graphics, an offline voiceover (Kokoro, with Kamla's line in Hindi) and burned-in captions. The MP4 itself is not committed; rebuild it with the steps in [video/README.md](video/README.md). A three-minute live walkthrough is in [docs/demo-script.md](docs/demo-script.md).
+A 1:57 film, rendered entirely from code in [`video/`](video/): the problem, how the LLM Planner works, a live run with the Agent reasoning panel filling in, the officer's approval and the OTP, and the results. Real screen recordings of the control room and two phones in sync, motion graphics, an offline voiceover (Kokoro, with Kamla's line in Hindi) and burned-in captions. The MP4 itself is not committed; rebuild it with the steps in [video/README.md](video/README.md). A three-minute live walkthrough is in [docs/demo-script.md](docs/demo-script.md).
 
 ---
 

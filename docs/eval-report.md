@@ -6,28 +6,28 @@ Message mix: faq 14, followup 7, power 10, question 16, repost_safe 6, rescue 17
 
 ## Headline: Pukaar against first-come-first-served
 
-| Measure | First-come-first-served | Pukaar (rules) |
-| --- | --- | --- |
-| Requests turned into jobs or tickets | 210 | 98 |
-| Duplicate-merge F1 (after officer review) | 0 (no merging) | 0.80 |
-| Median time to assign a P1 family | 463 min | 16 min |
-| 90th percentile time to assign a P1 family | 1253 min | 147 min |
-| P1 families assigned by the end | 28/28 | 24/28 |
-| Boat or van trips | 210 | 54 |
-| Wasted trips (already rescued, rumour or duplicate) | 131 | 13 |
-| Supplies requests sent on rescue boats | 24 | 0 (van only) |
-| Rumours caught in the Verify lane | 0/15 | 15/15 |
+| Measure | First-come-first-served | Pukaar (rules) | Pukaar (Ollama, llama3.2:1b) |
+| --- | --- | --- | --- |
+| Requests turned into jobs or tickets | 210 | 101 | 108 |
+| Duplicate-merge F1 (after officer review) | 0 (no merging) | 0.79 | 0.71 |
+| Median time to assign a P1 family | 463 min | 20 min | 16 min |
+| 90th percentile time to assign a P1 family | 1253 min | 172 min | 200 min |
+| P1 families assigned by the end | 28/28 | 25/28 | 24/28 |
+| Boat or van trips | 210 | 56 | 54 |
+| Wasted trips (already rescued, rumour or duplicate) | 131 | 15 | 15 |
+| Supplies requests sent on rescue boats | 24 | 0 (van only) | 0 (van only) |
+| Rumours caught in the Verify lane | 0/15 | 15/15 | 15/15 |
 
 ## Pukaar in rules mode
 
-Run time: 10.9 s for the whole night.
+Run time: 10.3 s for the whole night.
 
 **Duplicate merging** (pairs of request messages about the same family):
 
 | | Precision | Recall | F1 | True pairs found | Wrong merges | Missed pairs |
 | --- | --- | --- | --- | --- | --- | --- |
-| Automatic merges only | 0.82 | 0.44 | 0.57 | 93 | 21 | 119 |
-| After the officer reviews 67 'possible duplicate' cards | 0.87 | 0.74 | 0.80 | 156 | 23 | 56 |
+| Automatic merges only | 0.83 | 0.43 | 0.57 | 92 | 19 | 120 |
+| After the officer reviews 67 'possible duplicate' cards | 0.88 | 0.72 | 0.79 | 153 | 20 | 59 |
 
 **Field extraction** on 180 rescue and welfare messages: 98.2% of fields correct overall.
 
@@ -45,7 +45,40 @@ Run time: 10.9 s for the whole night.
 
 **Other measures:** 15 of 15 rumour messages went to Verify, and 0 genuine messages were wrongly sent there. 6 of 6 reposts about the already-rescued Pinto family were matched to their closed ticket and answered automatically. 248 of 280 reporters received at least one status update or question back. 0 medic backup trips were requested.
 
-Wasted trips: duplicate of a family already served (P-0428); duplicate of a family already served (P-0463); duplicate of a family already served (P-0487); duplicate of a family already served (P-0436); duplicate of a family already served (P-0495); duplicate of a family already served (P-0443); duplicate of a family already served (P-0516); duplicate of a family already served (P-0534); duplicate of a family already served (P-0548); duplicate of a family already served (P-0544); duplicate of a family already served (P-0424); duplicate of a family already served (P-0551); duplicate of a family already served (P-0552).
+Wasted trips: duplicate of a family already served (P-0428); duplicate of a family already served (P-0459); duplicate of a family already served (P-0463); duplicate of a family already served (P-0488); duplicate of a family already served (P-0496); duplicate of a family already served (P-0436); duplicate of a family already served (P-0443); duplicate of a family already served (P-0517); duplicate of a family already served (P-0519); duplicate of a family already served (P-0536); duplicate of a family already served (P-0546); duplicate of a family already served (P-0550); duplicate of a family already served (P-0424); duplicate of a family already served (P-0553); duplicate of a family already served (P-0554).
+
+## Pukaar in Ollama, llama3.2:1b mode
+
+Run time: 1123.9 s for the whole night. Model: llama3.2:1b (317 model calls, 169 fell back to rules).
+
+**Duplicate merging** (pairs of request messages about the same family):
+
+| | Precision | Recall | F1 | True pairs found | Wrong merges | Missed pairs |
+| --- | --- | --- | --- | --- | --- | --- |
+| Automatic merges only | 0.77 | 0.35 | 0.48 | 75 | 23 | 137 |
+| After the officer reviews 66 'possible duplicate' cards | 0.84 | 0.62 | 0.71 | 131 | 25 | 81 |
+
+**Field extraction** on 180 rescue and welfare messages: 96.6% of fields correct overall.
+
+| Field | Accuracy |
+| --- | --- |
+| language | 100.0% |
+| people | 89.4% |
+| vulnerable | 93.3% |
+| medical | 100.0% |
+| water level | 100.0% |
+| location (lane) | 96.7% |
+| danger | 100.0% |
+
+**Intent** (what kind of message it is) correct for 97.4% of 304 messages. Most common misses: supplies read as rescue (4); faq read as question (2); road read as other (2).
+
+**Other measures:** 15 of 15 rumour messages went to Verify, and 0 genuine messages were wrongly sent there. 2 of 6 reposts about the already-rescued Pinto family were matched to their closed ticket and answered automatically. 248 of 280 reporters received at least one status update or question back. 0 medic backup trips were requested.
+
+Wasted trips: duplicate of a family already served (P-0428); duplicate of a family already served (P-0461); duplicate of a family already served (P-0465); duplicate of a family already served (P-0438); duplicate of a family already served (P-0492); duplicate of a family already served (P-0500); duplicate of a family already served (P-0445); duplicate of a family already served (P-0523); duplicate of a family already served (P-0525); duplicate of a family already served (P-0542); duplicate of a family already served (P-0555); duplicate of a family already served (P-0553); duplicate of a family already served (P-0557); duplicate of a family already served (P-0559); duplicate of a family already served (P-0424).
+
+## About the Ollama run
+
+The Ollama column used `llama3.2:1b`, the only model pulled on the build machine; 169 of its 317 model calls timed out or returned unusable output and fell back to rules. The recommended `qwen2.5:3b` or `qwen2.5:7b` has not been evaluated yet: pull it and run `scripts/evaluate.py --modes rules ollama` to get its numbers.
 
 ## How this was measured
 

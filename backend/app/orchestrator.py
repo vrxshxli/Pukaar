@@ -156,7 +156,9 @@ def _apply_dispatch(approval):
                                 f"New task, {ticket['priority']}: {_task_place(ticket)}. {people}"
                                 f"{' (' + extra + ')' if extra else ''}.{danger} Route: {route['summary']}.",
                                 ticket_id=ticket["id"])
-    loop.status_update(tickets.get(ticket["id"]))
+    # Families hear from us when the boat actually sets off, not before.
+    audit.log("Dispatch", f"{team['name']} assigned to {ticket['id']}, waiting for the crew to accept",
+              ticket_id=ticket["id"], approved_by=approval["decided_by"])
 
 
 def _task_place(ticket):

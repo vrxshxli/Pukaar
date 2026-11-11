@@ -28,13 +28,18 @@ def decode(row):
 def pending():
     rows = [decode(r) for r in db.query("SELECT * FROM approvals WHERE status = 'pending' ORDER BY id")]
     for r in rows:
-        # Tickets get better names as reports merge, so dispatch cards use the current one.
-        if r["kind"] == "dispatch" and r["ticket_id"] and r["team_id"]:
-            names = db.one("""SELECT t.title, tm.name FROM tickets t, teams tm WHERE t.id = ? AND tm.id = ?""",
-                           (r["ticket_id"], r["team_id"]))
-            if names:
-                r["title"] = f"Send {names['name']} to {names['title']}?"
+        r["title"] = current_title(r)
     return rows
+
+
+def current_title(approval):
+    """Tickets get better names as reports merge, so dispatch cards use the current one."""
+    if approval["kind"] == "dispatch" and approval["ticket_id"] and approval["team_id"]:
+        names = db.one("SELECT t.title, tm.name FROM tickets t, teams tm WHERE t.id = ? AND tm.id = ?",
+                       (approval["ticket_id"], approval["team_id"]))
+        if names:
+            return f"Send {names['name']} to {names['title']}?"
+    return approval["title"]
 
 
 def require_approved(approval, kind, ticket_id=None, team_id=None):
@@ -94,7 +99,9 @@ def decide(approval_id, decision, officer):
     if not officer:
         raise ApprovalRequired("an officer name is required")
     status = "approved" if decision == "approve" else "rejected"
-    db.update("approvals", "id", approval_id, status=status, decided_by=officer, decided_at=db.now_iso())
+    approval["title"] = current_title(approval)
+    db.update("approvals", "id", approval_id, status=status, decided_by=officer, decided_at=db.now_iso(),
+              title=approval["title"])
     audit.log("Officer", f"{officer} {status} #{approval_id}: {approval['title']}", tool="decide_approval",
               kind="human", ticket_id=approval["ticket_id"], approved_by=officer if status == "approved" else None)
     events.publish("changed", {"what": "approvals"})

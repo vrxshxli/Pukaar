@@ -96,6 +96,16 @@ flowchart LR
 
 Each rule has a pytest test in `backend/tests/`.
 
+## How duplicate matching works
+
+Triage adds up evidence that a report and a ticket are the same family, and writes each piece down as a reason:
+
+- **Location suggests:** same landmark, same lane, a few metres apart. On its own this can only raise a "Possible duplicate" card, because many families live on one lane.
+- **Identity confirms:** same sender, same family name (compared across Devanagari and Latin spellings by a consonant skeleton, so पाटिल and Patil match), a match against the household registry, or matching details (people count, vulnerable members, medical need, water level).
+- **Conflicts subtract:** a different family name, a different lane, or a very different head count.
+
+At 0.6 or more the report merges on its own; between 0.35 and 0.6 the officer decides. A report is only treated as a repost about an already-rescued family when there is identity evidence, so a new family near a rescued one is never told it was rescued. The evaluation is what pushed us to this design: an earlier version that trusted location alone merged different families and answered new ones as already safe.
+
 ## LLM modes
 
 - `LLM_MODE=rules` (default): keyword and pattern extraction in four languages, rapidfuzz matching, and template replies. No model needed.

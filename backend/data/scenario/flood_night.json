@@ -1521,7 +1521,7 @@
    "sender": null,
    "channel": "sms",
    "language": "en",
-   "text": "The Shaikh Noor family is stuck at Lane 6, they are on the roof. 3 people inside. With a small child and my old grandmother.",
+   "text": "The Noorani family is stuck at Lane 6, they are on the roof. 3 people inside. With a small child and my old grandmother.",
    "truth": {
     "family": "fam46",
     "kind": "rescue",
@@ -2361,7 +2361,7 @@
    "sender": null,
    "channel": "call",
    "language": "hi",
-   "text": "Sheikh Ali परिवार गली 7 मस्जिद के पास में फंसा है, पानी घुटनों तक आ गया है। 6 लोग हैं। छोटा बच्चा और बुज़ुर्ग दादी साथ में हैं। दादाजी को डायलिसिस चाहिए।",
+   "text": "Abbasi परिवार गली 7 मस्जिद के पास में फंसा है, पानी घुटनों तक आ गया है। 6 लोग हैं। छोटा बच्चा और बुज़ुर्ग दादी साथ में हैं। दादाजी को डायलिसिस चाहिए।",
    "truth": {
     "family": "fam30",
     "kind": "rescue",
@@ -6865,7 +6865,7 @@
    "priority": "P2"
   },
   "fam30": {
-   "surname": "Sheikh Ali",
+   "surname": "Abbasi",
    "lane": 7,
    "landmark": "lane7_mosque",
    "people": 6,
@@ -7057,7 +7057,7 @@
    "priority": "P2"
   },
   "fam46": {
-   "surname": "Shaikh Noor",
+   "surname": "Noorani",
    "lane": 6,
    "landmark": null,
    "people": 3,

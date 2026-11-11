@@ -22,10 +22,10 @@ messages = []
 phone_counter = [10000]
 
 SURNAMES = ["Patil", "Kadam", "Khan", "Bhatt", "Sayyed", "Lobo", "Menon", "Wagh", "Kharat", "Dalvi", "Shirke",
-            "Chougule", "Barve", "Paradkar", "Ingle", "Tambe", "Kotian", "Shaikh Noor", "Pereira", "Gaonkar", "D'Souza", "Shinde", "More", "Ansari", "Pawar", "Jadhav",
+            "Chougule", "Barve", "Paradkar", "Ingle", "Tambe", "Kotian", "Noorani", "Pereira", "Gaonkar", "D'Souza", "Shinde", "More", "Ansari", "Pawar", "Jadhav",
             "Sawant", "Mishra", "Iyer", "Fernandes", "Qureshi", "Bhosle", "Gaikwad", "Tiwari", "Chavan", "Naik",
             "Salvi", "Pandey", "Mhatre", "Rane", "Desai", "Kamble", "Lokhande", "Siddiqui", "Pillai", "Mane",
-            "Dubey", "Thakur", "Gawde", "Shetty", "Rathod", "Waghmare", "Parab", "Malik", "Joshi", "Sheikh Ali",
+            "Dubey", "Thakur", "Gawde", "Shetty", "Rathod", "Waghmare", "Parab", "Malik", "Joshi", "Abbasi",
             "Kulkarni", "Bansode", "Hegde", "Nair", "Raut", "Solanki", "Mistry", "Kale", "Sutar", "Ghosh", "Rao"]
 SURNAMES_HI = {"Patil": "पाटिल", "Kadam": "कदम", "Gupta": "गुप्ता", "Yadav": "यादव", "Khan": "खान", "Shinde": "शिंदे",
                "More": "मोरे", "Ansari": "अंसारी", "Pawar": "पवार", "Jadhav": "जाधव", "Sawant": "सावंत", "Mishra": "मिश्रा",

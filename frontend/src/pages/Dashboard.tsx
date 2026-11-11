@@ -22,7 +22,7 @@ function useOfficer() {
 
 function Metric({ value, label, tone }: { value: number; label: string; tone?: string }) {
   return (
-    <div className="flex-1 border-r border-line px-3 py-1.5 last:border-r-0">
+    <div className="flex-1 border-b border-r border-line px-3 py-1.5 last:border-r-0 sm:border-b-0">
       <div className="text-xl font-extrabold tabular-nums" style={tone ? { color: tone } : undefined}>{value}</div>
       <div className="text-[11px] text-muted">{label}</div>
     </div>
@@ -60,6 +60,12 @@ export default function Dashboard() {
   }
 
   const m = state.metrics
+  // P1 dispatches first, then other dispatches, then everything else.
+  const scoreOf = Object.fromEntries(state.tickets.map((t) => [t.id, t.priority_score]))
+  const approvalsSorted = [...state.approvals].sort((a, b) => {
+    const rank = (x: typeof a) => (x.kind === 'dispatch' ? 0 : x.kind === 'merge' ? 1 : 2)
+    return rank(a) - rank(b) || (scoreOf[b.ticket_id ?? ''] ?? 0) - (scoreOf[a.ticket_id ?? ''] ?? 0) || a.id - b.id
+  })
   return (
     <div className="flex h-full flex-col">
       <Header state={state} connected={connected} officer={officer} setOfficer={setOfficer}
@@ -72,7 +78,7 @@ export default function Dashboard() {
           Automation is off: agents keep logging, but no message is sent and no new proposal is made.
         </div>
       )}
-      <div className="flex border-b border-line bg-card">
+      <div className="grid grid-cols-4 border-b border-line bg-card sm:flex">
         <Metric value={m.reports_in} label="reports in" />
         <Metric value={m.tickets} label="tickets after merging" />
         <Metric value={m.open_p1} label="open P1 tickets" tone="#B3284F" />
@@ -110,7 +116,7 @@ export default function Dashboard() {
                 <h2 className="mb-2 text-sm font-bold">Waiting for your approval ({state.approvals.length})</h2>
                 <div className="space-y-2">
                   {state.approvals.length === 0 && <Empty>Nothing to approve. Dispatches, bulletins and uncertain merges will appear here.</Empty>}
-                  {state.approvals.map((a) => (
+                  {approvalsSorted.map((a) => (
                     <ApprovalCard key={a.id} approval={a} teams={state.teams} busy={busy} onPreview={setPreview}
                       onDecide={(decision, teamId) => act(() => api(`/api/approvals/${a.id}`, { decision, officer, team_id: teamId }))} />
                   ))}

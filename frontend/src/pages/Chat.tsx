@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { api, clock, useStream } from '../api'
 import { ErrorNote, Logo } from '../components/ui'
+import { ThemeToggle } from '../theme'
 
 interface Message {
   id: number
@@ -179,6 +180,7 @@ export default function Chat() {
         </div>
         <button onClick={() => { try { localStorage.removeItem('pukaar-identity') } catch { /* ignore */ } setIdentity(null); setMessages([]) }}
           className="rounded bg-white/15 px-2 py-1 text-[11px]">Switch</button>
+        <ThemeToggle className="bg-white/10 text-white" />
       </div>
       <div className="bg-marigold/20 px-3 py-1 text-center text-[11px] font-semibold text-[#6b4b00] dark:text-marigold">
         Demo: messages go to the Pukaar control-room simulation

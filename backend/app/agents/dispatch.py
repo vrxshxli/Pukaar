@@ -132,8 +132,9 @@ class Dispatch(Agent):
     def _free_up_for_p1(self, ticket):
         """If every boat is only proposed for lower-priority work, take one back for this P1."""
         row = db.one("""SELECT a.* FROM approvals a JOIN tickets t ON t.id = a.ticket_id
+                        JOIN teams tm ON tm.id = a.team_id
                         WHERE a.kind = 'dispatch' AND a.status = 'pending' AND t.priority != 'P1'
-                        ORDER BY t.priority_score LIMIT 1""")
+                        AND tm.kind = 'boat' ORDER BY t.priority_score LIMIT 1""")
         if not row:
             return []
         approvals.supersede(row["id"], f"{ticket['id']} is P1 and needs this boat more")

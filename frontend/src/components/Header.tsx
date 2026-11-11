@@ -2,6 +2,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { useState } from 'react'
 import type { State } from '../api'
 import { clock } from '../api'
+import { ThemeToggle } from '../theme'
 import { COLORS, Logo } from './ui'
 
 const LEVEL_COLOR: Record<string, string> = { Red: COLORS.urgent, Orange: '#D9530B', Yellow: COLORS.marigold, none: COLORS.grey }
@@ -45,6 +46,12 @@ export default function Header({ state, connected, officer, setOfficer, onToggle
       </div>
       {children}
       <div className="ml-auto flex flex-wrap items-center gap-3">
+        <nav className="flex gap-2 text-xs opacity-90" aria-label="Other apps">
+          <a href="/chat" target="_blank" rel="noreferrer" className="hover:underline">Citizen chat</a>
+          <a href="/volunteer" target="_blank" rel="noreferrer" className="hover:underline">Volunteer</a>
+          <a href="/family" target="_blank" rel="noreferrer" className="hover:underline">Family lookup</a>
+        </nav>
+        <ThemeToggle className="bg-white/10 text-white" />
         <label className="flex items-center gap-1.5 text-xs">
           <span className="opacity-75">LLM</span>
           <select value={llm.mode} onChange={(e) => onLlmMode(e.target.value as 'rules' | 'ollama')}

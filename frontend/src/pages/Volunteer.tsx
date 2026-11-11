@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { api, clock, useStream, type Route, type Team } from '../api'
 import WardMap from '../components/WardMap'
 import { Button, Chip, Empty, ErrorNote, Logo, PriorityBadge, Spinner } from '../components/ui'
+import { ThemeToggle } from '../theme'
 
 interface Task {
   id: string
@@ -127,6 +128,7 @@ export default function Volunteer() {
           <span className="text-[11px] opacity-75">{team ? STATUS[team.status] ?? team.status : 'Loading'}</span>
         </div>
         <button onClick={() => setTeamId('')} className="rounded bg-white/15 px-2 py-1 text-[11px]">Switch team</button>
+        <ThemeToggle className="bg-white/10 text-white" />
       </div>
       <div className="flex-1 space-y-3 p-3">
         {error && <ErrorNote>{error}</ErrorNote>}

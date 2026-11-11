@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { api, clock } from '../api'
 import { Button, ErrorNote, Logo } from '../components/ui'
+import { ThemeToggle } from '../theme'
 
 interface Result {
   ticket_id: string
@@ -54,7 +55,10 @@ export default function Family() {
 
   return (
     <div className="mx-auto max-w-md p-4">
-      <div className="mb-1 flex items-center gap-2"><Logo /><h1 className="text-xl font-extrabold">Is my family safe?</h1></div>
+      <div className="mb-1 flex items-center gap-2">
+        <Logo /><h1 className="text-xl font-extrabold">Is my family safe?</h1>
+        <ThemeToggle className="ml-auto bg-soft text-fg" />
+      </div>
       <p className="mb-4 text-sm text-muted">
         Check a rescue request in Ward 12. We only show the status and the relief camp, never an address or phone number.
       </p>

@@ -1,0 +1,458 @@
+## Slide 1
+- Pukaar
+- पुकार
+- AgentX Hackathon 2026 | PS-03: Multi-agent disaster response coordinator
+- Pukaar पुकार
+- India can send a flood alert to every phone. Pukaar makes sure the call for help that comes back is heard, answered and closed.
+- The gap nobody built for: alerts go out in 19+ languages, but requests for help come back as WhatsApp forwards, posts and calls, with no structure, no status and no “closed”. The problem isn’t too little information. It’s the same request arriving five times and nobody knowing when it’s done.
+- Meet Kamla, 68
+- Ground floor, riverside colony. Water at knee height, grandson with a fever, phone at 14%. She, her daughter in Pune and a neighbour all ask for help. At 11 PM a boat goes to a family rescued at 8 PM. Kamla’s boat reaches her lane at 2 AM. (Illustrative story built from documented patterns.)
+- What the ward control room receives at 9:40 PM
+- WhatsApp voice note, Hindi
+- “पानी घुटनों तक आ गया है, पोते को बुखार है… गली चार, हनुमान मंदिर के पीछे”
+- Post on X, from her daughter in Pune
+- “Please help my mother Kamla Devi, Lane 4 behind Hanuman temple, Shanti Nagar. Water rising!!”
+- SMS, from a neighbour
+- “shantinagar gali 4 mandir ke peeche budhi amma aur bachcha phase hai”
+- Officer’s queue
+- 400+ unread messages, a whiteboard, and a 3-minute manual entry for each one.
+- Three reports, three spellings, one family. Nobody knows.
+- 400 messages × 3 minutes ≈ 20 hours of typing before anyone can act. The three red ones are Kamla. (Illustrative)
+- 134 bn
+- disaster alerts sent by SMS in 19+ languages through SACHET. There’s no structured way to reply.
+- NDMA / C-DOT, 2026
+- ~3 min
+- to hand-type each rescue request, with hundreds arriving every hour and a separate team just to remove repeats.
+- Kerala floods volunteers, 2018
+- Already rescued
+- Kerala’s CM office warned that many helpline requests were for people who had already been saved.
+- CMO Kerala, Aug 2018
+- ~48,000
+- heatstroke cases and 159 deaths in 2024, India’s warmest year on record. Heat victims rarely call for help.
+- NCDC via PTI, 2025
+- Pukaar, AgentX Hackathon 2026, PS-03
+- 1
+
+## Slide 2
+- Pukaar
+- पुकार
+- One family, one ticket, one closing
+- Our solution | Six agents, one incident board
+- Agents do the paperwork. Humans send the boats.
+- Every rescue dispatch and every public broadcast needs one tap from the duty officer.
+- Nothing is lost, repeated or left open.
+- Reversible work, such as replies, follow-up questions and merges, the agents handle on their own.
+- Watch
+- Sees it coming
+- Reads alerts, rain forecasts and river gauges. Proposes where to pre-position boats before the peak.
+- Pre-positioning needs officer approval
+- Listen
+- Hears every channel
+- WhatsApp, SMS and voice in Hindi, Marathi or English. Extracts needs and landmarks; asks one follow-up.
+- Acts alone
+- Triage
+- Makes one ticket
+- Merges duplicates across channels, ranks them with reasons and flags doubtful claims.
+- Acts alone; merges can be undone
+- Dispatch
+- Plans the rescue
+- Matches teams by skill, distance and duty hours. Routes around flooded roads and replans.
+- Every dispatch needs officer approval
+- Loop
+- Closes the circle
+- Updates everyone who reported the family in their language. Drafts ward bulletins.
+- Public bulletins need officer approval
+- Saathi
+- Stays with the family
+- Answers “what do I do now?” for floods, fire, gas leaks and heat, only from approved safety playbooks.
+- Acts alone; danger goes to 112 first
+- Listen
+- every channel
+- Merge
+- one family
+- Rank
+- with reasons
+- Assign
+- officer approves
+- Close
+- confirmed safe
+- USP: Pukaar closes the loop that every flood breaks. A call for help is merged once, ranked with reasons, answered in the caller’s language and marked safe, so no boat goes to a family that’s already out.
+- What’s new here
+- Closes the loop
+- Open, assigned, safe. Existing tools stop at “received”.
+- Merges with reasons
+- Shows why reports in three languages are one family.
+- Learns the streets
+- “Lane blocked” replies reroute every team.
+- One engine, many disasters
+- Floods, fires, gas leaks, heat: only the playbook changes.
+- Voice note, Hindi
+- गली चार, मंदिर के पीछे
+- X post, English
+- Lane 4 behind Hanuman temple
+- SMS, Hinglish
+- gali 4 mandir ke peeche
+- P1
+- 3 reports merged
+- Kamla Devi household, Lane 4, Shanti Nagar
+- Water at knee height, rising
+- Elder, 68
+- Child with fever
+- Phone at 14%
+- Proposed: Boat Team 2 (medic on board), 1.2 km, route avoids flooded Lane 6
+- Approve dispatch
+- Pukaar, AgentX Hackathon 2026, PS-03
+- 2
+
+## Slide 3
+- Pukaar
+- पुकार
+- How it addresses the problem
+- Problem fit | What breaks today, and what changes
+- What goes wrong in a flood night today
+- What Pukaar does
+- The same family is reported five times across channels
+- →
+- One ticket, with every reporter linked to it
+- Boats go to families who were rescued hours ago
+- →
+- Closing needs a volunteer OTP and the family’s reply. Later reposts get “Rescued at 8:12 PM, safe at Camp 3”.
+- About 3 minutes of typing per request
+- →
+- The agent extracts the details in seconds; the officer only reviews
+- The caller never hears back, so she reposts
+- →
+- Status updates in her own language, which stops the repost spiral
+- Addresses are landmarks: “behind the Hanuman mandir”
+- →
+- Landmark geocoding, and a request for a location pin when confidence is low
+- Rumours and fake rescue calls spread fast
+- →
+- A verify lane; public bulletins go out only after the officer approves them
+- Alerts arrive, but nothing is moved in advance
+- →
+- Watch proposes where to pre-position boats and supplies before the peak
+- Families wait alone and make risky choices: wading, switches, flames
+- →
+- Saathi gives safe next steps in their language and escalates danger
+- Heat victims are silent; they don’t call
+- →
+- Heatwave mode checks on vulnerable households first, with the same engine and a new playbook
+- 9:44
+- 14%
+- Pukaar Ward 12 Helpline
+- Verified helpline
+- Today
+- ▶
+- 9:38 PM · 0:14
+- आपका संदेश मिल गया है। टिकट P-0412 खुला है। घर में कितने लोग हैं?
+- 9:38 PM
+- 3 लोग। पोते को बुखार है
+- 9:39 PM
+- आपकी बेटी का संदेश भी इसी टिकट से जुड़ गया है।
+- 9:41 PM
+- बोट टीम 2 आपकी ओर आ रही है, लगभग 25 मिनट। फ़ोन चालू रखें, ऊँची जगह पर रहें।
+- 9:44 PM
+- टीम पहुँचने पर यह OTP बताएँ: 4817
+- 9:44 PM
+- Message
+- Hold to speak
+- Kamla, in Hindi
+- One follow-up, a merged ticket, a status and an OTP
+- 9:58
+- 62%
+- Pukaar Volunteer Desk
+- Boat Team 2
+- New task, P1
+- Kamla Devi household, Lane 4 behind Hanuman temple. 3 people: elder 68, child with fever.
+- Route avoids flooded Lane 6, 1.2 km.
+- Accept
+- Can’t go
+- 9:45 PM
+- Lane 5 blocked too, water above waist
+- 9:58 PM
+- Noted. New route via Station Road, +4 min. Lane 5 now blocked for all teams.
+- 9:58 PM
+- Enter the family’s OTP at pickup.
+- Enter OTP
+- Need medic
+- 9:58 PM
+- Message
+- Share location
+- Volunteer, on the water
+- Task, route, and a replan from one reply
+- 9:52
+- 11%
+- Pukaar Saathi
+- Safety steps from approved playbooks
+- गैस की बदबू आ रही है, पानी भी घुस गया है
+- 9:51 PM
+- किसी भी बिजली के स्विच को न छुएँ, आग न जलाएँ।
+- 9:51 PM
+- सिलेंडर का रेगुलेटर बंद करें, खिड़कियाँ खोलें और बाहर ऊँची जगह पर जाएँ। बाहर से 1906 पर कॉल करें।
+- Call 1906
+- Call 112
+- 9:51 PM
+- Gas risk added to ticket P-0412. Boat Team 2 told.
+- हम बाहर आ गए हैं
+- 9:52 PM
+- बहुत अच्छा। वहीं रुकें, बोट टीम 2 लगभग 15 मिनट में पहुँचेगी।
+- 9:52 PM
+- Ask anything
+- Hold to speak
+- Saathi, the companion
+- Safe steps, a call to 1906, and the team told
+- Pukaar, AgentX Hackathon 2026, PS-03
+- 3
+
+## Slide 4
+- Pukaar
+- पुकार
+- Agent design: planning, tools and memory
+- Architecture | Multi-agent, human-gated
+- What comes in
+- Citizen requests
+- WhatsApp, SMS, voice notes
+- Official alerts
+- CAP feed in SACHET format (mock)
+- Forecast and gauges
+- Open-Meteo rain, river levels (mock)
+- Field replies
+- “reached”, “lane blocked”, OTP
+- Household registry
+- Vulnerable residents (mock data)
+- →
+- Agents on a shared incident board
+- Planner
+- Splits each incident into tasks for the right agent
+- Watch
+- Alerts into watch zones and pre-positioning plans
+- Listen
+- Speech to text, translation, extraction, one follow-up
+- Triage
+- Duplicate merge, explainable priority, verify lane
+- Dispatch + Loop
+- Routing, replanning, status and bulletins
+- Saathi
+- Safety Q&A from playbooks; updates the ticket; escalates danger
+- →
+- Human gates
+- Officer approves
+- Dispatching a boat or team
+- Officer approves
+- Any public bulletin
+- Officer approves
+- Downgrading a P1, or closing without the family’s reply
+- Agents act alone
+- Acknowledge, ask a follow-up, merge (undoable), re-ping
+- →
+- What goes out
+- Officer dashboard
+- Live map, ticket queue, approvals
+- Volunteer tasks
+- WhatsApp with route and map link
+- Family updates + Saathi
+- Status and safety steps in their language
+- Ward bulletins
+- Area-wise, in the local language
+- Audit log
+- Every action, who approved it, when
+- Memory
+- what the agents remember across the night
+- Case memory
+- Each ticket’s full timeline: every report, call, assignment and reply
+- Area memory
+- Blocked roads and water depth from volunteers, fading as reports age
+- Volunteer memory
+- Skills, boat or vehicle, hours on duty, enforced rest
+- Household memory
+- Who is elderly, alone or on dialysis, for heat check-ins (mock)
+- Real tool calls
+- Messages WhatsApp Cloud API / Twilio
+- Calls Twilio SMS and voice (IVR)
+- Weather Open-Meteo API
+- Alerts CAP feed parser
+- Safety NDMA playbooks
+- Routing OSRM / OpenRouteService
+- Geocoding Nominatim + landmarks
+- Speech Whisper / Bhashini
+- Tickets REST API on PostGIS
+- Tech stack
+- LangGraph multi-agent orchestration
+- LLM with tool calling
+- FastAPI
+- Postgres + PostGIS
+- Leaflet live map
+- Server-sent events
+- React dashboard
+- Synthetic flood-night replay
+- Pukaar, AgentX Hackathon 2026, PS-03
+- 4
+
+## Slide 5
+- Pukaar
+- पुकार
+- The demo: a flood night, replayed
+- Working demo | Live at 10× speed in 3 minutes
+- Live demo walkthrough
+- 1
+- A red alert arrives
+- Watch marks two low-lying wards and proposes moving two boats there. Officer approves.
+- 2
+- Three reports, one family
+- Hindi voice note, English post and SMS arrive. Triage merges them into one P1 ticket and shows why.
+- 3
+- Dispatch proposes a team
+- Boat Team 2 with a medic, 1.2 km away. Officer taps approve. The volunteer gets a WhatsApp with the route; Kamla and her daughter each get an update in their language.
+- 4
+- Kamla asks what to do
+- “Gas smell, and water is inside.” Saathi replies in Hindi from the gas-leak playbook, tells her to call 1906, and flags the gas to Boat Team 2.
+- 5
+- A lane floods
+- A volunteer replies “lane blocked”. Area memory updates and another team’s route is replanned on its own.
+- 6
+- Closed means closed
+- The rescue is confirmed by OTP. A fourth repost gets an automatic “already rescued, safe at Camp 3”.
+- 7
+- The ward hears back
+- Loop drafts a Marathi bulletin with camp locations. Officer approves, and it goes out.
+- Pukaar control room
+- Ward 12, flood night, 9:45 PM
+- Live
+- 312
+- reports in
+- 141
+- tickets after merge
+- 2
+- P1 tickets open
+- 3
+- waiting for your approval
+- P1
+- Kamla Devi household
+- Lane 4, 3 reports merged, 6 min
+- P1
+- Joseph family, on roof
+- Lane 9, 2 reports, 11 min
+- Verify
+- “Dam has burst” post
+- Contradicts river gauge
+- Safe
+- Pinto family
+- Closed by OTP at 8:12 PM
+- Waiting for your approval
+- Send Boat Team 2 to Kamla Devi household?
+- Water rising
+- Elder, 68
+- Child, fever
+- Phone 14%
+- Why merged: same lane and landmark in Hindi, English and Hinglish, all within 6 minutes.
+- Why this team: medic on board, 1.2 km, 3 h on duty.
+- Approve
+- Change team
+- Officer console mock-up; numbers are illustrative, from the synthetic replay.
+- How we’ll prove it works
+- Synthetic flood night, ~300 messages
+- Target
+- Duplicate merge accuracy (F1)
+- ≥ 0.90
+- Fields extracted correctly
+- ≥ 90%
+- P1 time to assign vs first-come-first-served
+- Faster
+- Trips to families already rescued
+- 0
+- Ground truth is known because we write the night. Targets now, measured numbers in the final round.
+- 24-hour build plan
+- 0–4 h
+- Synthetic data, ticket schema, WhatsApp and SMS sandbox
+- 4–10 h
+- Listen and Triage agents with merge reasons
+- 10–16 h
+- Dispatch, routing, approval gates, live map
+- 16–21 h
+- Loop updates, Saathi playbooks, replay mode, evaluation
+- 21–24 h
+- Demo video, README; stretch: heatwave mode
+- Pukaar, AgentX Hackathon 2026, PS-03
+- 5
+
+## Slide 6
+- Pukaar
+- पुकार
+- Feasible, safe and worth deploying
+- Feasibility and impact | Risks, alternatives, measures
+- Risks and how we handle them
+- Two different families get merged
+- →
+- Merges can be undone; low-confidence ones go to the officer
+- The model invents a location
+- →
+- No dispatch below a geocode confidence bar; raw message shown beside the extraction
+- Who is accountable?
+- →
+- Agents propose, the officer approves; every action is in the audit log
+- Mobile data drops
+- →
+- SMS fallback and queued sync
+- Untrained volunteers sent into deep water
+- →
+- Capability gating by skill and water depth
+- Fake requests and rumours
+- →
+- Verify lane, cross-check with alert zones, callback
+- Wrong safety advice
+- →
+- Saathi answers only from approved playbooks; danger goes to 112 first
+- Personal data
+- →
+- Mock data only; no names in public bulletins
+- Why it’s buildable in 24 hours
+- Every tool is a free sandbox or public API; no special access needed.
+- We write the flood night ourselves, so the demo is repeatable and the scores are honest.
+- Clear scope: the core loop ships first, heatwave mode is a stretch.
+- Versus what exists
+- Tool
+- What it misses on a flood night
+- SACHET alerts
+- Sends warnings out; doesn’t take requests back
+- Volunteer sheets (Kerala 2018)
+- Manual entry, a team to remove repeats, little status for families
+- Crisis maps (Ushahidi-style)
+- Show reports; dispatch and closing stay manual
+- WhatsApp groups
+- Fast but unstructured; forwards outlive the rescue
+- Pukaar
+- Merge, rank, dispatch with approval, close, in her language
+- Impact we’ll measure
+- Faster
+- The most urgent families get a team sooner
+- Median P1 time to assign
+- No wasted trips
+- Boats go where people still are
+- Trips to rescued families
+- Heard
+- Every caller knows help is coming
+- % of callers who got a status
+- Nobody silent
+- Heat check-ins reach the vulnerable
+- % of registry reached
+- Who uses it: ward and district control-room officers and their volunteer teams. Citizens just message as they already do.
+- Team: [Team name] | [Member 1, role] | [Member 2, role] | [Member 3, role] | [Member 4, role]
+- One night, two endings
+- Kamla’s story, illustrative
+- Today
+- 11:00 PM: a boat goes to a family rescued at 8 PM
+- 2:00 AM: a boat finally reaches Kamla
+- With Pukaar
+- Safe by about 10:10 PM: reports merged at 9:38, boat approved at 9:44
+- 9:30 PM
+- 10:30 PM
+- 11:30 PM
+- 12:30 AM
+- 1:30 AM
+- 2:30 AM
+- “No call for help should be heard five times and answered never.”
+- Sources: NDMA / C-DOT SACHET via ETV Bharat, 2026 · Khaleej Times, Kerala floods volunteers, 2018 · CMO Kerala via The Statesman, 2018 · The News Minute, 2018 · NCDC heat surveillance via PTI, 2025
+- Pukaar, AgentX Hackathon 2026, PS-03
+- 6
+

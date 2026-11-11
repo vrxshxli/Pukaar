@@ -2,39 +2,55 @@
 
 # Pukaar · पुकार
 
-**Every call heard. Every family reached.**
-
-A multi-agent flood-response coordinator for ward control rooms. It turns a night of duplicate, multilingual and sometimes false calls for help into one ranked queue, proposes the right boat, and lets a human officer decide.
+**An agent for the ward duty officer on a flood night.**
 
 ![Python](https://img.shields.io/badge/Python-3.11%2B-2f5d58?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-2f5d58?logo=fastapi&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-2f5d58?logo=react&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind-4.1-2f5d58?logo=tailwindcss&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-WAL-2f5d58?logo=sqlite&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-67%20passing-4f8a4c)
-![Offline](https://img.shields.io/badge/runs-on%20one%20laptop-d4705f)
+![LLM](https://img.shields.io/badge/LLM%20Planner-Groq%20free%20%C2%B7%20Ollama%20local-2f5d58)
+![Tests](https://img.shields.io/badge/tests-86%20passing-4f8a4c)
+![Cost](https://img.shields.io/badge/cost-%E2%82%B90-d4705f)
 
 **AgentX Hackathon 2026 · PS-03 · Team Seekers**
 
-### 🌐 [Live app: pukaar.onrender.com](https://pukaar.onrender.com) · ▶ [Watch the 4-minute demo film](https://youtu.be/TGQ5zi1kfI8)
-
-[![Pukaar demo film on YouTube](https://img.youtube.com/vi/TGQ5zi1kfI8/maxresdefault.jpg)](https://youtu.be/TGQ5zi1kfI8)
-
-![Pukaar landing page](docs/screenshots/landing.jpg)
+### 🌐 [Live app: pukaar.onrender.com](https://pukaar.onrender.com) · ▶ [Demo video](https://youtu.be/TGQ5zi1kfI8)
 
 </div>
 
+| | |
+| --- | --- |
+| **Who it is for** | The **ward duty officer** in a flood control room: one person, three boats, a van, and hundreds of messages arriving at once. |
+| **The problem** | The same family writes three times in three languages, rumours spread, and boats go in the order calls arrive, so the families in the most danger wait the longest: a median of **463 minutes** on our 311-message test night. |
+| **Why an agent, not a chatbot** | A chatbot answers one person. The officer needs something that **acts across the whole ward**: reads every message, checks what it already knows, decides whether this is a family already on a ticket, a rumour or a new emergency, and prepares the next action for approval. That needs planning, tools and memory, not a conversation. |
+| **What changes** | One ticket per family, ranked with written reasons, the right boat proposed with a route around flooded lanes. The median wait for the most urgent families drops to **20 minutes**. |
+
+### How the agent works
+
+```
+event ─► LLM Planner ──plan──► one tool call ──► observe result ──► replan … ──► done (max 6 steps)
+           │  reads memory                         │
+           │  short-term · long-term · episodic    └─ every step validated; invalid → rules take over
+           ▼
+     proposes only ──► officer approves (require_approved) ──► boat moves · family gets OTP
+```
+
+- **Planning.** For each judgment event (a new rescue report, a likely duplicate, a rumour, a blocked lane) the LLM Planner returns an ordered plan, calls **one tool**, sees the result, and replans until done or 6 steps. Obvious events (FAQs, status questions, supplies) stay with fast rules. `PLANNER_SCOPE = judgment | all | off`.
+- **Tool use.** It may only call tools in [`tools/registry.py`](backend/app/tools/registry.py), with their JSON schemas: `find_similar_tickets`, `create_ticket`, `merge_into_ticket`, `flag_for_verification`, `score_priority`, `escalate_danger`, `mark_road_blocked`, `replan_routes`, and the memory tools.
+- **Memory.** Read-only tools: **short-term** (this family's ticket, reports and conversation), **long-term** (blocked lanes, watch zones, household registry, camps), **episodic** (past decisions and outcomes, e.g. "a boat was rerouted around Lane 6").
+- **Human approval.** No tool the Planner can reach dispatches a boat, closes or downgrades a ticket, or sends a bulletin. Those still pass `approvals.require_approved`, which only an officer's tap satisfies. A merge is only accepted if the matcher's own score clears 0.6, and a P1 is never lowered.
+- **Reliability.** Every model call has a timeout and retries with backoff on rate limits. A timeout, a rate limit, bad JSON or a rejected step hands the event to the rules, and the fallback is logged. Every plan, step, reason and result is in the audit log and in the **Agent reasoning** tab of each ticket.
+
+### Run it locally, free
+
+```bash
+./start.sh                  # macOS / Linux   (Windows: .\start.ps1)   → http://localhost:8000
+```
+
+Rules mode needs nothing else. For the LLM Planner, either run a free local model (`ollama pull qwen2.5:7b`, then `LLM_MODE=ollama`) or put a free Groq key in `.env` (`LLM_MODE=groq`, `GROQ_API_KEY=…`, see [`.env.example`](.env.example)). Sign in at `/login` as `rao` (officer) or `boat1` (crew).
+
+![Pukaar landing page](docs/screenshots/landing.jpg)
+
 ---
-
-## The problem, in two sentences
-
-In a flood, a ward control room gets hundreds of messages at once: the same family three times, rumours, and voice notes in three languages. Boats then go out in the order calls arrive, so the families in the most danger wait the longest (on our test night, a median of **463 minutes**).
-
-## What Pukaar does about it
-
-Six specialist agents and a planner read every message, merge repeats into **one ticket per family**, rank it with **written reasons**, propose the nearest suitable crew with a route around flooded lanes, and **stop**: nothing moves until a signed-in duty officer approves. Families hear back in their own language, with an OTP so the crew knows they reached the right door. On the same night, the median wait for the most urgent families drops to **20 minutes**.
-
-> Agents do the paperwork. Humans send the boats.
 
 ## Contents
 

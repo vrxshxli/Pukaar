@@ -159,7 +159,8 @@ Copy the location words exactly into location_text; the control room geocodes th
 def extract(text):
     """Structured report from a message: model first, rules always as the base."""
     rules = nlp.extract(text)
-    if not _use_ollama():
+    # listen_llm = off keeps Listen on rules while the Planner uses the model (fair evaluation, saves quota).
+    if not _use_ollama() or db.get_setting("listen_llm", "on") == "off":
         if mode() == "ollama":
             _fallback(_state["last_error"] or "Ollama unavailable")
         return rules, "rules"

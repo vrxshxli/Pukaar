@@ -61,9 +61,12 @@ def run_pukaar(mode):
     tmp = Path(tempfile.mkdtemp()) / "eval.db"
     os.environ["PUKAAR_DB"] = str(tmp)
     db.connect(tmp)
-    db.set_setting("llm_mode", mode)
+    # planner = Ollama with the LLM Planner on; ollama = Ollama for reading messages only.
+    db.set_setting("llm_mode", "ollama" if mode == "planner" else mode)
+    db.set_setting("planner_scope", "judgment" if mode == "planner" else "off")
+    db.set_setting("listen_llm", "off" if mode == "planner" else "on")
     db.set_setting("auto_field", "on")
-    if mode == "ollama" and not llm.check_health(force=True):
+    if mode in ("ollama", "planner") and not llm.check_health(force=True):
         return None
     message_truth = {}
     queue = items()
@@ -86,8 +89,16 @@ def run_pukaar(mode):
         simulated_officer(clock, message_truth)
         orchestrator.tick()
         clock += timedelta(minutes=1)
+    runs = db.query("SELECT status, steps, outcome FROM agent_runs")
+    planner_stats = None
+    if mode == "planner":
+        reasons = Counter((r["outcome"] or "").split("(")[1].split(":")[0] if "Rules took over (" in (r["outcome"] or "")
+                          else "finished" for r in runs)
+        planner_stats = {"runs": len(runs), "finished": sum(1 for r in runs if r["status"] == "done"),
+                         "rules": sum(1 for r in runs if r["status"] == "rules"), "reasons": dict(reasons),
+                         "avg_steps": round(sum(len(json.loads(r["steps"] or "[]")) for r in runs) / max(len(runs), 1), 2)}
     return {"mode": mode, "seconds": round(time.time() - started, 1), "message_truth": message_truth,
-            "llm": llm.status() if mode == "ollama" else None}
+            "llm": llm.status() if mode in ("ollama", "planner") else None, "planner": planner_stats}
 
 
 def simulated_officer(clock, message_truth):
@@ -374,7 +385,10 @@ def write_report(results, baseline, skipped):
         lines += [
             f"## Pukaar in {r['label']} mode",
             "",
-            f"Run time: {r['seconds']} s for the whole night." + (f" Model: {r['model']}." if r.get("model") else ""),
+            f"Run time: {r['seconds']} s for the whole night." + (f" Model: {r['model']}." if r.get("model") else "")
+            + (f" LLM Planner: {r['planner']['runs']} runs, {r['planner']['finished']} finished by the model, "
+               f"{r['planner']['rules']} handed to rules ({', '.join(f'{k} {v}' for k, v in r['planner']['reasons'].items() if k != 'finished')}), "
+               f"{r['planner']['avg_steps']} tool steps on average." if r.get("planner") else ""),
             "",
             "**Duplicate merging** (pairs of request messages about the same family):",
             "",
@@ -454,11 +468,17 @@ def main():
             print(skipped)
             continue
         score = score_pukaar(run)
-        label = mode if mode == "rules" else f"Ollama, {llm.chat_model()}"
+        label = mode if mode == "rules" else (f"LLM Planner, {llm.chat_model()}" if mode == "planner"
+                                              else f"Ollama, {llm.chat_model()}")
         status = run.get("llm") or {}
+        ps = run.get("planner")
         results.append({"label": label, "seconds": run["seconds"], "score": score,
                         "model": f"{llm.chat_model()} ({status.get('calls', 0)} model calls, "
-                                 f"{status.get('fallbacks', 0)} fell back to rules)" if mode == "ollama" else None})
+                                 f"{status.get('fallbacks', 0)} fell back to rules)" if mode != "rules" else None,
+                        "planner": ps})
+        if ps:
+            print(f"  planner runs {ps['runs']}: finished {ps['finished']}, rules took over {ps['rules']} "
+                  f"{ps['reasons']}, avg steps {ps['avg_steps']}")
         print(f"  merge F1 auto {score['merge_auto']['f1']:.2f}, after review {score['merge_final']['f1']:.2f}; "
               f"fields {pct(score['fields']['overall'])}; P1 median {mins(score['p1']['median'])}; "
               f"wasted {len(score['wasted'])}")

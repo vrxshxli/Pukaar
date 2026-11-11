@@ -296,10 +296,12 @@ async def clip_agent(browser):
     await asyncio.sleep(2)
 
     await send_chat(phone, KAMLA_VOICE, "Kamla sends a voice note")
-    await wait_state(dctx, lambda st: any(t["title"] == "Kamla Devi household" for t in st["tickets"]), "ticket")
+    st = await wait_state(dctx, lambda st: any("Lane 4" in (t["area"] or "") and t["id"] != "P-0398"
+                                               for t in st["tickets"]), "ticket")
+    tid = next(t["id"] for t in st["tickets"] if "Lane 4" in (t["area"] or "") and t["id"] != "P-0398")
     dash.mark("planner opened the ticket")
     await asyncio.sleep(1)
-    q = dash.page.locator('section[aria-label="Ticket queue"] button', has_text="Kamla Devi household").first
+    q = dash.page.locator('section[aria-label="Ticket queue"] button', has_text=tid).first
     await dash.tap(q, "Open the ticket")
     await asyncio.sleep(1.5)
     await dash.tap(dash.page.get_by_role("tab", name=re.compile("Agent reasoning")), "Agent reasoning")
@@ -307,8 +309,7 @@ async def clip_agent(browser):
 
     await api(dctx, "/api/messages", {"phone": DAUGHTER[0], "text": DAUGHTER[1]})
     dash.mark("daughter writes")
-    await wait_state(dctx, lambda st: any(t["title"] == "Kamla Devi household" and t["report_count"] >= 2
-                                          for t in st["tickets"]), "merge")
+    await wait_state(dctx, lambda st: any(t["id"] == tid and t["report_count"] >= 2 for t in st["tickets"]), "merge")
     dash.mark("planner merged")
     await asyncio.sleep(5)
     panel = dash.page.locator('aside[aria-label^="Ticket"] .overflow-y-auto').first
@@ -318,8 +319,8 @@ async def clip_agent(browser):
     dash.mark("reasoning scrolled")
     await asyncio.sleep(2)
 
-    card = dash.page.locator("article", has_text="Kamla Devi").first
-    await wait_state(dctx, lambda st: any(a["ticket_id"] and "Kamla" in a["title"] for a in st["approvals"]), "approval")
+    card = dash.page.locator("article", has_text="Send Boat").first
+    await wait_state(dctx, lambda st: any(a["ticket_id"] == tid and a["kind"] == "dispatch" for a in st["approvals"]), "approval")
     await card.hover()
     dash.mark("route preview", await card.bounding_box())
     await asyncio.sleep(2.5)

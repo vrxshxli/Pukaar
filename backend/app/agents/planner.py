@@ -197,6 +197,8 @@ class Planner(Agent):
         for key, value in args.items():
             if not _type_ok(props[key].get("type"), value):
                 raise PlanRejected(f"{tool_name}.{key} has the wrong type")
+            if props[key].get("enum") and value not in props[key]["enum"]:
+                raise PlanRejected(f"{tool_name}.{key} must be one of {props[key]['enum']}")
         check = getattr(self, f"_check_{tool_name}", None)
         if check:
             args = check(args, state) or args

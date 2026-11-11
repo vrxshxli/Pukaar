@@ -38,6 +38,8 @@ async def lifespan(app):
     if os.environ.get("LLM_MODE"):
         db.set_setting("llm_mode", os.environ["LLM_MODE"])
     events.bind_loop(asyncio.get_running_loop())
+    if llm.mode() == "ollama":
+        llm.warm_up()
     if os.environ.get("PUKAAR_NO_TICKER") != "1":
         threading.Thread(target=_ticker, daemon=True, name="ticker").start()
     yield
@@ -258,6 +260,8 @@ def update_settings(body: SettingsIn):
         audit.log("Officer", f"Automation switched {'on' if body.automation else 'off'}", kind="human")
     if body.llm_mode in ("rules", "ollama"):
         db.set_setting("llm_mode", body.llm_mode)
+        if body.llm_mode == "ollama":
+            llm.warm_up()
         audit.log("Officer", f"LLM mode set to {body.llm_mode}", kind="human")
     if body.auto_field is not None:
         db.set_setting("auto_field", "on" if body.auto_field else "off")

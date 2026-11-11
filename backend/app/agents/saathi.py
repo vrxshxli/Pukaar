@@ -4,7 +4,7 @@ Saathi answers only with steps copied from the approved playbooks. For fire,
 gas, electrical danger, someone unconscious or another medical emergency,
 the very first line is the emergency number. It never diagnoses.
 """
-from .. import nlp
+from .. import llm, nlp
 from ..i18n import playbook_language, t
 from ..tools import playbooks, tickets  # noqa: F401  (registers search_playbook, escalate_danger)
 from .base import Agent
@@ -44,6 +44,9 @@ class Saathi(Agent):
             if danger in fields.get("danger", []):
                 hazard = {"gas": "gas_leak"}.get(danger, danger)
                 break
+        if not hazard and not playbooks.match_hazards(text):
+            # Keywords found nothing; in Ollama mode the model may still recognise the hazard.
+            hazard = llm.pick_playbook(text)
         found = self.call("search_playbook", summary="Saathi searched the playbooks",
                           question=text, language=pb_lang, hazard=hazard)
 

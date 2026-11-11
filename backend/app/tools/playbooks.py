@@ -31,7 +31,8 @@ def match_hazards(text):
       "Find the approved safety playbook that answers a 'what do I do now' question. Returns the steps in the requested language, or covered=false.",
       {"type": "object", "properties": {
           "question": {"type": "string"},
-          "language": {"type": "string", "enum": ["en", "hi", "mr"]}},
+          "language": {"type": "string", "enum": ["en", "hi", "mr"]},
+          "hazard": {"type": "string", "enum": ["flood", "fire", "gas_leak", "heat", "electrical"]}},
        "required": ["question"]})
 def search_playbook(question, language="en", hazard=None):
     ids = [hazard] if hazard else match_hazards(question)

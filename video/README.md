@@ -2,6 +2,8 @@
 
 A 4 minute 41 second film about Pukaar, rendered entirely from code: real screen recordings of the running app, motion graphics, an offline voiceover and burned-in captions.
 
+Watch it: https://youtu.be/TGQ5zi1kfI8
+
 Output: `out/pukaar-demo.mp4` (1920×1080, 30 fps, H.264 + AAC) and `out/pukaar-demo.srt`.
 
 ## How it is made

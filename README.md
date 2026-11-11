@@ -16,6 +16,10 @@ A multi-agent flood-response coordinator for ward control rooms. It turns a nigh
 
 **AgentX Hackathon 2026 · PS-03 · Team Seekers**
 
+### ▶ [Watch the 4-minute demo film](https://youtu.be/TGQ5zi1kfI8)
+
+[![Pukaar demo film on YouTube](https://img.youtube.com/vi/TGQ5zi1kfI8/maxresdefault.jpg)](https://youtu.be/TGQ5zi1kfI8)
+
 ![Pukaar landing page](docs/screenshots/landing.jpg)
 
 </div>
@@ -48,7 +52,7 @@ Six specialist agents and a planner read every message, merge repeats into **one
 - [Run it](#run-it)
 - [Evaluation](#evaluation)
 - [Tests](#tests)
-- [Demo film](#demo-film)
+- [Demo film](#demo-film) · [watch on YouTube](https://youtu.be/TGQ5zi1kfI8)
 - [What is simulated](#what-is-simulated)
 - [Beyond floods](#beyond-floods)
 
@@ -449,7 +453,9 @@ cd backend && .venv/bin/python -m pytest -q      # 67 passed
 
 ## Demo film
 
-A 4:41 film, rendered entirely from code in [`video/`](video/): real screen recordings of the control room and two phones in sync, motion graphics, an offline voiceover (Kokoro, with Kamla's line in Hindi) and burned-in captions. The rendered MP4 is not committed; rebuild it with the steps in [video/README.md](video/README.md). A three-minute live walkthrough is in [docs/demo-script.md](docs/demo-script.md).
+**Watch it: https://youtu.be/TGQ5zi1kfI8**
+
+A 4:41 film, rendered entirely from code in [`video/`](video/): real screen recordings of the control room and two phones in sync, motion graphics, an offline voiceover (Kokoro, with Kamla's line in Hindi) and burned-in captions. The MP4 itself is not committed; rebuild it with the steps in [video/README.md](video/README.md). A three-minute live walkthrough is in [docs/demo-script.md](docs/demo-script.md).
 
 ---
 

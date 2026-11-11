@@ -1,0 +1,44 @@
+[
+  {
+    "id": "hanuman_temple",
+    "name": "Hanuman temple",
+    "lat": 19.0764, "lng": 72.8760, "node": "L4_mid", "lane": "Lane 4",
+    "aliases": ["hanuman temple", "hanuman mandir", "mandir", "temple", "हनुमान मंदिर", "मंदिर", "हनुमान मंदिराच्या", "मंदिराच्या मागे", "mandir ke peeche", "mandir ke piche", "hanuman mandir ke peeche"]
+  },
+  {
+    "id": "lane7_mosque",
+    "name": "the mosque on Lane 7",
+    "lat": 19.0770, "lng": 72.8792, "node": "L7_mid", "lane": "Lane 7",
+    "aliases": ["mosque", "masjid", "the mosque on lane 7", "gali 7 masjid", "masjid ke paas", "मस्जिद", "मशीद", "मशिदीजवळ", "मस्जिद के पास"]
+  },
+  {
+    "id": "water_tank",
+    "name": "the water tank",
+    "lat": 19.0772, "lng": 72.8800, "node": "L8_mid", "lane": "Lane 8",
+    "aliases": ["water tank", "tanki", "paani ki tanki", "tanki ke paas", "पानी की टंकी", "टंकी", "पाण्याची टाकी", "टाकीजवळ"]
+  },
+  {
+    "id": "camp3_school",
+    "name": "Camp 3 school",
+    "lat": 19.0803, "lng": 72.8750, "node": "camp3_gate", "lane": "School Lane",
+    "aliases": ["camp 3", "camp 3 school", "school", "municipal school", "schule", "स्कूल", "शाला", "शाळा", "कैंप 3", "कॅम्प 3"]
+  },
+  {
+    "id": "camp5_hall",
+    "name": "Camp 5 community hall",
+    "lat": 19.0784, "lng": 72.8838, "node": "camp5_gate", "lane": "Hall Road",
+    "aliases": ["camp 5", "community hall", "samaj mandir", "hall", "सामुदायिक भवन", "हॉल", "समाज मंदिर", "कैंप 5", "कॅम्प 5"]
+  },
+  {
+    "id": "station",
+    "name": "Station Road",
+    "lat": 19.0790, "lng": 72.8740, "node": "L2_top", "lane": "Station Road",
+    "aliases": ["station road", "station", "स्टेशन रोड", "स्टेशन"]
+  },
+  {
+    "id": "sector3",
+    "name": "Sector 3",
+    "lat": 19.0760, "lng": 72.8835, "node": "sector3", "lane": "Sector 3",
+    "aliases": ["sector 3", "sector three", "सेक्टर 3", "सेक्टर ३"]
+  }
+]

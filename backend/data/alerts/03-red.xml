@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mock alert in CAP 1.2 format, modelled on SACHET alerts. Not a real alert. -->
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>MOCK-MH-MUMBAI-WARD12-03-red</identifier>
+  <sender>mock-sachet@pukaar.demo</sender>
+  <sent>2026-07-14T21:35:00+05:30</sent>
+  <status>Exercise</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>en-IN</language>
+    <category>Met</category>
+    <event>Flood</event>
+    <urgency>Immediate</urgency>
+    <severity>Extreme</severity>
+    <certainty>Observed</certainty>
+    <effective>2026-07-14T21:35:00+05:30</effective>
+    <senderName>Mock Mumbai Disaster Control Room</senderName>
+    <headline>Red alert: Mithi river nearing danger level</headline>
+    <description>Extremely heavy rain observed. Mithi river at Kurla bridge rising towards danger level of 4.0 m. Residents of low-lying lanes in Ward 12 should move to upper floors or relief camps. Camp 3 school and Camp 5 community hall are open.</description>
+    <parameter><valueName>ColorCode</valueName><value>Red</value></parameter>
+    <area>
+      <areaDesc>Ward 12 Shanti Nagar, Kurla, Mumbai</areaDesc>
+      <polygon>19.0730,72.8690 19.0810,72.8690 19.0810,72.8850 19.0730,72.8850 19.0730,72.8690</polygon>
+    </area>
+  </info>
+</alert>

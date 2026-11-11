@@ -1,0 +1,23 @@
+{
+  "id": "ward-12",
+  "name": "Ward 12, Shanti Nagar",
+  "city": "Mumbai",
+  "incident_name": "Shanti Nagar flood night",
+  "note": "Shanti Nagar is a fictional ward placed on the Kurla stretch of the Mithi river. Every household, name and phone number is invented.",
+  "center": {"lat": 19.0770, "lng": 72.8770},
+  "night_date": "2026-07-14",
+  "replay_start": "21:30",
+  "replay_end": "02:30",
+  "river": [
+    [19.0738, 72.8690], [19.0741, 72.8730], [19.0737, 72.8770],
+    [19.0740, 72.8810], [19.0736, 72.8850]
+  ],
+  "helplines": {
+    "emergency": "112",
+    "fire": "101",
+    "ambulance": "108",
+    "lpg_leak": "1906",
+    "disaster_control_room": "1916",
+    "ward_helpline": "+91 90000 01200"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "flood",
+  "title": {"en": "Flood: water rising at home", "hi": "बाढ़: घर में पानी बढ़ रहा है", "mr": "पूर: घरात पाणी वाढत आहे"},
+  "danger": false,
+  "emergency": {"number": "112", "label": {"en": "Emergency", "hi": "आपातकाल", "mr": "आपत्कालीन"}},
+  "keywords": ["flood", "water", "rising", "roof", "paani", "pani", "baadh", "badh", "पानी", "बाढ़", "पाणी", "पूर", "ghutno", "kamar"],
+  "source": "Based on NDMA public flood safety guidance (do's and don'ts).",
+  "steps": {
+    "en": [
+      "Move to the highest floor or the roof. Take drinking water, medicines and a torch.",
+      "Switch off the main electricity switch and the gas cylinder if you can reach them safely.",
+      "Do not walk or drive through moving water. Even knee-deep water can knock you down.",
+      "Keep children and elderly people with you and away from the water.",
+      "Keep your phone on and save battery. Wave a cloth or torch to signal the rescue boat."
+    ],
+    "hi": [
+      "सबसे ऊँची मंज़िल या छत पर चले जाइए। पीने का पानी, दवाइयाँ और टॉर्च साथ रखिए।",
+      "अगर सुरक्षित रूप से पहुँच सकें तो बिजली का मेन स्विच और गैस सिलेंडर बंद कर दीजिए।",
+      "बहते पानी में न चलें और न गाड़ी चलाएँ। घुटनों तक का पानी भी गिरा सकता है।",
+      "बच्चों और बुज़ुर्गों को अपने पास रखिए और पानी से दूर रखिए।",
+      "फ़ोन चालू रखिए और बैटरी बचाइए। बचाव नाव को इशारा करने के लिए कपड़ा या टॉर्च हिलाइए।"
+    ],
+    "mr": [
+      "सर्वात वरच्या मजल्यावर किंवा छतावर जा. पिण्याचे पाणी, औषधे आणि टॉर्च सोबत घ्या.",
+      "सुरक्षितपणे पोहोचता येत असेल तर वीजेचा मेन स्विच आणि गॅस सिलेंडर बंद करा.",
+      "वाहत्या पाण्यातून चालू नका किंवा गाडी चालवू नका. गुडघाभर पाणीही तुम्हाला पाडू शकते.",
+      "मुले आणि वृद्धांना जवळ ठेवा आणि पाण्यापासून दूर ठेवा.",
+      "फोन चालू ठेवा आणि बॅटरी वाचवा. बचाव बोटीला खूण करण्यासाठी कापड किंवा टॉर्च हलवा."
+    ]
+  }
+}

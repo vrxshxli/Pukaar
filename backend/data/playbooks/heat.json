@@ -1,0 +1,31 @@
+{
+  "id": "heat",
+  "title": {"en": "Extreme heat", "hi": "भीषण गर्मी", "mr": "तीव्र उष्णता"},
+  "danger": false,
+  "emergency": {"number": "108", "also": "112", "label": {"en": "Ambulance", "hi": "एम्बुलेंस", "mr": "रुग्णवाहिका"}},
+  "keywords": ["heat", "hot", "garmi", "loo", "heatstroke", "dizzy", "chakkar", "गर्मी", "लू", "चक्कर", "उष्णता", "उन्हाळा"],
+  "source": "Based on NDMA and IMD heatwave public guidance.",
+  "steps": {
+    "en": [
+      "Stay indoors in the coolest room between 12 noon and 4 PM.",
+      "Drink water often, even if you are not thirsty. ORS, lemon water or buttermilk also help.",
+      "Wear light, loose cotton clothes and cover your head if you go out.",
+      "Check on elderly neighbours and anyone who lives alone, twice a day.",
+      "If someone is confused, very hot or stops sweating, move them to shade, cool them with a wet cloth and call 108."
+    ],
+    "hi": [
+      "दोपहर 12 से 4 बजे के बीच घर के सबसे ठंडे कमरे में रहें।",
+      "प्यास न लगे तब भी बार-बार पानी पिएँ। ओआरएस, नींबू पानी या छाछ भी मदद करते हैं।",
+      "हल्के, ढीले सूती कपड़े पहनें और बाहर जाएँ तो सिर ढकें।",
+      "बुज़ुर्ग पड़ोसियों और अकेले रहने वालों का दिन में दो बार हाल पूछें।",
+      "अगर कोई भ्रमित हो, बहुत गरम हो या पसीना आना बंद हो जाए, तो उसे छाँव में ले जाएँ, गीले कपड़े से ठंडा करें और 108 पर कॉल करें।"
+    ],
+    "mr": [
+      "दुपारी 12 ते 4 या वेळेत घरातील सर्वात थंड खोलीत राहा.",
+      "तहान लागली नाही तरी वारंवार पाणी प्या. ओआरएस, लिंबू पाणी किंवा ताकही मदत करते.",
+      "हलके, सैल सुती कपडे घाला आणि बाहेर जाताना डोके झाका.",
+      "वृद्ध शेजारी आणि एकटे राहणाऱ्यांची दिवसातून दोनदा चौकशी करा.",
+      "कोणी गोंधळलेले, खूप गरम किंवा घाम येणे बंद झाले असेल तर त्यांना सावलीत न्या, ओल्या कापडाने थंड करा आणि 108 वर कॉल करा."
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "gas_leak",
+  "title": {"en": "Gas leak (LPG)", "hi": "गैस लीक (एलपीजी)", "mr": "गॅस गळती (एलपीजी)"},
+  "danger": true,
+  "emergency": {"number": "1906", "also": "112", "label": {"en": "LPG emergency", "hi": "एलपीजी आपातकाल", "mr": "एलपीजी आपत्कालीन"}},
+  "keywords": ["gas", "lpg", "cylinder", "smell", "leak", "badbu", "गैस", "सिलेंडर", "बदबू", "गंध", "गॅस", "वास", "गळती"],
+  "source": "Based on public LPG safety guidance from Indian oil marketing companies (emergency number 1906).",
+  "steps": {
+    "en": [
+      "Do not switch any light, fan or switch on or off. Do not light a match or use a lighter.",
+      "Close the cylinder regulator knob if you can reach it safely.",
+      "Open doors and windows to let the gas out.",
+      "Get everyone out of the room, or to the roof if water is outside.",
+      "Do not use your phone inside the room with the smell. Call from outside or from the roof."
+    ],
+    "hi": [
+      "कोई भी लाइट, पंखा या स्विच चालू या बंद न करें। माचिस या लाइटर न जलाएँ।",
+      "अगर सुरक्षित रूप से पहुँच सकें तो सिलेंडर का रेगुलेटर बंद कर दें।",
+      "गैस बाहर निकलने के लिए दरवाज़े और खिड़कियाँ खोल दें।",
+      "सबको कमरे से बाहर निकालें, या बाहर पानी हो तो छत पर ले जाएँ।",
+      "जिस कमरे में गंध है वहाँ फ़ोन का इस्तेमाल न करें। बाहर से या छत से कॉल करें।"
+    ],
+    "mr": [
+      "कोणताही दिवा, पंखा किंवा स्विच चालू किंवा बंद करू नका. काडेपेटी किंवा लायटर पेटवू नका.",
+      "सुरक्षितपणे पोहोचता येत असेल तर सिलेंडरचा रेग्युलेटर बंद करा.",
+      "गॅस बाहेर जाण्यासाठी दारे आणि खिडक्या उघडा.",
+      "सर्वांना खोलीतून बाहेर काढा, किंवा बाहेर पाणी असेल तर छतावर न्या.",
+      "ज्या खोलीत वास येतो तिथे फोन वापरू नका. बाहेरून किंवा छतावरून कॉल करा."
+    ]
+  }
+}

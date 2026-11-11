@@ -1,0 +1,31 @@
+{
+  "id": "electrical",
+  "title": {"en": "Electrical danger in flood water", "hi": "बाढ़ के पानी में बिजली का खतरा", "mr": "पुराच्या पाण्यात वीजेचा धोका"},
+  "danger": true,
+  "emergency": {"number": "112", "label": {"en": "Emergency", "hi": "आपातकाल", "mr": "आपत्कालीन"}},
+  "keywords": ["current", "shock", "electric", "wire", "spark", "transformer", "bijli", "karant", "taar", "करंट", "बिजली", "तार", "झटका", "वीज", "शॉक", "ट्रान्सफॉर्मर"],
+  "source": "Based on public electrical safety guidance for floods from Indian power utilities and NDMA.",
+  "steps": {
+    "en": [
+      "Stay out of water that is near a fallen wire, a meter box or a transformer.",
+      "Switch off the main switch only if you are standing on a dry spot. Never touch it with wet hands.",
+      "Do not touch anyone who is getting a shock. Use a dry wooden stick to push the wire away, only if it is safe.",
+      "Do not use electrical appliances that have been in water.",
+      "Tell the rescue team exactly where the wire or spark is."
+    ],
+    "hi": [
+      "गिरे हुए तार, मीटर बॉक्स या ट्रांसफ़ॉर्मर के पास के पानी से दूर रहें।",
+      "मेन स्विच तभी बंद करें जब आप सूखी जगह पर खड़े हों। गीले हाथों से कभी न छुएँ।",
+      "जिसे करंट लग रहा हो उसे न छुएँ। सुरक्षित हो तभी सूखी लकड़ी से तार हटाएँ।",
+      "पानी में भीगे बिजली के उपकरण इस्तेमाल न करें।",
+      "बचाव टीम को ठीक-ठीक बताएँ कि तार या चिंगारी कहाँ है।"
+    ],
+    "mr": [
+      "पडलेली तार, मीटर बॉक्स किंवा ट्रान्सफॉर्मरजवळच्या पाण्यापासून दूर राहा.",
+      "तुम्ही कोरड्या जागी उभे असाल तरच मेन स्विच बंद करा. ओल्या हातांनी कधीही स्पर्श करू नका.",
+      "ज्याला शॉक लागत आहे त्याला स्पर्श करू नका. सुरक्षित असेल तरच कोरड्या लाकडाने तार दूर करा.",
+      "पाण्यात भिजलेली विद्युत उपकरणे वापरू नका.",
+      "बचाव पथकाला तार किंवा ठिणगी नेमकी कुठे आहे ते सांगा."
+    ]
+  }
+}

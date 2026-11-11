@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mock alert in CAP 1.2 format, modelled on SACHET alerts. Not a real alert. -->
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>MOCK-MH-MUMBAI-WARD12-02-orange</identifier>
+  <sender>mock-sachet@pukaar.demo</sender>
+  <sent>2026-07-14T21:15:00+05:30</sent>
+  <status>Exercise</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>en-IN</language>
+    <category>Met</category>
+    <event>Flood</event>
+    <urgency>Immediate</urgency>
+    <severity>Severe</severity>
+    <certainty>Likely</certainty>
+    <effective>2026-07-14T21:15:00+05:30</effective>
+    <senderName>Mock Mumbai Disaster Control Room</senderName>
+    <headline>Very heavy rain warning for Mithi river belt</headline>
+    <description>Very heavy rain (115 to 204 mm) likely. Water logging expected in Shanti Nagar, Kranti Nagar and Bail Bazar. Keep boats ready.</description>
+    <parameter><valueName>ColorCode</valueName><value>Orange</value></parameter>
+    <area>
+      <areaDesc>Ward 12 Shanti Nagar, Kurla, Mumbai</areaDesc>
+      <polygon>19.0730,72.8690 19.0810,72.8690 19.0810,72.8850 19.0730,72.8850 19.0730,72.8690</polygon>
+    </area>
+  </info>
+</alert>

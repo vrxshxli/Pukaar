@@ -1,0 +1,4 @@
+[
+  {"id": "camp3", "name": "Camp 3 (municipal school)", "lat": 19.0805, "lng": 72.8752, "node": "camp3_gate", "capacity": 250, "occupancy": 142, "needs": ["drinking water", "blankets", "baby food"]},
+  {"id": "camp5", "name": "Camp 5 (community hall)", "lat": 19.0786, "lng": 72.8840, "node": "camp5_gate", "capacity": 120, "occupancy": 37, "needs": ["ORS", "torches"]}
+]

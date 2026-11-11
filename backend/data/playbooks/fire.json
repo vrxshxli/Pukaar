@@ -1,0 +1,31 @@
+{
+  "id": "fire",
+  "title": {"en": "Fire or smoke", "hi": "आग या धुआँ", "mr": "आग किंवा धूर"},
+  "danger": true,
+  "emergency": {"number": "101", "also": "112", "label": {"en": "Fire brigade", "hi": "फायर ब्रिगेड", "mr": "अग्निशमन दल"}},
+  "keywords": ["fire", "smoke", "burning", "aag", "dhuan", "dhua", "आग", "धुआँ", "धुआं", "धूर", "जळत"],
+  "source": "Based on public fire safety guidance from Indian fire services.",
+  "steps": {
+    "en": [
+      "Get everyone out of the building now. Do not stop to collect things.",
+      "If there is smoke, stay low and cover your nose and mouth with a wet cloth.",
+      "Touch a door with the back of your hand before opening it. If it is hot, use another way out.",
+      "Do not use a lift. Do not go back inside.",
+      "If you cannot get out, close the door, block gaps with wet cloth and signal from a window."
+    ],
+    "hi": [
+      "सबको अभी इमारत से बाहर निकालें। सामान लेने के लिए न रुकें।",
+      "धुआँ हो तो नीचे झुककर चलें और नाक-मुँह को गीले कपड़े से ढकें।",
+      "दरवाज़ा खोलने से पहले हाथ के पिछले हिस्से से छूकर देखें। गरम हो तो दूसरा रास्ता लें।",
+      "लिफ़्ट का इस्तेमाल न करें। वापस अंदर न जाएँ।",
+      "बाहर न निकल सकें तो दरवाज़ा बंद करें, दरारों को गीले कपड़े से बंद करें और खिड़की से इशारा करें।"
+    ],
+    "mr": [
+      "सर्वांना आत्ताच इमारतीतून बाहेर काढा. सामान घेण्यासाठी थांबू नका.",
+      "धूर असेल तर खाली वाकून चाला आणि नाक-तोंड ओल्या कापडाने झाका.",
+      "दार उघडण्यापूर्वी हाताच्या मागच्या बाजूने स्पर्श करून पाहा. गरम असेल तर दुसरा मार्ग वापरा.",
+      "लिफ्ट वापरू नका. पुन्हा आत जाऊ नका.",
+      "बाहेर पडता येत नसेल तर दार बंद करा, फटी ओल्या कापडाने बंद करा आणि खिडकीतून खूण करा."
+    ]
+  }
+}

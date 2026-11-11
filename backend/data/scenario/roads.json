@@ -1,0 +1,337 @@
+{
+  "nodes": {
+    "L1_top": {
+      "lat": 19.079,
+      "lng": 72.873
+    },
+    "L1_mid": {
+      "lat": 19.0768,
+      "lng": 72.873
+    },
+    "L1_bot": {
+      "lat": 19.0746,
+      "lng": 72.873
+    },
+    "L2_top": {
+      "lat": 19.079,
+      "lng": 72.874
+    },
+    "L2_mid": {
+      "lat": 19.0768,
+      "lng": 72.874
+    },
+    "L2_bot": {
+      "lat": 19.0746,
+      "lng": 72.874
+    },
+    "L3_top": {
+      "lat": 19.079,
+      "lng": 72.875
+    },
+    "L3_mid": {
+      "lat": 19.0768,
+      "lng": 72.875
+    },
+    "L3_bot": {
+      "lat": 19.0746,
+      "lng": 72.875
+    },
+    "L4_top": {
+      "lat": 19.079,
+      "lng": 72.876
+    },
+    "L4_mid": {
+      "lat": 19.0768,
+      "lng": 72.876
+    },
+    "L4_bot": {
+      "lat": 19.0746,
+      "lng": 72.876
+    },
+    "L5_top": {
+      "lat": 19.079,
+      "lng": 72.877
+    },
+    "L5_mid": {
+      "lat": 19.0768,
+      "lng": 72.877
+    },
+    "L5_bot": {
+      "lat": 19.0746,
+      "lng": 72.877
+    },
+    "L6_top": {
+      "lat": 19.079,
+      "lng": 72.878
+    },
+    "L6_mid": {
+      "lat": 19.0768,
+      "lng": 72.878
+    },
+    "L6_bot": {
+      "lat": 19.0746,
+      "lng": 72.878
+    },
+    "L7_mid": {
+      "lat": 19.0768,
+      "lng": 72.879
+    },
+    "L7_bot": {
+      "lat": 19.0746,
+      "lng": 72.879
+    },
+    "L8_mid": {
+      "lat": 19.0768,
+      "lng": 72.88
+    },
+    "L8_bot": {
+      "lat": 19.0746,
+      "lng": 72.88
+    },
+    "L9_mid": {
+      "lat": 19.0768,
+      "lng": 72.881
+    },
+    "L9_bot": {
+      "lat": 19.0746,
+      "lng": 72.881
+    },
+    "staging": {
+      "lat": 19.079,
+      "lng": 72.8705
+    },
+    "camp3_gate": {
+      "lat": 19.0803,
+      "lng": 72.875
+    },
+    "sector3": {
+      "lat": 19.076,
+      "lng": 72.8835
+    },
+    "camp5_gate": {
+      "lat": 19.0784,
+      "lng": 72.8838
+    }
+  },
+  "edges": [
+    {
+      "id": "L1_top-L1_mid",
+      "from": "L1_top",
+      "to": "L1_mid",
+      "name": "Lane 1"
+    },
+    {
+      "id": "L1_mid-L1_bot",
+      "from": "L1_mid",
+      "to": "L1_bot",
+      "name": "Lane 1"
+    },
+    {
+      "id": "L2_top-L2_mid",
+      "from": "L2_top",
+      "to": "L2_mid",
+      "name": "Lane 2"
+    },
+    {
+      "id": "L2_mid-L2_bot",
+      "from": "L2_mid",
+      "to": "L2_bot",
+      "name": "Lane 2"
+    },
+    {
+      "id": "L3_top-L3_mid",
+      "from": "L3_top",
+      "to": "L3_mid",
+      "name": "Lane 3"
+    },
+    {
+      "id": "L3_mid-L3_bot",
+      "from": "L3_mid",
+      "to": "L3_bot",
+      "name": "Lane 3"
+    },
+    {
+      "id": "L4_top-L4_mid",
+      "from": "L4_top",
+      "to": "L4_mid",
+      "name": "Lane 4"
+    },
+    {
+      "id": "L4_mid-L4_bot",
+      "from": "L4_mid",
+      "to": "L4_bot",
+      "name": "Lane 4"
+    },
+    {
+      "id": "L5_top-L5_mid",
+      "from": "L5_top",
+      "to": "L5_mid",
+      "name": "Lane 5"
+    },
+    {
+      "id": "L5_mid-L5_bot",
+      "from": "L5_mid",
+      "to": "L5_bot",
+      "name": "Lane 5"
+    },
+    {
+      "id": "L6_top-L6_mid",
+      "from": "L6_top",
+      "to": "L6_mid",
+      "name": "Lane 6"
+    },
+    {
+      "id": "L6_mid-L6_bot",
+      "from": "L6_mid",
+      "to": "L6_bot",
+      "name": "Lane 6"
+    },
+    {
+      "id": "L7_mid-L7_bot",
+      "from": "L7_mid",
+      "to": "L7_bot",
+      "name": "Lane 7"
+    },
+    {
+      "id": "L8_mid-L8_bot",
+      "from": "L8_mid",
+      "to": "L8_bot",
+      "name": "Lane 8"
+    },
+    {
+      "id": "L9_mid-L9_bot",
+      "from": "L9_mid",
+      "to": "L9_bot",
+      "name": "Lane 9"
+    },
+    {
+      "id": "staging-L1_top",
+      "from": "staging",
+      "to": "L1_top",
+      "name": "Station Road"
+    },
+    {
+      "id": "L1_top-L2_top",
+      "from": "L1_top",
+      "to": "L2_top",
+      "name": "Station Road"
+    },
+    {
+      "id": "L2_top-L3_top",
+      "from": "L2_top",
+      "to": "L3_top",
+      "name": "Station Road"
+    },
+    {
+      "id": "L3_top-L4_top",
+      "from": "L3_top",
+      "to": "L4_top",
+      "name": "Station Road"
+    },
+    {
+      "id": "L4_top-L5_top",
+      "from": "L4_top",
+      "to": "L5_top",
+      "name": "Station Road"
+    },
+    {
+      "id": "L5_top-L6_top",
+      "from": "L5_top",
+      "to": "L6_top",
+      "name": "Station Road"
+    },
+    {
+      "id": "L6_mid-L7_mid",
+      "from": "L6_mid",
+      "to": "L7_mid",
+      "name": "Market Road"
+    },
+    {
+      "id": "L7_mid-L8_mid",
+      "from": "L7_mid",
+      "to": "L8_mid",
+      "name": "Market Road"
+    },
+    {
+      "id": "L8_mid-L9_mid",
+      "from": "L8_mid",
+      "to": "L9_mid",
+      "name": "Market Road"
+    },
+    {
+      "id": "L1_bot-L2_bot",
+      "from": "L1_bot",
+      "to": "L2_bot",
+      "name": "River Road",
+      "slow": 1.8
+    },
+    {
+      "id": "L2_bot-L3_bot",
+      "from": "L2_bot",
+      "to": "L3_bot",
+      "name": "River Road",
+      "slow": 1.8
+    },
+    {
+      "id": "L3_bot-L4_bot",
+      "from": "L3_bot",
+      "to": "L4_bot",
+      "name": "River Road",
+      "slow": 1.8
+    },
+    {
+      "id": "L4_bot-L5_bot",
+      "from": "L4_bot",
+      "to": "L5_bot",
+      "name": "River Road",
+      "slow": 1.8
+    },
+    {
+      "id": "L5_bot-L6_bot",
+      "from": "L5_bot",
+      "to": "L6_bot",
+      "name": "River Road",
+      "slow": 1.8
+    },
+    {
+      "id": "L6_bot-L7_bot",
+      "from": "L6_bot",
+      "to": "L7_bot",
+      "name": "River Road",
+      "slow": 1.8
+    },
+    {
+      "id": "L7_bot-L8_bot",
+      "from": "L7_bot",
+      "to": "L8_bot",
+      "name": "River Road",
+      "slow": 1.8
+    },
+    {
+      "id": "L8_bot-L9_bot",
+      "from": "L8_bot",
+      "to": "L9_bot",
+      "name": "River Road",
+      "slow": 1.8
+    },
+    {
+      "id": "L3_top-camp3_gate",
+      "from": "L3_top",
+      "to": "camp3_gate",
+      "name": "School Lane"
+    },
+    {
+      "id": "L9_mid-sector3",
+      "from": "L9_mid",
+      "to": "sector3",
+      "name": "Sector 3 Road"
+    },
+    {
+      "id": "sector3-camp5_gate",
+      "from": "sector3",
+      "to": "camp5_gate",
+      "name": "Hall Road"
+    }
+  ],
+  "note": "Simplified fictional road graph laid over the Kurla stretch of the Mithi river. It does not match real streets. River Road edges carry slow=1.8 because the current along the river is strong, so boats avoid it when they can."
+}

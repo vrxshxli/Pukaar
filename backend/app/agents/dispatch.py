@@ -15,6 +15,7 @@ class Dispatch(Agent):
     tools = ["list_free_teams", "compute_route", "create_approval", "replan_routes"]
 
     def run(self, event=None):
+        self._rebalance_medic()
         proposals = []
         for ticket in self._waiting_tickets():
             proposal = self.propose_for(ticket)
@@ -44,7 +45,7 @@ class Dispatch(Agent):
             return None
 
         goal = geo.nearest_node(ticket["lat"], ticket["lng"])
-        needs_medic = bool(MEDICAL_NEEDS & set(filter(None, (ticket["medical"] or "").split(", "))))
+        needs_medic = self._needs_medic(ticket)
         options = []
         for team in free:
             route = geo.compute_route(team["node"], goal, kind=kind)
@@ -74,6 +75,31 @@ class Dispatch(Agent):
         self.log(f"Dispatch proposed {team['name']} for {ticket['id']} ({ticket['priority']}): " + "; ".join(why),
                  ticket_id=ticket["id"])
         return approval
+
+    def _needs_medic(self, ticket):
+        return bool(MEDICAL_NEEDS & set(filter(None, (ticket["medical"] or "").split(", "))))
+
+    def _rebalance_medic(self):
+        """New details can arrive after a proposal. If a medical ticket was proposed a boat
+        without a medic while the medic boat waits on a non-medical proposal, swap them."""
+        pending = db.query("""SELECT a.id, a.team_id, a.ticket_id FROM approvals a
+                              WHERE a.kind = 'dispatch' AND a.status = 'pending'""")
+        decoded = [(a, tickets.get(a["ticket_id"]), teams.get(a["team_id"])) for a in pending]
+        needy = [(a, t) for a, t, tm in decoded if self._needs_medic(t) and "medic" not in tm["skills"]]
+        spare = [(a, t) for a, t, tm in decoded if not self._needs_medic(t) and "medic" in tm["skills"]]
+        if not needy:
+            return
+        medic_free = [f for f in teams.list_free_teams(kind="boat") if "medic" in f["skills"]]
+        if not spare and not medic_free:
+            return
+        a, t = needy[0]
+        approvals.supersede(a["id"], f"{t['id']} now needs a medic")
+        tickets.touch(t["id"], status="open")
+        if spare and not medic_free:
+            b, other = spare[0]
+            approvals.supersede(b["id"], f"the medic boat is needed for {t['id']}")
+            tickets.touch(other["id"], status="open")
+        self.propose_for(tickets.get(t["id"]))
 
     def _team_cost(self, team, route, needs_medic, ticket):
         has_medic = "medic" in team["skills"]

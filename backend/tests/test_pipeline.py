@@ -113,3 +113,16 @@ def test_gas_leak_question_gets_saathi_answer():
     msgs = outgoing("+91 90000 05500")
     saathi = next(m for m in msgs if m.startswith("1906"))
     assert "माचिस" in saathi
+
+
+def test_medic_boat_moves_to_kamla_when_fever_arrives_later():
+    at("21:38")
+    orchestrator.handle_message(DAUGHTER_PHONE, KAMLA_DAUGHTER)
+    at("21:39")
+    orchestrator.handle_message("+91 90000 05103", "We are 5 people on the roof at Lane 9, small child with us. Joseph family")
+    at("21:41")
+    r = orchestrator.handle_message(KAMLA_PHONE, KAMLA_VOICE)
+    proposal = next(a for a in approvals.pending() if a["kind"] == "dispatch" and a["ticket_id"] == r["ticket_id"])
+    assert proposal["team_id"] == "boat1"
+    joseph = [a for a in approvals.pending() if a["kind"] == "dispatch" and a["ticket_id"] != r["ticket_id"]]
+    assert joseph and joseph[0]["team_id"] != "boat1"

@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --surface: #f2f6f6;
+  --card: #ffffff;
+  --text: #0e2a2b;
+  --muted: #587072;
+  --line: #d6e2e2;
+  --soft: #e7f1f1;
+}
+
+.dark {
+  --surface: #07191a;
+  --card: #0e2a2b;
+  --text: #e4efef;
+  --muted: #92adae;
+  --line: #1f4547;
+  --soft: #133638;
+}
+
+@theme inline {
+  --color-teal: #0f7173;
+  --color-marigold: #e0a21c;
+  --color-urgent: #b3284f;
+  --color-safe: #5a8a23;
+  --color-ink: #0e2a2b;
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-fg: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-soft: var(--soft);
+  --font-sans: system-ui, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", "Nirmala UI", sans-serif;
+}
+
+html, body, #root { height: 100%; }
+body { background: var(--surface); color: var(--text); margin: 0; }
+
+.leaflet-container { background: var(--soft); font-family: inherit; }
+.dark .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
+.team-icon { background: transparent; border: none; }

@@ -168,6 +168,27 @@ def close_ticket(ticket_id: str, body: CloseIn):
     return orchestrator.handle_approval(approval["id"], "approve", body.officer)
 
 
+class DowngradeIn(BaseModel):
+    priority: str = "P2"
+    officer: str = "Duty officer"
+
+
+@app.post("/api/tickets/{ticket_id}/downgrade")
+def downgrade_ticket(ticket_id: str, body: DowngradeIn):
+    """Agents can never lower a P1. The officer can, and the tap is recorded as an approval."""
+    t = tickets.get(ticket_id)
+    if not t:
+        raise HTTPException(404, "No such ticket")
+    if body.priority not in ("P2", "P3"):
+        raise HTTPException(400, "Priority must be P2 or P3")
+    with orchestrator._lock:
+        approval = approvals.create_approval("downgrade", f"Downgrade {ticket_id} from {t['priority']} to {body.priority}?",
+                                             ticket_id=ticket_id, payload={"priority": body.priority}, agent="Officer")
+        if approval is None:
+            raise HTTPException(409, "Automation is off, so no approval could be created")
+    return orchestrator.handle_approval(approval["id"], "approve", body.officer)
+
+
 @app.get("/api/activity")
 def activity(limit: int = 80):
     return db.query("SELECT * FROM audit_log WHERE kind != 'tool' ORDER BY id DESC LIMIT ?", (limit,))

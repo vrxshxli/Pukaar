@@ -267,7 +267,7 @@ def family_lookup(ticket: str | None = None, name: str | None = None, area: str 
     for t in matches[:5]:
         db.insert("lookups", query=json.dumps({"ticket": ticket, "name": name, "area": area}),
                   ticket_id=t["id"], created_at=db.now_iso())
-        results.append({**tickets.public_status(t), "title": t["title"]})
+        results.append(tickets.public_status(t))
     if results:
         audit.log("Loop", f"Family lookup matched {', '.join(r['ticket_id'] for r in results)}",
                   tool="family_lookup", kind="action", ticket_id=results[0]["ticket_id"])

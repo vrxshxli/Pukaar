@@ -149,10 +149,15 @@ def _apply_dispatch(approval):
     extra = ", ".join(ticket["vulnerable"] + ([ticket["medical"]] if ticket["medical"] else []))
     danger = (" DANGER: " + ", ".join(ticket["danger"]) + ".") if ticket["danger"] else ""
     messaging.send_team_message(team["id"],
-                                f"New task, {ticket['priority']}: {ticket['title']}, {ticket['area']}. {people}"
+                                f"New task, {ticket['priority']}: {_task_place(ticket)}. {people}"
                                 f"{' (' + extra + ')' if extra else ''}.{danger} Route: {route['summary']}.",
                                 ticket_id=ticket["id"])
     loop.status_update(tickets.get(ticket["id"]))
+
+
+def _task_place(ticket):
+    lane = (ticket["area"] or "").split(",")[0]
+    return ticket["title"] if lane and lane in ticket["title"] else f"{ticket['title']}, {ticket['area']}"
 
 
 def _send_bulletin(approval):

@@ -386,10 +386,20 @@ def downgrade(ticket_id, priority, approval):
     touch(ticket_id, priority=priority)
 
 
+GENERIC_TITLES = ("Household,", "Elder and child,", "Welfare check,")
+
+
+def public_title(ticket):
+    """A family name if we have one; never a lane or landmark."""
+    title = ticket["title"] or ""
+    return "Family (name not given)" if title.startswith(GENERIC_TITLES) or "Lane" in title else title
+
+
 def public_status(ticket):
     """What the family lookup page may show: status and camp only."""
     camp = scenario.camp_by_id(ticket["safe_camp"]) if ticket.get("safe_camp") else None
     return {
+        "title": public_title(ticket),
         "ticket_id": ticket["id"],
         "status": ticket["status"],
         "safe_at": ticket.get("safe_at"),

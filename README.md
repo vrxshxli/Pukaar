@@ -13,7 +13,7 @@
 
 **AgentX Hackathon 2026 · PS-03 · Team Seekers**
 
-### 🌐 [Live app: pukaar.onrender.com](https://pukaar.onrender.com) · ▶ [Demo video (1:57)](https://youtu.be/TGQ5zi1kfI8)
+### 🌐 [Live app: pukaar.onrender.com](https://pukaar.onrender.com) · ▶ [Demo video (1:57)](https://youtu.be/3fqPBQM876Y)
 
 </div>
 
@@ -70,7 +70,7 @@ Rules mode needs nothing else. For the LLM Planner, either run a free local mode
 - [Run it](#run-it)
 - [Evaluation](#evaluation)
 - [Tests](#tests)
-- [Demo film](#demo-film) · [watch on YouTube](https://youtu.be/TGQ5zi1kfI8)
+- [Demo film](#demo-film) · [watch on YouTube](https://youtu.be/3fqPBQM876Y)
 - [What is simulated](#what-is-simulated)
 - [Beyond floods](#beyond-floods)
 
@@ -480,7 +480,7 @@ cd backend && .venv/bin/python -m pytest -q      # 86 passed
 
 ## Demo film
 
-**Watch it: https://youtu.be/TGQ5zi1kfI8**
+**Watch it: https://youtu.be/3fqPBQM876Y**
 
 A 1:57 film, rendered entirely from code in [`video/`](video/): the problem, how the LLM Planner works, a live run with the Agent reasoning panel filling in, the officer's approval and the OTP, and the results. Real screen recordings of the control room and two phones in sync, motion graphics, an offline voiceover (Kokoro, with Kamla's line in Hindi) and burned-in captions. The MP4 itself is not committed; rebuild it with the steps in [video/README.md](video/README.md). A three-minute live walkthrough is in [docs/demo-script.md](docs/demo-script.md).
 

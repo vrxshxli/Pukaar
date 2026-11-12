@@ -339,7 +339,7 @@ def similarity(a, b):
 # The key comes only from the GROQ_API_KEY environment variable.
 
 GROQ_URL = os.environ.get("GROQ_URL", "https://api.groq.com/openai/v1/chat/completions")
-GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
 PLANNER_TIMEOUT = float(os.environ.get("PLANNER_TIMEOUT", "15"))
 RETRIES = int(os.environ.get("PLANNER_RETRIES", "3"))
 

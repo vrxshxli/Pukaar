@@ -6,21 +6,21 @@ Message mix: faq 14, followup 7, power 10, question 16, repost_safe 6, rescue 17
 
 ## Headline: Pukaar against first-come-first-served
 
-| Measure | First-come-first-served | Pukaar (rules) | Pukaar (Ollama, qwen2.5:3b) |
+| Measure | First-come-first-served | Pukaar (rules) | Pukaar (LLM Planner, qwen2.5:7b) |
 | --- | --- | --- | --- |
-| Requests turned into jobs or tickets | 210 | 101 | 107 |
-| Duplicate-merge F1 (after officer review) | 0 (no merging) | 0.79 | 0.68 |
-| Median time to assign a P1 family | 463 min | 20 min | 28 min |
-| 90th percentile time to assign a P1 family | 1253 min | 172 min | 154 min |
-| P1 families assigned by the end | 28/28 | 25/28 | 23/28 |
-| Boat or van trips | 210 | 56 | 53 |
-| Wasted trips (already rescued, rumour or duplicate) | 131 | 15 | 17 |
+| Requests turned into jobs or tickets | 210 | 101 | 99 |
+| Duplicate-merge F1 (after officer review) | 0 (no merging) | 0.79 | 0.76 |
+| Median time to assign a P1 family | 463 min | 20 min | 20 min |
+| 90th percentile time to assign a P1 family | 1253 min | 172 min | 200 min |
+| P1 families assigned by the end | 28/28 | 25/28 | 25/28 |
+| Boat or van trips | 210 | 56 | 55 |
+| Wasted trips (already rescued, rumour or duplicate) | 131 | 15 | 15 |
 | Supplies requests sent on rescue boats | 24 | 0 (van only) | 0 (van only) |
 | Rumours caught in the Verify lane | 0/15 | 15/15 | 15/15 |
 
 ## Pukaar in rules mode
 
-Run time: 15.9 s for the whole night.
+Run time: 10.9 s for the whole night.
 
 **Duplicate merging** (pairs of request messages about the same family):
 
@@ -47,24 +47,24 @@ Run time: 15.9 s for the whole night.
 
 Wasted trips: duplicate of a family already served (P-0428); duplicate of a family already served (P-0459); duplicate of a family already served (P-0463); duplicate of a family already served (P-0488); duplicate of a family already served (P-0496); duplicate of a family already served (P-0436); duplicate of a family already served (P-0443); duplicate of a family already served (P-0517); duplicate of a family already served (P-0519); duplicate of a family already served (P-0536); duplicate of a family already served (P-0546); duplicate of a family already served (P-0550); duplicate of a family already served (P-0424); duplicate of a family already served (P-0553); duplicate of a family already served (P-0554).
 
-## Pukaar in Ollama, qwen2.5:3b mode
+## Pukaar in LLM Planner, qwen2.5:7b mode
 
-Run time: 1691.7 s for the whole night. Model: qwen2.5:3b (317 model calls, 10 fell back to rules).
+Run time: 16142.4 s for the whole night. Model: qwen2.5:7b (632 planner calls; Listen was kept on the rules extractor in this mode by design, so the 311 "fallbacks" the counter printed are not failures). LLM Planner: 200 runs, 72 finished by the model, 128 handed to rules (invalid_step 126, timeout 2), 2.13 tool steps on average.
 
 **Duplicate merging** (pairs of request messages about the same family):
 
 | | Precision | Recall | F1 | True pairs found | Wrong merges | Missed pairs |
 | --- | --- | --- | --- | --- | --- | --- |
-| Automatic merges only | 0.69 | 0.34 | 0.46 | 72 | 32 | 140 |
-| After the officer reviews 75 'possible duplicate' cards | 0.80 | 0.59 | 0.68 | 125 | 32 | 87 |
+| Automatic merges only | 0.76 | 0.44 | 0.56 | 94 | 30 | 118 |
+| After the officer reviews 65 'possible duplicate' cards | 0.82 | 0.70 | 0.76 | 149 | 33 | 63 |
 
-**Field extraction** on 180 rescue and welfare messages: 93.4% of fields correct overall.
+**Field extraction** on 180 rescue and welfare messages: 98.2% of fields correct overall.
 
 | Field | Accuracy |
 | --- | --- |
 | language | 100.0% |
-| people | 71.7% |
-| vulnerable | 92.2% |
+| people | 99.4% |
+| vulnerable | 93.3% |
 | medical | 100.0% |
 | water level | 100.0% |
 | location (lane) | 96.7% |
@@ -72,9 +72,9 @@ Run time: 1691.7 s for the whole night. Model: qwen2.5:3b (317 model calls, 10 f
 
 **Intent** (what kind of message it is) correct for 97.4% of 304 messages. Most common misses: supplies read as rescue (4); faq read as question (2); road read as other (2).
 
-**Other measures:** 15 of 15 rumour messages went to Verify, and 0 genuine messages were wrongly sent there. 3 of 6 reposts about the already-rescued Pinto family were matched to their closed ticket and answered automatically. 248 of 280 reporters received at least one status update or question back. 0 medic backup trips were requested.
+**Other measures:** 15 of 15 rumour messages went to Verify, and 0 genuine messages were wrongly sent there. 6 of 6 reposts about the already-rescued Pinto family were matched to their closed ticket and answered automatically. 248 of 280 reporters received at least one status update or question back. 0 medic backup trips were requested.
 
-Wasted trips: duplicate of a family already served (P-0459); duplicate of a family already served (P-0462); duplicate of a family already served (P-0463); duplicate of a family already served (P-0442); duplicate of a family already served (P-0493); duplicate of a family already served (P-0477); duplicate of a family already served (P-0516); duplicate of a family already served (P-0518); duplicate of a family already served (P-0435); duplicate of a family already served (P-0538); duplicate of a family already served (P-0541); duplicate of a family already served (P-0549); duplicate of a family already served (P-0446); duplicate of a family already served (P-0553); duplicate of a family already served (P-0555); duplicate of a family already served (P-0557); duplicate of a family already served (P-0423).
+Wasted trips: duplicate of a family already served (P-0428); duplicate of a family already served (P-0459); duplicate of a family already served (P-0462); duplicate of a family already served (P-0486); duplicate of a family already served (P-0494); duplicate of a family already served (P-0436); duplicate of a family already served (P-0443); duplicate of a family already served (P-0513); duplicate of a family already served (P-0515); duplicate of a family already served (P-0532); duplicate of a family already served (P-0541); duplicate of a family already served (P-0545); duplicate of a family already served (P-0548); duplicate of a family already served (P-0424); duplicate of a family already served (P-0549).
 
 ## How this was measured
 

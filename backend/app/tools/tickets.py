@@ -215,7 +215,8 @@ def nlp_language_name(code):
 
 @tool("create_ticket",
       "Open a new ticket from a report.",
-      {"type": "object", "properties": {"report_id": {"type": "integer"}, "kind": {"type": "string"}},
+      {"type": "object", "properties": {"report_id": {"type": "integer"},
+                                        "kind": {"type": "string", "enum": ["rescue", "welfare", "supplies"]}},
        "required": ["report_id"]})
 def create_ticket(report_id, kind="rescue", status="open", verify_reason=None):
     report = db.one("SELECT * FROM reports WHERE id = ?", (report_id,))
@@ -476,7 +477,9 @@ def public_status(ticket):
 
 @tool("escalate_danger",
       "Raise a ticket's priority because of a danger (gas, fire, electrical, unconscious person) and note it for the rescue team.",
-      {"type": "object", "properties": {"ticket_id": {"type": "string"}, "danger": {"type": "string"}},
+      {"type": "object", "properties": {"ticket_id": {"type": "string"},
+                                        "danger": {"type": "string", "enum": ["gas", "fire", "electrical", "unconscious",
+                                                                              "breathing", "needs medic"]}},
        "required": ["ticket_id", "danger"]})
 def escalate_danger(ticket_id, danger):
     t = get(ticket_id)

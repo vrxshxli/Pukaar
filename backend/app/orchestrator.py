@@ -10,6 +10,7 @@ from . import db, events, nlp, scenario, simulation
 from .agents.dispatch import Dispatch
 from .agents.listen import Listen
 from .agents.loop import Loop, camp_name
+from .agents.planner import Planner
 from .agents.saathi import Saathi, ticket_for
 from .agents.triage import Triage
 from .agents.watch import Watch
@@ -19,6 +20,7 @@ from .tools import approvals, audit, geo, messaging, teams, tickets
 _lock = threading.RLock()
 
 listen, triage, dispatch, loop, saathi, watch = Listen(), Triage(), Dispatch(), Loop(), Saathi(), Watch()
+planner = Planner()
 
 
 def plan(summary, ticket_id=None):
@@ -48,12 +50,21 @@ def handle_message(phone, text, channel="chat", name=None, area=None, meta=None)
 
 def _route_by_intent(reporter, heard, fields, text, steps):
     intent = fields["intent"]
-    if intent in ("rescue", "welfare", "supplies", "rumour", "road_report", "power_report", "safe_report") \
-            or heard.get("followup_answer"):
-        decision = triage.run(heard)
-        steps.append("Triage")
-    else:
-        decision = {"action": "none"}
+    decision = None
+    # Judgment calls go to the LLM Planner; obvious ones (and any fallback) stay with the rules.
+    if not heard.get("followup_answer") and planner.handles("message", intent):
+        decision = planner.run_message(reporter, heard, text)
+        steps.append("Planner (LLM)" if decision else "Planner (LLM), then rules")
+    if decision is None:
+        if intent in ("rescue", "welfare", "supplies", "rumour", "road_report", "power_report", "safe_report") \
+                or heard.get("followup_answer"):
+            decision = triage.run(heard)
+            steps.append("Triage")
+            if "Planner (LLM), then rules" in steps:
+                from .agents.planner import attach_ticket
+                attach_ticket(getattr(planner, "last_run_id", None), decision.get("ticket_id"))
+        else:
+            decision = {"action": "none"}
     ticket_id = decision.get("ticket_id")
 
     if Saathi.should_answer(fields, text) and intent not in ("faq", "rumour", "status_query"):
@@ -238,9 +249,18 @@ def _blocked(team, road=None, **_):
     road = geo.normalise_road_name(road or "")
     if not road:
         raise ValueError("which road is blocked?")
-    plan(f"Planner: {team['name']} reported {road} blocked, so Watch updates area memory, then Dispatch replans")
-    watch.road_blocked(road, source=team["name"])
-    replanned = dispatch.replan(road)
+    result = planner.run_road_blocked(road, team) if planner.handles("road_blocked") else None
+    if result is None:
+        plan(f"Planner: {team['name']} reported {road} blocked, so Watch updates area memory, then Dispatch replans")
+        watch.road_blocked(road, source=team["name"])
+        replanned = dispatch.replan(road)
+    else:
+        replanned = result["replanned"]
+        events.publish("changed", {"what": "area"})
+        for r in replanned:
+            if r["found"]:
+                dispatch.log(f"Dispatch rerouted {r['team']} for {r['ticket_id'] or 'pre-positioning'}: {r['summary']} "
+                             f"(was {r['old_eta']:g} min, now {r['eta_min']:g} min)", ticket_id=r["ticket_id"])
     for r in replanned:
         if not r["found"]:
             continue

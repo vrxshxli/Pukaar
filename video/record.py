@@ -73,7 +73,8 @@ async def new_page(browser, clip, name, size, login=None, scale=1, mobile=False)
 
 
 async def api(ctx, path, body=None):
-    r = await (ctx.request.post(f"{BASE}{path}", data=body) if body is not None else ctx.request.get(f"{BASE}{path}"))
+    r = await (ctx.request.post(f"{BASE}{path}", data=body, timeout=300000) if body is not None
+               else ctx.request.get(f"{BASE}{path}", timeout=300000))
     return await r.json()
 
 
@@ -270,14 +271,102 @@ async def clip_replay(browser):
     await finish(dctx, dash)
 
 
+async def wait_state(ctx, pred, label, timeout=240):
+    """Poll the control room state until pred(state) is true (the LLM Planner takes a while locally)."""
+    t0 = time.monotonic()
+    while time.monotonic() - t0 < timeout:
+        st = await api(ctx, "/api/state")
+        if pred(st):
+            return st
+        await asyncio.sleep(1.5)
+    raise TimeoutError(f"waited too long for: {label}")
+
+
+async def clip_agent(browser):
+    """Kamla's rescue with the LLM Planner on: the Agent reasoning tab fills in live, then approval and OTP."""
+    print("agent")
+    await reset(browser)
+    dctx, dash = await new_page(browser, "agent", "dash", DESK, login=OFFICER)
+    await dctx.request.post(f"{BASE}/api/settings", data={"llm_mode": "ollama", "planner_scope": "judgment",
+                                                           "listen_llm": False, "ollama_model": "qwen2.5:7b"})
+    pctx, phone = await new_page(browser, "agent", "phone", PHONE, mobile=True)
+    vctx, crew = await new_page(browser, "agent", "crew", PHONE, login=CREW, mobile=True)
+    await dash.page.goto(f"{BASE}/control")
+    await crew.page.goto(f"{BASE}/volunteer")
+    await pick_identity(phone, "Kamla Devi")
+    await asyncio.sleep(2)
+
+    await send_chat(phone, KAMLA_VOICE, "Kamla sends a voice note")
+    st = await wait_state(dctx, lambda st: any("Lane 4" in (t["area"] or "") and t["id"] != "P-0398"
+                                               for t in st["tickets"]), "ticket")
+    tid = next(t["id"] for t in st["tickets"] if "Lane 4" in (t["area"] or "") and t["id"] != "P-0398")
+    dash.mark("planner opened the ticket")
+    await asyncio.sleep(1)
+    q = dash.page.locator('section[aria-label="Ticket queue"] button', has_text=tid).first
+    await dash.tap(q, "Open the ticket")
+    await asyncio.sleep(1.5)
+    await dash.tap(dash.page.get_by_role("tab", name=re.compile("Agent reasoning")), "Agent reasoning")
+    await asyncio.sleep(4)
+
+    await api(dctx, "/api/messages", {"phone": DAUGHTER[0], "text": DAUGHTER[1]})
+    dash.mark("daughter writes")
+    await wait_state(dctx, lambda st: any(t["id"] == tid and t["report_count"] >= 2 for t in st["tickets"]), "merge")
+    dash.mark("planner merged")
+    await asyncio.sleep(5)
+    panel = dash.page.locator('aside[aria-label^="Ticket"] .overflow-y-auto').first
+    for y in (220, 440, 700):
+        await panel.evaluate(f"el => el.scrollTo({{top: {y}, behavior: 'smooth'}})")
+        await asyncio.sleep(1.6)
+    dash.mark("reasoning scrolled")
+    await asyncio.sleep(2)
+
+    card = dash.page.locator("article", has_text="Send Boat").first
+    await wait_state(dctx, lambda st: any(a["ticket_id"] == tid and a["kind"] == "dispatch" for a in st["approvals"]), "approval")
+    await card.hover()
+    dash.mark("route preview", await card.bounding_box())
+    await asyncio.sleep(2.5)
+    await dash.tap(card.get_by_role("button", name=re.compile("Approve")), "Approve Boat 1")
+    await asyncio.sleep(3)
+    await crew.page.reload()
+    await asyncio.sleep(2)
+    await crew.tap(crew.page.get_by_role("button", name="Accept"), "Crew accepts")
+    await asyncio.sleep(4)
+    thread = await api(pctx, "/api/chat/+91 90000 00412")
+    otp = next(re.search(r"\b(\d{4})\b", m["text"]).group(1) for m in reversed(thread)
+               if m["direction"] == "out" and "OTP" in m["text"])
+    phone.mark(f"OTP {otp} arrives")
+    await asyncio.sleep(1.5)
+    await crew.tap(crew.page.get_by_role("button", name="Reached"), "Boat reached")
+    await asyncio.sleep(2)
+    await crew.tap(crew.page.get_by_role("button", name="Enter family OTP"), "Enter OTP")
+    await crew.page.get_by_label("Family OTP").type(otp, delay=160)
+    await crew.tap(crew.page.get_by_role("button", name="Confirm"), "Family confirmed safe")
+    await asyncio.sleep(5)
+    await dctx.request.post(f"{BASE}/api/settings", data={"llm_mode": "rules", "planner_scope": "judgment",
+                                                           "listen_llm": True, "ollama_model": ""})
+    for ctx, rec in ((dctx, dash), (pctx, phone), (vctx, crew)):
+        await finish(ctx, rec)
+
+
+CLIPS = {"landing": "clip_landing", "login": "clip_login", "rescue": "clip_rescue", "signals": "clip_signals",
+         "family": "clip_family", "replay": "clip_replay", "agent": "clip_agent"}
+
+
 async def main():
-    if OUT.exists():
-        shutil.rmtree(OUT)
-    OUT.mkdir()
+    import sys
+    wanted = sys.argv[1:] or ["landing", "login", "rescue", "signals", "family", "replay"]
+    old = json.loads((OUT / "events.json").read_text(encoding="utf-8")) if (OUT / "events.json").exists() else None
+    if old and isinstance(old, dict):
+        # Keep the other clips' events; only the re-recorded clips are replaced.
+        events.extend(e for e in old["events"] if e["clip"] not in wanted)
+        pages.extend(p for p in old["pages"] if p["clip"] not in wanted)
+    OUT.mkdir(exist_ok=True)
+    for clip in wanted:
+        shutil.rmtree(OUT / clip, ignore_errors=True)
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
-        for clip in (clip_landing, clip_login, clip_rescue, clip_signals, clip_family, clip_replay):
-            await clip(browser)
+        for clip in wanted:
+            await globals()[CLIPS[clip]](browser)
         await reset(browser)
         await browser.close()
     (OUT / "events.json").write_text(json.dumps({"events": events, "pages": pages}, indent=1, ensure_ascii=False), encoding="utf-8")

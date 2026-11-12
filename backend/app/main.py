@@ -78,6 +78,9 @@ class SettingsIn(BaseModel):
     automation: bool | None = None
     llm_mode: str | None = None
     auto_field: bool | None = None
+    planner_scope: str | None = None
+    listen_llm: bool | None = None
+    ollama_model: str | None = None
 
 
 class CloseIn(BaseModel):
@@ -137,6 +140,7 @@ def state(officer=Depends(require_officer)):
         "automation": db.automation_on(),
         "auto_field": db.get_setting("auto_field", "off") == "on",
         "llm": llm.status(),
+        "planner": planner_status(),
         "replay": replay_status(),
         "tickets": all_tickets,
         "teams": teams.all_teams(),
@@ -177,6 +181,12 @@ def public_overview():
     }
 
 
+def planner_status():
+    from .agents import planner
+    return {"scope": planner.scope(), "provider": llm.planner_provider(), "model": llm.planner_model(),
+            "max_steps": planner.MAX_STEPS}
+
+
 def metrics(all_tickets):
     rescue_kinds = ("rescue", "welfare", "supplies")
     wasted = db.one("""SELECT COUNT(*) n FROM approvals a JOIN tickets t ON t.id = a.ticket_id
@@ -209,6 +219,8 @@ def ticket_detail(ticket_id: str, officer=Depends(require_officer)):
         JOIN messages m ON m.id = r.message_id JOIN reporters rp ON rp.id = tr.reporter_id
         WHERE tr.ticket_id = ? ORDER BY tr.created_at""", (ticket_id,))
     t["history"] = audit_for(ticket_id)
+    from .agents.planner import runs_for_ticket
+    t["agent_runs"] = runs_for_ticket(ticket_id)
     return t
 
 
@@ -343,11 +355,18 @@ def update_settings(body: SettingsIn, officer=Depends(require_officer)):
         db.set_setting("automation", "on" if body.automation else "off")
         audit.log("Officer", f"Automation switched {'on' if body.automation else 'off'}", kind="human",
                   approved_by=officer["display_name"])
-    if body.llm_mode in ("rules", "ollama"):
+    if body.llm_mode in ("rules", "ollama", "groq"):
         db.set_setting("llm_mode", body.llm_mode)
         if body.llm_mode == "ollama":
             llm.warm_up()
         audit.log("Officer", f"LLM mode set to {body.llm_mode}", kind="human", approved_by=officer["display_name"])
+    if body.listen_llm is not None:
+        db.set_setting("listen_llm", "on" if body.listen_llm else "off")
+    if body.ollama_model is not None and body.ollama_model.replace(":", "").replace(".", "").replace("-", "").isalnum():
+        db.set_setting("ollama_model", body.ollama_model)
+    if body.planner_scope in ("off", "judgment", "all"):
+        db.set_setting("planner_scope", body.planner_scope)
+        audit.log("Officer", f"Planner scope set to {body.planner_scope}", kind="human", approved_by=officer["display_name"])
     if body.auto_field is not None:
         db.set_setting("auto_field", "on" if body.auto_field else "off")
     events.publish("changed", {"what": "settings"})

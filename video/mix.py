@@ -85,7 +85,8 @@ for name, s in scenes[1:]:
 
 # Accent hits: a deep thump on the "almost eight hours" line, a chime on the title.
 hits = np.zeros(N, np.float32)
-eight = next(l for l in tl["lines"] if "eight hours" in l["caption"])["start"] + 0.45
+_eight = next(l for l in tl["lines"] if "eight hours" in l["caption"])
+eight = _eight["start"] + (_eight["end"] - _eight["start"]) * 0.62 + 0.5
 title = next(s for name, s in scenes if name == "title")
 for when, freqs, decay, gain in [(eight, [55, 82], 6, 0.55), (title, [880, 1318.5, 1760], 2.2, 0.16)]:
     i = int(when * SR)

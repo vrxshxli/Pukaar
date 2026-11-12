@@ -11,7 +11,13 @@ services:
     autoDeploy: true
     envVars:
       - key: LLM_MODE
-        value: rules
+        value: groq
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: PLANNER_SCOPE
+        value: judgment
       - key: PUKAAR_OFFICER_PASSWORD
         sync: false
       - key: PUKAAR_VOLUNTEER_PASSWORD

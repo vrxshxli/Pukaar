@@ -7,28 +7,34 @@ import { Icon } from './ui'
 export default function MapToolbar({ state, onToggleAutomation, onLlmMode, children }: {
   state: State
   onToggleAutomation: () => void
-  onLlmMode: (mode: 'rules' | 'ollama') => void
+  onLlmMode: (mode: 'rules' | 'ollama' | 'groq') => void
   children?: React.ReactNode
 }) {
   const [showQr, setShowQr] = useState(false)
   const chatUrl = `${window.location.origin}/chat`
   const llm = state.llm
-  const llmText = llm.mode === 'ollama'
-    ? (llm.effective === 'ollama' ? llm.model : 'unavailable · rules')
-    : 'rules'
+  const llmText = llm.mode === 'rules' ? 'rules'
+    : llm.effective === llm.mode ? (llm.model ?? llm.mode) : 'unavailable · rules'
   return (
     <div className="glass pointer-events-auto flex flex-wrap items-center gap-2 px-2 py-1.5">
       {children}
       <span className="hidden h-6 w-px bg-line sm:block" />
       <label className="flex items-center gap-1.5 rounded-xl bg-soft px-2 py-1 text-xs" title={llm.last_error ?? 'Which engine reads messages'}>
         <span className="font-semibold text-muted">LLM</span>
-        <select value={llm.mode} onChange={(e) => onLlmMode(e.target.value as 'rules' | 'ollama')}
+        <select value={llm.mode} onChange={(e) => onLlmMode(e.target.value as 'rules' | 'ollama' | 'groq')}
           className="rounded-md bg-transparent text-xs font-semibold text-fg outline-none" aria-label="LLM mode">
           <option value="rules" className="bg-card text-fg">Rules</option>
           <option value="ollama" className="bg-card text-fg">Ollama</option>
+          <option value="groq" className="bg-card text-fg">Groq</option>
         </select>
         <span className={`rounded-full px-1.5 py-0.5 text-[10.5px] font-semibold ${llm.fallback ? 'bg-marigold text-ink' : 'bg-card text-muted'}`}>{llmText}</span>
       </label>
+      {state.planner && (
+        <span title="Which events the LLM Planner handles, and with which model"
+          className={`rounded-xl px-2 py-1 text-[11px] font-semibold ${state.planner.provider && state.planner.scope !== 'off' ? 'bg-accent-soft text-accent' : 'bg-soft text-muted'}`}>
+          Planner {state.planner.provider && state.planner.scope !== 'off' ? `${state.planner.scope} · ${state.planner.model}` : 'off · rules'}
+        </span>
+      )}
       <button onClick={onToggleAutomation} role="switch" aria-checked={state.automation}
         className={`flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-xs font-bold ${state.automation ? 'bg-safe/15 text-[#3c6e3a] dark:text-[#a8d4a2]' : 'bg-urgent text-white'}`}
         title="When off, agents only log and propose nothing; no message leaves the control room">
